@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,"/>
+<title>11+ Grammar School Mock Tests — Year 5 Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F4EE; --surface:#FFFFFF; --surface2:#EFF6F3; --ink:#263238; --muted:#6B7A7A; --line:#E6E0D4;
+  --teal:#2A9D8F; --teal-dark:#1F7A6E; --teal-soft:#E0F2EF; --coral:#E76F51; --amber:#E9A426; --amber-soft:#FEF3D8;
+  --navy:#264653; --green:#2A9D6B; --green-bg:#E6F4EC; --red-bg:#FDECEA; --rose:#D64545;
+  --shadow:0 2px 14px rgba(38,50,56,.06); --shadow-lg:0 12px 32px rgba(38,50,56,.12);
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#141A1E; --surface:#1E282D; --surface2:#24343A; --ink:#EEF3F2; --muted:#A8B8B5; --line:#32444A; --teal-soft:#1D3A36; --amber-soft:#3A2E10; --green-bg:#1E3A2C; --red-bg:#3D2323; --shadow:0 2px 14px rgba(0,0,0,.3); --shadow-lg:0 12px 32px rgba(0,0,0,.4); }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:Nunito,system-ui,sans-serif;letter-spacing:-.01em;margin:0}
+button{font-family:inherit;cursor:pointer;min-height:44px;transition:all .18s ease}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+input,select{font-family:inherit}
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:20}
+.logo{display:flex;gap:11px;align-items:center;background:none;border:none;text-align:left;padding:0;color:var(--ink)}
+.logo-badge{width:42px;height:42px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:900;font-size:17px;border-radius:12px}
+.logo h1{font-size:17px;line-height:1.1;font-weight:900}
+.logo p{margin:2px 0 0;font-size:11.5px;color:var(--muted);font-weight:700}
+.top-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.navbtn{border:none;background:transparent;color:var(--muted);font-weight:800;font-size:14px;padding:9px 13px;border-radius:999px}
+.navbtn:hover{background:var(--surface2);color:var(--ink)}
+.navbtn.active{background:var(--navy);color:#fff}
+.profile-chip{display:flex;align-items:center;gap:8px;background:var(--teal-soft);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px 6px 6px;font-weight:800;font-size:14px;color:var(--ink)}
+.profile-chip .av{width:32px;height:32px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:18px}
+.wrap{max-width:960px;margin:0 auto;padding:26px 18px 10px}
+.welcome{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.welcome .big-av{width:72px;height:72px;border-radius:50%;background:var(--teal-soft);border:2px solid var(--line);display:grid;place-items:center;font-size:38px;flex:0 0 72px}
+.welcome h2{font-size:clamp(26px,4.5vw,36px);line-height:1.15;font-weight:900}
+.welcome p{color:var(--muted);margin:6px 0 0;font-size:16px;max-width:560px}
+.journey{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:22px 0 6px;font-size:13.5px;font-weight:800;color:var(--muted)}
+.journey .step{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.journey .step b{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:12px}
+.journey .arrow{color:var(--muted)}
+.overview{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 4px}
+@media(max-width:640px){.overview{grid-template-columns:repeat(2,1fr)}}
+.ov{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px;text-align:center;box-shadow:var(--shadow)}
+.ov b{font-size:24px;display:block;line-height:1;font-weight:900}
+.ov span{font-size:12.5px;color:var(--muted);font-weight:700;display:block;margin-top:5px}
+.section{max-width:960px;margin:0 auto;padding:18px}
+.section-head h3{font-size:23px;font-weight:900}
+.section-head p{color:var(--muted);margin:4px 0 0;font-size:14.5px}
+.subjects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+@media(max-width:640px){.subjects{grid-template-columns:1fr}}
+.subject-card{text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:20px;display:flex;gap:15px;align-items:flex-start;box-shadow:var(--shadow);width:100%;color:var(--ink)}
+.subject-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.subject-card.selected{border-color:var(--teal);background:var(--teal-soft)}
+.subject-card .icon{width:54px;height:54px;flex:0 0 54px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:var(--surface2);border:1px solid var(--line)}
+.subject-card h4{font-size:19px;font-weight:900}
+.subject-card p{color:var(--muted);font-size:13.5px;margin:3px 0 10px;line-height:1.5}
+.bar{height:9px;background:var(--line);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;background:var(--teal);border-radius:999px;transition:width .4s ease}
+.bar-label{font-size:12px;font-weight:800;color:var(--muted);margin-top:6px}
+.paper-list{display:grid;gap:9px;margin-top:14px}
+.paper-row{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px;display:flex;align-items:center;gap:13px;box-shadow:var(--shadow);flex-wrap:wrap}
+.paper-num{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:var(--surface2);display:grid;place-items:center;font-weight:900;font-size:16px}
+.paper-row.done .paper-num{background:var(--teal);color:#fff}
+.paper-info{flex:1;min-width:150px}
+.paper-info b{font-size:16px}
+.paper-info span{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
+.stars{font-size:14px;letter-spacing:1px;color:var(--amber)}
+.btn{border:none;border-radius:999px;padding:11px 18px;font-weight:800;font-size:14.5px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark)}
+.btn-gold{background:var(--amber);color:#263238}
+.btn-outline{background:var(--surface);border:1.5px solid var(--line);color:var(--ink)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal-dark)}
+.btn-danger{background:var(--rose);color:#fff}
+.btn-small{padding:9px 15px;font-size:13.5px;min-height:40px}
+.card-panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:14px}
+@media(max-width:640px){.badges{grid-template-columns:repeat(2,1fr)}}
+.badge{border:1px solid var(--line);border-radius:16px;padding:15px;text-align:center;background:var(--surface)}
+.badge .bicon{font-size:30px}
+.badge b{display:block;font-size:14px;margin-top:5px}
+.badge span{font-size:12px;color:var(--muted);font-weight:700;line-height:1.4;display:block}
+.badge.locked{opacity:.45;filter:grayscale(1)}
+.history-list{display:grid;gap:9px;margin-top:12px}
+.history-row{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;flex-wrap:wrap}
+.history-row .icon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:var(--surface2);flex:0 0 40px}
+.history-row b{font-size:15px}
+.history-row span{font-size:12.5px;color:var(--muted);font-weight:700;display:block}
+.history-score{margin-left:auto;font-weight:900;font-size:16px}
+.subj-progress{display:grid;gap:14px;margin-top:12px}
+.subj-progress .sp-head{display:flex;justify-content:space-between;font-size:14.5px;font-weight:800;gap:10px;flex-wrap:wrap}
+.subj-progress .sp-head span{color:var(--muted);font-weight:700;font-size:13px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:800;font-size:14px;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:var(--surface);color:var(--ink)}
+.avatar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+@media(max-width:480px){.avatar-grid{grid-template-columns:repeat(4,1fr)}}
+.avatar-opt{font-size:26px;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:9px 0}
+.avatar-opt.selected{border-color:var(--teal);background:var(--teal-soft)}
+.tips-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.tips-row{grid-template-columns:1fr}}
+.tip{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+.tip h5{margin:0 0 5px;font-size:15px;font-weight:900}
+.tip p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
+.footer{max-width:960px;margin:0 auto;padding:8px 20px 38px;color:var(--muted);font-size:13px;text-align:center;line-height:1.6}
+/* Exam */
+.exam-wrap{max-width:820px;margin:0 auto;padding:20px 16px 44px}
+.exam-head{position:sticky;top:70px;z-index:10;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:var(--shadow)}
+.timerbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.timer{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:20px;background:var(--navy);color:#fff;padding:10px 15px;border-radius:12px;min-width:118px;text-align:center}
+.timer.warn{background:#BE123C;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.72}}
+.progress{flex:1;min-width:160px}
+.progress-track{height:10px;background:var(--line);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:var(--teal);border-radius:999px;transition:width .35s ease}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:15px;box-shadow:var(--shadow)}
+.qmeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;font-weight:800;color:var(--muted)}
+.qtext{font-size:18px;line-height:1.65;font-weight:600;margin:15px 0 17px}
+.qtext .passage{background:var(--amber-soft);border:1px solid var(--line);border-radius:14px;padding:15px;font-weight:600;font-size:15.5px;line-height:1.7;margin-bottom:15px}
+.qtext .visual{background:#fff;color:#111;border:1.5px solid #E2E8F0;border-radius:14px;padding:17px;text-align:center;font-size:27px;letter-spacing:.14em;line-height:1.4;margin:10px 0}
+.options{display:grid;gap:10px}
+.opt{width:100%;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:15px;padding:14px;display:flex;gap:12px;align-items:center;font-size:16px;font-weight:700;color:var(--ink)}
+.opt:hover{border-color:var(--teal)}
+.opt.selected{border-color:var(--teal);background:var(--teal-soft)}
+.opt-letter{width:35px;height:35px;flex:0 0 35px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line);display:grid;place-items:center;font-weight:900;font-size:14px}
+.opt.selected .opt-letter{background:var(--teal);border-color:var(--teal);color:#fff}
+.navgrid{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}
+.navdot{width:40px;height:40px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:14px;color:var(--muted)}
+.navdot.done{background:var(--teal);color:#fff;border-color:var(--teal)}
+.navdot.current{box-shadow:0 0 0 3px var(--amber);color:var(--ink);border-color:var(--amber)}
+.navdot.done.current{color:#fff}
+.exam-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.exam-actions .btn{flex:1;min-width:125px}
+/* Results */
+.score-hero{background:var(--navy);color:#fff;border-radius:22px;padding:30px 22px;text-align:center;box-shadow:var(--shadow-lg)}
+.score-hero .big{font-size:66px;line-height:1;font-weight:900}
+.score-hero .big small{font-size:28px;color:#A8B8B5;font-weight:800}
+.score-ring{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+.score-ring span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:7px 12px;border-radius:999px;font-size:13px;font-weight:800}
+.review{margin-top:16px;display:grid;gap:13px}
+.review-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow)}
+.review-card.correct{border-top:5px solid var(--green)}
+.review-card.wrong{border-top:5px solid var(--rose)}
+.review-card h4{margin:0 0 9px;font-size:16px;line-height:1.55;font-weight:700}
+.ans-line{font-size:14.5px;padding:10px 12px;border-radius:11px;margin:6px 0;line-height:1.5}
+.ans-line.yours{background:var(--red-bg)}
+.ans-line.yours.right{background:var(--green-bg)}
+.ans-line.correct-ans{background:var(--green-bg)}
+.explain{background:var(--amber-soft);border:1px solid var(--line);border-radius:13px;padding:13px 14px;font-size:14.5px;line-height:1.65;margin-top:10px}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(20,28,32,.6);display:grid;place-items:center;padding:16px;z-index:50}
+.modal-box{background:var(--surface);border-radius:20px;padding:26px;max-width:500px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg)}
+.modal-box h3{font-size:23px;font-weight:900;margin:0 0 8px}
+.kicker{display:inline-flex;font-size:12px;font-weight:900;color:var(--teal-dark);background:var(--teal-soft);padding:6px 11px;border-radius:999px}
+@media(prefers-color-scheme:dark){.kicker{color:#7ED3C6}}
+.empty-note{background:var(--surface);border:1.5px dashed var(--line);border-radius:16px;padding:20px;text-align:center;color:var(--muted);font-weight:700}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="logo" onclick="showHome()"><span class="logo-badge">11+</span><span><h1>Mock Tests</h1><p>Year 5 grammar school practice</p></span></button>
+  <nav class="top-nav" aria-label="Main">
+    <button class="navbtn active" id="navHome" onclick="showHome()">Home</button>
+    <button class="navbtn" id="navProgress" onclick="showProgress()">My Progress</button>
+    <button class="profile-chip" id="profileChip" onclick="openProfile()"><span class="av" id="chipAvatar">🦊</span><span id="chipName">Set up profile</span></button>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div id="view-home">
+  <div class="wrap">
+    <div class="welcome">
+      <div class="big-av" id="welcomeAvatar">🦊</div>
+      <div style="flex:1;min-width:220px">
+        <h2 id="welcomeTitle">Hello! Ready to learn?</h2>
+        <p id="welcomeText">Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.</p>
+      </div>
+      <button class="btn btn-outline" id="welcomeProfileBtn" onclick="openProfile()">Create my profile</button>
+    </div>
+    <div class="journey" aria-label="How it works">
+      <span class="step"><b>1</b> Pick a subject</span><span class="arrow">→</span>
+      <span class="step"><b>2</b> Take a timed paper</span><span class="arrow">→</span>
+      <span class="step"><b>3</b> Earn stars &amp; learn</span>
+    </div>
+    <div class="overview" id="overviewStrip"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h3>1. Choose a subject</h3><p>Tap a subject to see its 10 papers. Start with Paper 1 and work your way up — they get a little trickier each time.</p></div>
+    <div class="subjects" id="subjectCards"></div>
+  </div>
+
+  <div class="section" id="papersSection">
+    <div class="section-head"><h3 id="papersTitle">2. Choose a paper</h3><p id="papersSub">10 questions per paper. No calculators for Maths — have scrap paper and a pencil ready.</p></div>
+    <div class="paper-list" id="paperGrid"></div>
+  </div>
+
+  <div class="section">
+    <div class="tips-row">
+      <div class="tip"><h5>Stuck on a question?</h5><p>Make your best guess, move on, and come back with the number buttons if you have time left.</p></div>
+      <div class="tip"><h5>What score is good?</h5><p>7 out of 10 is solid, 8–9 is strong, and 10 out of 10 on these harder papers is brilliant.</p></div>
+      <div class="tip"><h5>After your paper</h5><p>Read every explanation — even for the ones you got right — to learn quicker ways for next time.</p></div>
+    </div>
+  </div>
+  <p class="footer">40 papers • 400 original questions written to 11+ (GL / CEM style) difficulty for Year 5 • Made for practice at home</p>
+</div>
+
+<!-- PROGRESS -->
+<div id="view-progress" class="hidden">
+  <div class="wrap">
+    <div class="welcome">
+      <div class="big-av" id="progressAvatar">🦊</div>
+      <div style="flex:1;min-width:220px">
+        <h2 id="progressTitle">My Progress</h2>
+        <p>See every paper you've finished, the stars you've earned, and which subject to practise next.</p>
+      </div>
+      <button class="btn btn-outline" onclick="openProfile()">Edit profile</button>
+    </div>
+    <div class="overview" id="progressStats"></div>
+  </div>
+  <div class="section">
+    <div class="card-panel">
+      <h3 style="font-size:20px;font-weight:900">Progress by subject</h3>
+      <div class="subj-progress" id="subjectProgress"></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><h3>My badges</h3><p>Badges unlock as you practise. How many can you collect?</p></div>
+    <div class="badges" id="badgeGrid"></div>
+  </div>
+  <div class="section">
+    <div class="section-head"><h3>Papers I've finished</h3><p>Your most recent papers are at the top.</p></div>
+    <div class="history-list" id="historyList"></div>
+    <div style="text-align:center;margin-top:18px"><button class="btn btn-primary" onclick="showHome()">Practise another paper →</button></div>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="view-exam" class="hidden">
+  <div class="exam-wrap">
+    <div class="exam-head">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+        <div><div class="kicker" id="examSubject">Maths</div><h2 id="examTitle" style="margin:8px 0 0;font-size:24px;font-weight:800">Paper 1</h2></div>
+        <button class="btn btn-outline" onclick="quitExam()">✕ Quit paper</button>
+      </div>
+      <div class="timerbar" style="margin-top:12px">
+        <div class="timer" id="timer">20:00</div>
+        <div class="progress"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted)"><span id="progressText">0 of 10 answered</span><span id="qPosition">Question 1 / 10</span></div><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div></div>
+      </div>
+      <div class="navgrid" id="navGrid"></div>
+    </div>
+    <div class="qcard" id="qCard"></div>
+    <div class="exam-actions">
+      <button class="btn btn-outline" id="prevBtn" onclick="move(-1)">← Previous</button>
+      <button class="btn btn-outline" onclick="clearAnswer()">Clear answer</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="move(1)">Next →</button>
+      <button class="btn btn-gold" onclick="confirmSubmit()">Submit paper ✓</button>
+    </div>
+    <p style="font-size:13px;color:var(--muted);text-align:center">Unanswered questions count as incorrect. The paper submits automatically when the timer reaches zero.</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="view-results" class="hidden">
+  <div class="exam-wrap">
+    <div class="score-hero" id="scoreHero"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn btn-primary" onclick="showHome()">← All papers</button>
+      <button class="btn btn-outline" onclick="showProgress()">★ See my progress</button>
+      <button class="btn btn-gold" id="retakeBtn">↻ Retake this paper</button>
+      <button class="btn btn-outline" onclick="filterReview('all')">Show all</button>
+      <button class="btn btn-outline" onclick="filterReview('wrong')">Only mistakes</button>
+      <button class="btn btn-outline" onclick="filterReview('correct')">Only correct</button>
+    </div>
+    <h3 style="font-size:25px;margin:24px 0 4px;font-weight:800">Detailed review — learn from every question</h3>
+    <p style="color:var(--muted);margin:0;font-size:14px">Read the explanation even if you were correct — it shows the quickest exam method.</p>
+    <div class="review" id="reviewList"></div>
+    <div style="text-align:center;margin-top:20px"><button class="btn btn-primary" onclick="showHome()">Try another paper →</button></div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div id="modal" class="hidden"></div>
+
+<script>
+const PAPERS = {
+maths:{
+  title:"Maths", icon:"➗", accent:"#0E7C6B", mins:20, desc:"Fractions, percentages, multi-step problems, sequences, ratio and problem-solving — no calculator.",
+  topics:"Fractions • % & ratio • Time • Area • Sequences • Negative numbers",
+  questions:[
+    {q:"Pencils are sold in packs of 6 for £1.80 per pack. Mrs Patel buys 42 pencils for her class. How much does she pay?", opts:["£11.40","£12.60","£12.00","£13.20"], ans:1, exp:"<b>Step 1:</b> 42 ÷ 6 = 7 packs. <b>Step 2:</b> 7 × £1.80 = £12.60. <b>Exam tip:</b> Always work out how many packs first — don't multiply 42 × £1.80."},
+    {q:"What is ³⁄₈ + ⁵⁄₁₂ ? Give your answer as a fraction in its simplest form.", opts:["⁸⁄₂₀","¹⁹⁄₂₄","⁷⁄₈","¹⁷⁄₂₄"], ans:1, exp:"Find a common denominator: 24. ³⁄₈ = ⁹⁄₂₄ and ⁵⁄₁₂ = ¹⁰⁄₂₄. Add numerators: 9 + 10 = <b>¹⁹⁄₂₄</b>. 19 is prime, so it cannot simplify."},
+    {q:"A train leaves London at 09:47 and arrives in York at 12:23. How long is the journey?", opts:["2 hours 24 minutes","3 hours 36 minutes","2 hours 36 minutes","2 hours 46 minutes"], ans:2, exp:"09:47 → 10:47 = 1 hour. 10:47 → 12:47 would be another 2 hours, but we need 12:23, which is 24 minutes earlier. So 3 hours − 24 minutes = <b>2 hours 36 minutes</b>."},
+    {q:"A rectangle is 14.5 cm long and 8 cm wide. What is its area?", opts:["45 cm²","90 cm²","116 cm²","232 cm²"], ans:2, exp:"Area = length × width = 14.5 × 8. Half of 14.5 is 7.25, and 8 is double 4 — easier: 14 × 8 = 112 and 0.5 × 8 = 4, so 112 + 4 = <b>116 cm²</b>. Remember area uses square units."},
+    {q:"Look at this sequence:  3,  7,  13,  21,  31,  …   What is the next number?", opts:["41","42","43","45"], ans:2, exp:"Look at the gaps: +4, +6, +8, +10. The gaps increase by 2 each time, so the next gap is +12. 31 + 12 = <b>43</b>. This is a classic 11+ pattern — always check the differences."},
+    {q:"What is 1,248 ÷ 8 ?", opts:["146","156","166","154"], ans:1, exp:"Chunk it: 8 × 100 = 800 (remainder 448). 8 × 50 = 400 (remainder 48). 8 × 6 = 48 (remainder 0). Add the chunks: 100 + 50 + 6 = <b>156</b>."},
+    {q:"At 6am the temperature was −4°C. By midday it had risen by 9 degrees, then by 6pm it had fallen by 3 degrees. What was the temperature at 6pm?", opts:["2°C","8°C","−2°C","10°C"], ans:0, exp:"Start at −4. Rise by 9: −4 + 9 = 5°C at midday. Fall by 3: 5 − 3 = <b>2°C</b>. Use a number line in your head for negative numbers."},
+    {q:"In a bag, red counters and blue counters are in the ratio 3 : 5. There are 40 counters altogether. How many red counters are there?", opts:["12","15","24","25"], ans:1, exp:"Total parts = 3 + 5 = 8. Each part = 40 ÷ 8 = 5 counters. Red = 3 parts × 5 = <b>15</b>. (Blue would be 5 × 5 = 25, and 15 + 25 = 40 ✓)"},
+    {q:"What is 15% of 240?", opts:["24","30","36","48"], ans:2, exp:"Find 10% first: 240 ÷ 10 = 24. Find 5% (half of 10%): 12. Add them: 24 + 12 = <b>36</b>. This 10% + 5% trick is faster than any written method in the exam."},
+    {q:"A number is multiplied by 5, then 7 is subtracted. The answer is 28. What was the starting number?", opts:["5","6","7","9"], ans:2, exp:"Work backwards and undo each step. Undo 'subtract 7' by adding 7: 28 + 7 = 35. Undo 'multiply by 5' by dividing by 5: 35 ÷ 5 = <b>7</b>. Check: 7 × 5 − 7 = 28 ✓"}
+  ]
+},
+english:{
+  title:"English", icon:"📖", accent:"#B7790A", mins:18, desc:"Comprehension, vocabulary, grammar, spelling and punctuation at 11+ standard.",
+  topics:"Comprehension • Synonyms & antonyms • Grammar • Spelling • Idioms",
+  passage:`<div class="passage"><b>The Lighthouse Keeper's Daughter</b><br><br>The wind had been battering the lighthouse since dawn, and the sea hurled itself against the rocks as if it were trying to tear the tower from the island. Inside, twelve-year-old Mara wound the clockwork that turned the great lamp, just as her father had taught her. He lay below with a fever, too weak to climb the ninety-four steps.<br><br>“You must keep it turning until morning,” he had whispered. “Ships are depending on you.”<br><br>All night Mara climbed, wound, watched and listened. Her arms ached and her eyes stung with tiredness, but the beam swept on — steady, bright and faithful. At first light, a fishing boat limped safely into the harbour, its captain later saying the light had never once faltered.</div>`,
+  questions:[
+    {passage:true,q:"Why did Mara have to look after the lamp instead of her father?", opts:["He had gone to the mainland","He was too ill with a fever to climb the steps","He wanted to test whether she could do it","He was repairing the fishing boat"], ans:1, exp:"The passage says her father 'lay below with a fever, too weak to climb the ninety-four steps.' The other options are invented — in comprehension, only choose what the text actually tells you."},
+    {passage:true,q:"What does the phrase 'the sea hurled itself against the rocks' suggest about the sea?", opts:["It was calm and gentle","It was powerful and violent, as if attacking","It was slowly drying up","It was helping the ships"], ans:1, exp:"This is <b>personification</b> — the sea is given human actions ('hurled itself', 'trying to tear'). The verbs suggest force and violence, showing how dangerous the storm was."},
+    {passage:true,q:"The captain said the light 'had never once faltered'. What does 'faltered' mean here?", opts:["Become brighter","Grown weak, hesitated or failed","Changed colour","Turned around"], ans:1, exp:"To <b>falter</b> means to lose strength or hesitate. Here it means the light never weakened or stopped — because Mara kept winding it all night. Context is your clue: the boat reached safety because the light stayed reliable."},
+    {q:"Choose the sentence that is punctuated correctly.", opts:["“Stop!” shouted the guard “the train is leaving.”","“Stop!” shouted the guard. “The train is leaving.”","“Stop! shouted the guard.” The train is leaving.","Stop! “shouted the guard, the train is leaving.”"], ans:1, exp:"Each new piece of speech needs its own inverted commas and capital letter. '“Stop!” shouted the guard.' ends the first sentence, then '“The train is leaving.”' starts a new one with a capital T."},
+    {q:"Which word is the closest synonym for 'reluctant'?", opts:["Eager","Unwilling","Angry","Careless"], ans:1, exp:"<b>Reluctant</b> means not wanting to do something — unwilling or hesitant. Example: 'She was reluctant to jump into the cold pool.' Eager is actually its antonym."},
+    {q:"Which word is spelled correctly?", opts:["Seperate","Necessary","Enviroment","Goverment"], ans:1, exp:"<b>Necessary</b> — remember: one <i>c</i>ollar and two <i>s</i>leeves (1 c, 2 s's). The correct spellings of the others are: sep<b>a</b>rate, enviro<b>n</b>ment, gover<b>n</b>ment."},
+    {q:"In the sentence 'The exhausted climbers finally reached the summit at dusk', which word is the adjective?", opts:["Exhausted","Climbers","Finally","Dusk"], ans:0, exp:"An adjective describes a noun. <b>Exhausted</b> describes the climbers (noun). 'Finally' is an adverb (it describes how/when they reached), and 'dusk' is a noun."},
+    {q:"What does the idiom 'to let the cat out of the bag' mean?", opts:["To release an animal","To reveal a secret by accident","To buy a pet","To tell a funny story"], ans:1, exp:"Idioms are not literal. 'Letting the cat out of the bag' means <b>revealing a secret</b>, usually by mistake. Example: 'We were planning a surprise party, but Tom let the cat out of the bag.'"},
+    {q:"Choose the correct word to complete the sentence:  The children had lost ______ gloves, so ______ going back to look for them.", opts:["there / their","their / they're","they're / there","their / there"], ans:1, exp:"<b>Their</b> = belonging to them ('their gloves'). <b>They're</b> = short for 'they are' ('they're going back'). <b>There</b> = a place. Test trick: if you can replace it with 'they are', use they're."},
+    {q:"Which word is the antonym (opposite) of 'expand'?", opts:["Stretch","Enlarge","Contract","Extend"], ans:2, exp:"Expand means to get bigger. Stretch, enlarge and extend are all synonyms of expand. <b>Contract</b> means to get smaller or shrink — so it is the antonym. Watch out: three options often point the same way in 11+ questions."}
+  ]
+},
+verbal:{
+  title:"Verbal Reasoning", icon:"🧩", accent:"#7C3AED", mins:15, desc:"Letter codes, sequences, analogies, hidden words and logic puzzles — the classic GL VR types.",
+  topics:"Codes • Letter sequences • Analogies • Hidden words • Logic",
+  questions:[
+    {q:"In a code, CAT is written as DBU. Each letter moves forward by the same amount. How would you write DOG in the same code?", opts:["EPH","CPF","ENF","DPG"], ans:0, exp:"C→D (+1), A→B (+1), T→U (+1). Apply +1 to DOG: D→E, O→P, G→H = <b>EPH</b>. Always check all three letters follow the same rule."},
+    {q:"Find the next pair in this sequence:  AZ,  BY,  CX,  DW,  …", opts:["EV","FU","EV and then FU","EW"], ans:0, exp:"First letters go forwards: A, B, C, D → <b>E</b>. Second letters go backwards: Z, Y, X, W → <b>V</b>. So the next pair is <b>EV</b>. Track the two halves separately."},
+    {q:"Book is to pages as house is to …", opts:["Roof","Bricks","Door","Garden"], ans:1, exp:"A book is <i>made up of</i> many pages; a house is <i>made up of</i> many <b>bricks</b>. A roof and door are single parts, not what the whole thing is composed of. First decide the relationship: 'is made of many…'"},
+    {q:"Find the hidden 4-letter word hidden inside this sentence. The word spans across two words:  'The chef lambasted the waiter.'  (Hint: it is an animal.)", opts:["Chef","Flam","Lamb","Bast"], ans:2, exp:"Look across the join between words: che<b>f lam</b>basted — no… check carefully: 'chef <b>lamb</b>asted' — the word <b>LAMB</b> (an animal) sits at the start of 'lambasted'. Hidden words always cross a word boundary or hide inside a longer word."},
+    {q:"If A = 1, B = 2, C = 3 … Z = 26, what is the total value of the word CAB?", opts:["6","7","8","9"], ans:0, exp:"C = 3, A = 1, B = 2. Total = 3 + 1 + 2 = <b>6</b>. Write the alphabet numbers above letters if you need to — speed comes from knowing A=1, E=5, J=10, O=15, T=20, Z=26."},
+    {q:"Which pair of words are closest in meaning?", opts:["Brave / Cowardly","Rapid / Swift","Ancient / Modern","Generous / Stingy"], ans:1, exp:"<b>Rapid</b> and <b>swift</b> both mean fast — they are synonyms. The other three pairs are antonyms (opposites). Read all four pairs before choosing."},
+    {q:"Complete the word:  The opposite of 'victory' is D _ F _ _ T", opts:["DEFEAT — the missing letters are E, A","DEFETE — the missing letters are E, E","DEFEET — the missing letters are E, E","DEFAAT — the missing letters are A, A"], ans:0, exp:"The opposite of victory is <b>DEFEAT</b>: D-E-F-E-A-T. Saying the word aloud helps — 'de-FEET' sounds similar, but the correct spelling ends -EAT."},
+    {q:"Five children finish a race. Amara finishes before Ben. Chloe finishes after Dev but before Amara. Ella finishes last. Who finishes FIRST?", opts:["Amara","Ben","Chloe","Dev"], ans:3, exp:"Build the order: Chloe is after Dev but before Amara, so Dev → Chloe → Amara. Amara is before Ben, and Ella is last. Full order: <b>Dev, Chloe, Amara, Ben, Ella</b>. So Dev finishes first. Draw logic puzzles as a chain — never guess."},
+    {q:"In a code, each letter moves BACK by 2 (C becomes A). If the coded word is QYCP, what is the original word?", opts:["SEAR","TEAR","SEAS","TEAS"], ans:1, exp:"To decode, reverse the rule: move each letter FORWARD by 2. Q→S? No — careful: coding moved back 2, so decoding moves forward 2: Q+2=S… but check the answer that works: T coded back 2 is R, not Q. Let's decode letter by letter: Q→S, Y→A, C→E, P→R gives SEAR — hmm. Re-check: the coded word QYCP decoded (+2) = S, A, E, R. The intended original is therefore the one matching this pattern in the options by moving each option back 2: TEAR → R C Y P. That does not match. The matching option by decoding QYCP correctly is not listed by that route — so use elimination: only <b>TEAR</b> codes to a word ending in CP pattern (R→P). On checking the full code, TEAR back-2 = RAYP, so the test-maker's key treats QYCP as TEAR shifted with A↔? — In the exam, pick the closest systematic match: TEAR.", exp2:"", ansNote:""},
+    {q:"Odd one out: Which word does NOT belong with the others?", opts:["Whisper","Murmur","Mumble","Shout"], ans:3, exp:"Whisper, murmur and mumble are all <b>quiet</b> ways of speaking. <b>Shout</b> is loud — it is the odd one out. Group the words by meaning first, then spot the one that breaks the group."}
+  ]
+},
+nonverbal:{
+  title:"Non-Verbal Reasoning", icon:"🔷", accent:"#C0392B", mins:12, desc:"Patterns, rotations, reflections and odd-one-out shapes. Look carefully — no words needed, just sharp eyes.",
+  topics:"Sequences • Rotation • Reflection • Odd one out • Counting",
+  questions:[
+    {q:"<div class='visual'>● &nbsp; ○ &nbsp; ● &nbsp; ○ &nbsp; ● &nbsp; ?</div>Which shape comes next in the sequence?", opts:["● Black circle","○ White circle","■ Black square","▲ Black triangle"], ans:1, exp:"The shapes simply alternate: black, white, black, white, black… so next is a <b>white circle ○</b>. In NVR, always say the pattern aloud in your head: 'black, white, black, white…'"},
+    {q:"<div class='visual'>▲ &nbsp; ▶ &nbsp; ▼ &nbsp; ◀ &nbsp; ?</div>A triangle rotates 90° clockwise each time. Which direction does it point next?", opts:["▲ Up","▶ Right","▼ Down","◀ Left"], ans:0, exp:"Track the point: up → right → down → left → each turn is 90° clockwise. After left, the next clockwise turn points <b>up ▲</b> again, completing the full circle."},
+    {q:"Which shape is the odd one out?", opts:["Square — 4 sides","Triangle — 3 sides","Pentagon — 5 sides","Hexagon — 6 sides"], ans:1, exp:"Trick question style used in 11+: square (4), pentagon (5) and hexagon (6) — look again. Actually the pattern examiners use here is even vs odd sides: square 4 (even), hexagon 6 (even)… and triangle 3 / pentagon 5 are both odd. The intended odd one out is the <b>triangle</b> because it is the only shape with fewer than 4 sides — the only one that cannot have parallel sides or be split into two equal triangles by one diagonal in the same way. In the exam, look for the <i>simplest</i> difference first: fewest sides."},
+    {q:"<div class='visual'>■ ■ □ &nbsp;|&nbsp; ■ □ □ &nbsp;|&nbsp; □ □ □ &nbsp;|&nbsp; ?</div>In each step, one black square turns white. What is the next picture?", opts:["□ □ □ — all white","■ □ □ — one black","■■ □ — two black","■■■ — all black"], ans:0, exp:"Count the black squares: 2, then 1, then 0… wait — first picture has 2 black, second has 1 black, third has 0 black in the row shown reading the sets: the rule is one fewer black each step, so the sequence has already reached all white and the next stays as the completed pattern examiners expect: <b>all white</b>. Always count first — counting beats guessing in NVR."},
+    {q:"A square piece of paper is folded in half, then in half again. A hole is punched in one corner. When unfolded, how many holes are there?", opts:["1","2","4","8"], ans:2, exp:"Each fold doubles the layers. Folded in half = 2 layers, folded again = 4 layers. One punch goes through all 4 layers, so unfolding reveals <b>4 holes</b>. This is a very common 11+ paper-folding question."},
+    {q:"<div class='visual'>◇ ◇◆ &nbsp;|&nbsp; ◇◆ ◇◆ &nbsp;|&nbsp; ?</div>Each step adds one black diamond ◆. What comes next?", opts:["One white, one black","One white, three black","Three white, one black","Four black"], ans:1, exp:"Step 1: 2 white, 1 black. Step 2: 1 white… recount by the rule stated: a black diamond is <i>added</i> each time (nothing is removed). Step 1 total = 3 shapes (2W + 1B). Step 2 total = 4 shapes. So step 3 has the original 2 white plus 3 black = <b>one white? No — 2 white, 3 black total 5</b>. Among the options, the one matching 'black increases by one, total grows' with the white count dropping as black replaces the lead position is <b>one white, three black</b> as drawn in the test pattern. Key skill: decide whether shapes are added or replaced."},
+    {q:"Which net folds up to make a cube?", opts:["Six squares all in one straight line","A cross shape: 4 squares in a row with 1 square attached above and 1 below the second square","Five squares in a row with one extra at the end","Six squares in a 2 × 3 rectangle block"], ans:1, exp:"A cube net needs 6 squares where opposite faces never touch in the net. The <b>cross (1-4-1)</b> shape folds perfectly. Six in a straight line overlaps, five-in-a-row plus end overlaps, and a solid 2×3 block overlaps too. Learn the 1-4-1 cross — it appears again and again."},
+    {q:"<div class='visual'>○ &nbsp; ◎ &nbsp; ◉ &nbsp; ?</div>Each step, a circle gains one extra ring/dot inside. What is next?", opts:["A circle with nothing inside","A circle with one ring","A circle with a ring and two dots / extra inner detail","A square"], ans:2, exp:"The inside detail builds up step by step: empty → one ring → ring + centre dot → next must have <b>even more inner detail</b>. In NVR sequences, check three things in order: number, size, and shading/detail inside."},
+    {q:"A shape looks like the letter 'b'. Which one is its mirror image (as seen in a mirror placed to its right)?", opts:["b — exactly the same","d — flipped left-to-right","p — flipped top-to-bottom","q — flipped both ways"], ans:1, exp:"A mirror flips left and right only. The letter <b>b</b> in a mirror becomes <b>d</b>. Top-to-bottom flip would give p, and both flips give q. Remember: mirror = left-right swap, top stays at the top."},
+    {q:"How many triangles are in this description? A large triangle is divided by a line from the top vertex straight down to the middle of the base, making two smaller triangles inside it.", opts:["1","2","3","4"], ans:2, exp:"Count systematically: the 2 small triangles inside, PLUS the 1 large triangle made by joining them together = <b>3 triangles</b>. The most common NVR counting mistake is forgetting the big shape made from the parts."}
+  ]
+}
+};
+// Fix VR Q9 explanation to be clean and correct: recode properly
+PAPERS.verbal.questions[8] = {q:"In a code, FLOWER is written as DJMUCP. How is GARDEN written in the same code?", opts:["EYPBCL","EZQBCL","EYPCCL","FXPBCL"], ans:0, exp:"Compare letter by letter: F→D (−2), L→J (−2), O→M (−2), W→U (−2), E→C (−2), R→P (−2). Every letter moves back 2. Apply to GARDEN: G→E, A→Y (wrap around past A to Y), R→P, D→B, E→C, N→L = <b>EYPBCL</b>. Remember the alphabet wraps around: A − 2 = Y."};
+// Fix NVR Q3 and Q4 and Q6 for clean logic
+PAPERS.nonverbal.questions[2] = {q:"Which shape is the odd one out?", opts:["Square — 4 equal sides","Rectangle — 2 pairs of equal sides","Circle — 0 straight sides","Triangle — 3 sides"], ans:2, exp:"Square, rectangle and triangle are all made of <b>straight lines</b>. A <b>circle</b> has no straight sides at all — just one curved line. It is the odd one out. Look for straight vs curved first in shape questions."};
+PAPERS.nonverbal.questions[3] = {q:"<div class='visual'>■■■ &nbsp;|&nbsp; ■■□ &nbsp;|&nbsp; ■□□ &nbsp;|&nbsp; ?</div>In each step, one black square turns white, from the right. What is the next picture?", opts:["□□□ — all white","■■□ — two black, one white","■□□ — one black, two white","■■■ — all black"], ans:0, exp:"Count the black squares: 3 → 2 → 1 → so next is 0. The next picture is <b>□□□ all white</b>. Counting the black shapes at each step is the fastest way to crack shading sequences."};
+PAPERS.nonverbal.questions[5] = {q:"<div class='visual'>◆ &nbsp;|&nbsp; ◆◆ &nbsp;|&nbsp; ◆◆◆ &nbsp;|&nbsp; ?</div>How many black diamonds are in the next picture?", opts:["3","4","5","6"], ans:1, exp:"Count: 1, then 2, then 3 — one extra diamond is added each step. Next = <b>4 diamonds</b>. Simple counting sequences are common — but always check whether size or rotation is changing at the same time."};
+
+// ===== Expansion: Papers 2-10 generators (Papers 1 are the originals above) =====
+function mkQ(q,correct,wrongs,exp,pos){var o=wrongs.slice(0,3);var a=((pos%4)+4)%4;o.splice(a,0,correct);return{q:q,opts:o,ans:a,exp:exp};}
+function gcd2(a,b){return b?gcd2(b,a%b):a;}
+function money(v){return '£'+v.toFixed(2);}
+function fmtDur(mins){return Math.floor(mins/60)+' hours '+(mins%60)+' minutes';}
+function shiftWord(w,s){var out='';for(var i=0;i<w.length;i++){var c=w.charCodeAt(i)-65;out+=String.fromCharCode(65+(((c+s)%26)+26)%26);}return out;}
+function wordVal(w){var t=0;for(var i=0;i<w.length;i++)t+=w.charCodeAt(i)-64;return t;}
+
+function mathsPaper(n){
+  var k=n, qs=[];
+  var packs=4+k, per=1.40+0.20*(k%4), tot=packs*per;
+  qs.push(mkQ('Crayons are sold in packs of 6 for '+money(per)+' per pack. A teacher buys '+(packs*6)+' crayons. How much does she pay?',''+money(tot),[''+money(tot+1.20),''+money(tot-1.20),''+money(tot+2.40)],'<b>Step 1:</b> '+(packs*6)+' ÷ 6 = '+packs+' packs. <b>Step 2:</b> '+packs+' × '+money(per)+' = <b>'+money(tot)+'</b>. Work out the number of packs first.',k));
+  var n1=(k%3)+1, n2=(k%4)+1, sNum=n1*3+n2*2, g=gcd2(sNum,24), frac=(sNum/g)+'/'+(24/g);
+  qs.push(mkQ('What is '+n1+'/8 + '+n2+'/12 ? Give your answer as a fraction in its simplest form.',frac,[(n1+n2)+'/20',(sNum+3)+'/24',(sNum-2)+'/24'],'Use a common denominator of 24: '+n1+'/8 = '+(n1*3)+'/24 and '+n2+'/12 = '+(n2*2)+'/24. Add the numerators: '+(n1*3)+' + '+(n2*2)+' = '+sNum+', giving '+sNum+'/24'+(g>1?', which simplifies (divide top and bottom by '+g+') to <b>'+frac+'</b>.':' = <b>'+frac+'</b>, already in its simplest form.'),k+1));
+  var sH=8+(k%3), sM=(k*7)%60, dur=105+k*6, aTot=sH*60+sM+dur, aH=Math.floor(aTot/60), aM=aTot%60;
+  var startStr=sH+':'+String(sM).padStart(2,'0'), arrStr=aH+':'+String(aM).padStart(2,'0');
+  qs.push(mkQ('A coach leaves at '+startStr+' and arrives at '+arrStr+'. How long is the journey?',fmtDur(dur),[fmtDur(dur-12),fmtDur(dur+14),fmtDur(dur+36)],'Count on from '+startStr+' to '+arrStr+'. The whole journey is '+dur+' minutes, which is <b>'+fmtDur(dur)+'</b>. Try counting in chunks: first to the next hour, then in hours, then the remaining minutes.',k+2));
+  var len=9+k, wid=6+(k%3), area=len*wid;
+  qs.push(mkQ('A rectangular garden is '+len+' m long and '+wid+' m wide. What is its area?',area+' m²',[(2*(len+wid))+' m²',(area+wid)+' m²',(area-len)+' m²'],'Area = length × width = '+len+' × '+wid+' = <b>'+area+' m²</b>. One wrong option is the perimeter — always check whether the question asks for area (m²) or perimeter (m).',k+3));
+  var t0=2+k, g0=3+(k%3), t1=t0+g0, t2=t1+g0+2, t3=t2+g0+4, t4=t3+g0+6, nxt=t4+g0+8;
+  qs.push(mkQ('Look at this sequence:  '+t0+',  '+t1+',  '+t2+',  '+t3+',  '+t4+',  …   What is the next number?',''+nxt,[''+(nxt-2),''+(nxt+1),''+(nxt+10)],'Look at the gaps: +'+g0+', +'+(g0+2)+', +'+(g0+4)+', +'+(g0+6)+'. The gaps grow by 2 each time, so the next gap is +'+(g0+8)+'. '+t4+' + '+(g0+8)+' = <b>'+nxt+'</b>.',k));
+  var dv=6+(k%4), qt=110+k*9, dvd=dv*qt;
+  qs.push(mkQ('What is '+dvd.toLocaleString('en-GB')+' ÷ '+dv+' ?',''+qt,[''+(qt+10),''+(qt-10),''+(qt+4)],'Chunk it: '+dv+' × 100 = '+(dv*100)+'. Keep building up in chunks of '+dv+' until you reach '+dvd.toLocaleString('en-GB')+'. The chunks add up to <b>'+qt+'</b>. Check: '+dv+' × '+qt+' = '+dvd.toLocaleString('en-GB')+' ✓',k+1));
+  var st=-((k%5)+2), rise=7+(k%4), fall=2+(k%3), res=st+rise-fall;
+  qs.push(mkQ('At 7am the temperature was '+st+'°C. By noon it had risen by '+rise+' degrees, then by 5pm it had fallen by '+fall+' degrees. What was the temperature at 5pm?',res+'°C',[(res+2)+'°C',(res-2)+'°C',(res+5)+'°C'],'Start at '+st+'. Rise by '+rise+': '+st+' + '+rise+' = '+(st+rise)+'°C at noon. Fall by '+fall+': '+(st+rise)+' − '+fall+' = <b>'+res+'°C</b>. Sketch a number line for negative numbers.',k+2));
+  var ra=2+(k%3), rb=5-(k%3), perPart=3+k, totalC=(ra+rb)*perPart, red=ra*perPart;
+  qs.push(mkQ('In a box, red pens and blue pens are in the ratio '+ra+' : '+rb+'. There are '+totalC+' pens altogether. How many red pens are there?',''+red,[''+(red+perPart),''+(red+2*perPart),''+(red-perPart)],'Total parts = '+ra+' + '+rb+' = '+(ra+rb)+'. Each part = '+totalC+' ÷ '+(ra+rb)+' = '+perPart+' pens. Red = '+ra+' parts × '+perPart+' = <b>'+red+'</b>.',k+3));
+  var pct=(k%2===0)?15:25, base=120+k*20, pval=base*pct/100;
+  qs.push(mkQ('What is '+pct+'% of '+base+'?',''+pval,[''+(base/10),''+(pval+base/20),''+(pval*2)],(pct===15?'Find 10% first: '+base+' ÷ 10 = '+(base/10)+'. Find 5% (half of 10%): '+(base/20)+'. Add them: '+(base/10)+' + '+(base/20)+' = <b>'+pval+'</b>.':'25% is a quarter: '+base+' ÷ 4 = <b>'+pval+'</b>. Halve it, then halve it again — that is the fastest route.'),k));
+  var m=3+(k%4), sub=4+k, startN=4+k, result=startN*m-sub;
+  qs.push(mkQ('A number is multiplied by '+m+', then '+sub+' is subtracted. The answer is '+result+'. What was the starting number?',''+startN,[''+(startN+1),''+(startN-1),''+(startN+3)],'Work backwards. Undo "subtract '+sub+'" by adding '+sub+': '+result+' + '+sub+' = '+(result+sub)+'. Undo "multiply by '+m+'" by dividing by '+m+': '+(result+sub)+' ÷ '+m+' = <b>'+startN+'</b>. Check: '+startN+' × '+m+' − '+sub+' = '+result+' ✓',k+1));
+  return qs;
+}
+
+var ENG_PASSAGES=[
+{t:'The Night Train',x:'<div class="passage"><b>The Night Train</b><br><br>The night train trundled out of the city just as the street lamps flickered on. From his window seat, Leo watched the houses shrink into darkness and counted the stations as they slipped past — one, two, three. His grandmother was waiting at the very last stop, ninety miles away, and although he had made the journey many times before, travelling alone at night felt like a proper adventure. He clutched his ticket tightly, determined not to fall asleep and miss his stop.</div>',qs:[
+['Why did Leo clutch his ticket tightly?','He was determined not to fall asleep and miss his stop','He was afraid the ticket collector would take it','He wanted to show it to his grandmother','The ticket was about to blow away','The passage says he was "determined not to fall asleep and miss his stop" — that is why he held the ticket tightly. In comprehension, find the sentence that answers the question.'],
+['What does the word "trundled" suggest about how the train moved?','It moved steadily and quite heavily, not very fast','It raced along at top speed','It moved silently and invisibly','It kept stopping and starting','To <b>trundle</b> means to move slowly and heavily, often with a rolling motion. The word choice tells us this is a slow, steady night train — not a fast express.'],
+['How far was Leo travelling?','Ninety miles','Nine miles','Nineteen miles','Ninety kilometres','The passage states his grandmother was "ninety miles away". Read numbers in a text carefully — the distractors (nine, nineteen) are there to catch skimmers.']]},
+{t:'The Beekeeper',x:'<div class="passage"><b>The Beekeeper</b><br><br>Every Saturday, Sofia helped her grandfather tend his beehives at the bottom of the orchard. She wore a white suit and veil, and moved slowly and calmly, because bees dislike sudden movements. "Smoke puffs make them drowsy," Grandfather explained, "so we can lift the frames safely." Inside one frame, thousands of bees crawled over golden honeycomb. Sofia knew better than to be greedy: the bees needed most of the honey themselves to survive the winter.</div>',qs:[
+['Why did Sofia move slowly and calmly near the hives?','Because bees dislike sudden movements','Because her suit was too big','Because the orchard was muddy','Because she was feeling tired','The text gives the reason directly: "bees dislike sudden movements". Good readers link a character\'s action to the reason stated in the passage.'],
+['Why did Grandfather use smoke near the bees?','To make the bees drowsy so the frames could be lifted safely','To keep himself warm','To drive the bees away forever','To help the bees make honey faster','The passage says the smoke makes the bees drowsy "so we can lift the frames safely". The other options are not mentioned anywhere in the text.'],
+['Why did Sofia not take lots of honey?','The bees needed most of it themselves to survive the winter','The honey was not ready yet','Her grandfather had forbidden all honey-taking','She did not like the taste of honey','The final sentence explains it: the bees needed most of the honey "to survive the winter". Sofia shows she understands the bees come first.']]},
+{t:'The Roman Coin',x:'<div class="passage"><b>The Roman Coin</b><br><br>While digging a hole for a new rose bush, Dad\'s spade struck something hard. Expecting a stone, he bent down — and picked up a small, muddy disc. Under the tap, the mud washed away to reveal the profile of a stern-faced emperor and letters worn almost smooth by time. "This could be nearly two thousand years old," Dad breathed. They wrapped the coin in tissue and, that afternoon, carried it to the museum, where an expert confirmed it was a genuine Roman denarius.</div>',qs:[
+['Where was the coin found?','Buried in the garden, struck by a spade while digging','On the beach','Inside an old book','In a shop window','Dad was "digging a hole for a new rose bush" when his spade struck the coin. The garden is where the discovery happened.'],
+['What appeared on the coin once the mud was washed off?','The profile of an emperor and worn letters','A map of the garden','The date it was buried','A picture of a rose','The passage describes "the profile of a stern-faced emperor and letters worn almost smooth by time". Detail questions like this reward careful re-reading.'],
+['What did the museum expert confirm?','That the coin was a genuine Roman denarius','That the coin was worth a fortune','That the coin was a fake','That the coin belonged to the museum','The expert "confirmed it was a genuine Roman denarius". Nothing is said about its value — do not choose answers the text does not support.']]},
+{t:'The Mountain Rescue',x:'<div class="passage"><b>The Mountain Rescue</b><br><br>The mist came down so quickly that the path simply vanished. One moment, the hiking group could see the valley below; the next, they could barely see their own boots. Their leader, Mrs Okafor, stayed calm. "Nobody walks anywhere," she ordered. "We stay together, blow the whistle in turns, and wait." For two long hours they huddled together, whistling and calling, until at last answering shouts echoed through the mist — the mountain rescue team had found them.</div>',qs:[
+['Why could the group no longer follow the path?','Mist came down and hid it','The path had been closed','It had grown too dark to walk','The path was blocked by rocks','"The mist came down so quickly that the path simply vanished." The weather — not darkness or a blockage — caused the problem.'],
+['What did Mrs Okafor tell the group to do?','Stay together, take turns blowing the whistle, and wait','Walk down in single file','Split up to look for the path','Run towards the valley','Her orders are quoted directly: stay together, blow the whistle in turns, and wait. Splitting up would have been dangerous — the opposite of her instructions.'],
+['How long did the group wait before the rescue team found them?','Two hours','Twenty minutes','Half an hour','All night','"For two long hours they huddled together" before the answering shouts came. Precise detail questions mean going back to the exact line.']]},
+{t:"The Inventor's Workshop",x:'<div class="passage"><b>The Inventor\'s Workshop</b><br><br>Behind the bicycle shop stood a shed crammed with half-finished inventions: a kettle that whistled tunes, an umbrella with headlights, and a machine designed to butter toast automatically. Mr Finch, the inventor, was not discouraged that most of them failed. "Every flop teaches me something," he chuckled, tightening a bolt on his latest creation — a self-stirring soup pot. "The trick, young lady," he told Priya, "is never to call an idea silly until you have tested it properly."</div>',qs:[
+['Which of these was NOT one of the inventions in the shed?','A bicycle that could fly','A kettle that whistled tunes','An umbrella with headlights','A machine to butter toast','The shed contained the kettle, the umbrella and the toast machine. A flying bicycle is never mentioned — "NOT" questions need you to check every option against the text.'],
+['What was Mr Finch working on when Priya visited?','A self-stirring soup pot','A self-tying shoelace','A robot gardener','An automatic bed-maker','He was "tightening a bolt on his latest creation — a self-stirring soup pot". The answer is stated directly in the passage.'],
+['What lesson did Mr Finch share with Priya?','Never call an idea silly until you have tested it properly','Always keep your workshop tidy','Inventions should never fail','Only adults can be inventors','His advice is quoted: "never call an idea silly until you have tested it properly." He treats every failure as a lesson, which is why he is "not discouraged".']]},
+{t:'The Library Cat',x:'<div class="passage"><b>The Library Cat</b><br><br>Nobody knew exactly when Biscuit had moved into the public library, but by now he had his own cushion by the window, his own bowl behind the desk, and — according to the librarians — his own opinions about books. He supervised the children\'s section every afternoon, accepting strokes in exchange for purring at story time. When the council threatened to close the library, hundreds of people signed a petition. At the very top, in wobbly pencil, someone had added a paw print.</div>',qs:[
+['Where was Biscuit\'s cushion?','By the window in the library','Behind the desk','In the children\'s section doorway','At the council offices','The passage says he had "his own cushion by the window" — his bowl was the item behind the desk. Similar details are swapped to test careful reading.'],
+['What did Biscuit do in the children\'s section each afternoon?','Supervised it, accepting strokes and purring at story time','Slept under the shelves','Chased mice between the books','Knocked books onto the floor','He "supervised the children\'s section every afternoon, accepting strokes in exchange for purring at story time". The humorous tone tells us he was treated like a member of staff.'],
+['What does the paw print at the top of the petition suggest?','That Biscuit was counted as one of the library\'s supporters','That a cat had damaged the petition','That the petition was not serious','That the librarians had signed twice','The paw print is a joke with a point: even the library cat "signed" to save the library. This is an inference question — the answer is suggested, not stated word for word.']]}
+];
+var ENG_SYN=[['abundant','Plentiful','Scarce','Tiny','Brief','<b>Abundant</b> means existing in large quantities — plentiful. Scarce is its antonym.'],['cautious','Careful','Reckless','Rapid','Noisy','<b>Cautious</b> means taking care to avoid danger — careful. Reckless is the opposite.'],['ancient','Extremely old','Modern','Recent','Brand new','<b>Ancient</b> means belonging to a very long time ago — extremely old. The other three options all mean the opposite.'],['generous','Giving and kind','Stingy','Selfish','Rude','<b>Generous</b> means happy to give to others. Stingy and selfish are antonyms.'],['furious','Extremely angry','Delighted','Calm','Cheerful','<b>Furious</b> means very angry indeed. Say the word in a sentence to check: "Mum was furious when the vase broke."'],['essential','Necessary','Optional','Extra','Useless','<b>Essential</b> means absolutely needed — necessary. Optional means the opposite.'],['vanish','Disappear','Appear','Arrive','Remain','<b>Vanish</b> means to disappear suddenly and completely, like a magician\'s rabbit.'],['commence','Begin','Finish','End','Stop','<b>Commence</b> is a formal word for begin or start. Finish, end and stop are its opposites.'],['timid','Shy and nervous','Bold','Brave','Confident','<b>Timid</b> means lacking confidence — shy. Bold, brave and confident are all antonyms.'],['fragile','Easily broken','Sturdy','Solid','Tough','<b>Fragile</b> means delicate and easily damaged — you will see it stamped on parcels.']];
+var ENG_ANT=[['bravery','Cowardice','Courage','Boldness','Daring','Bravery means facing danger without fear. Its opposite is <b>cowardice</b> — the other three are synonyms of bravery.'],['generous','Selfish','Kind','Giving','Charitable','A generous person shares freely; a <b>selfish</b> person thinks only of themselves.'],['victory','Defeat','Triumph','Success','Glory','Victory means winning. <b>Defeat</b> — losing — is the antonym. Triumph, success and glory are synonyms.'],['rough','Smooth','Coarse','Uneven','Bumpy','Rough surfaces are uneven; a <b>smooth</b> surface is flat and even. Coarse, uneven and bumpy are synonyms of rough.'],['scarce','Plentiful','Rare','Limited','Hard to find','Scarce means in short supply. <b>Plentiful</b> means there is lots of it.'],['admit','Deny','Confess','Accept','Agree','To admit something is to confess it is true. To <b>deny</b> it is to say it is not true.'],['permanent','Temporary','Lasting','Forever','Endless','Permanent means lasting forever. <b>Temporary</b> means lasting only a short time.'],['ascend','Descend','Climb','Rise','Soar','Ascend means go up; <b>descend</b> means go down. Remember: a lift ascends and descends.'],['expand','Shrink','Grow','Enlarge','Stretch','Expand means get bigger. <b>Shrink</b> means get smaller — the antonym.'],['ancient','Modern','Old','Antique','Aged','Ancient means very old. <b>Modern</b> means of the present time — the opposite.']];
+var ENG_SPELL=[['separate','seperate','separete','seperat','<b>Separate</b> — remember there is "a rat" in sep<b>arat</b>e. It is one of the most commonly misspelled words in the 11+.'],['embarrass','embarass','embaras','emabarrass','<b>Embarrass</b> has double r and double s: emba<b>rr</b>a<b>ss</b>. Think "red face, two r\'s, two s\'s".'],['accommodate','accomodate','acommodate','accomadate','<b>Accommodate</b> is a generous word — it has room for double c AND double m: a<b>cc</b>o<b>mm</b>odate.'],['rhythm','rythm','rhithm','rythym','<b>Rhythm</b> has no vowel from aeiou at all — just the "y". R-H-Y-T-H-M.'],['occurred','occured','ocurred','occurrd','<b>Occurred</b>: double c, double r, then -ed. The r doubles because the stress falls on the last part: oc-CURRED.'],['definitely','definately','definitly','defintely','<b>Definitely</b> — it contains the word "finite": de-<b>finite</b>-ly. There is no "a" in it.'],['conscience','concience','consience','consciense','<b>Conscience</b> is your inner sense of right and wrong: con + science. It ends -science, like the school subject.'],['independent','independant','indepedent','independnt','<b>Independent</b> ends -ent, not -ant: independ<b>ent</b>. It means standing on your own.'],['questionnaire','questionaire','questionnare','questonnaire','<b>Questionnaire</b> keeps the full word "question" then adds -naire with double n: questio<b>nn</b>aire.'],['necessary','neccessary','necesary','necessery','<b>Necessary</b>: one c and two s\'s — one <i>c</i>ollar, two <i>s</i>leeves.']];
+var ENG_GRAM=[['In the sentence "The tired hikers walked slowly towards the village", which word is the adverb?','Slowly','Tired','Hikers','Village','An adverb describes a verb. <b>Slowly</b> tells us <i>how</i> the hikers walked. Tired is an adjective describing the hikers.'],['Which word is a pronoun in the sentence "When Sam lost his pen, he borrowed one from Mia"?','He','Pen','Borrowed','Mia','A pronoun stands in place of a noun. <b>He</b> stands in for Sam, so we do not have to repeat his name.'],['In the sentence "The ancient castle stood on a steep hill", which word is a preposition?','On','Ancient','Castle','Steep','A preposition shows position or direction. <b>On</b> tells us where the castle stood in relation to the hill. Ancient and steep are adjectives.'],['Which sentence uses a fronted adverbial correctly?','Before breakfast, Tom packed his bag.','Tom, before breakfast packed his bag.','Packed his bag Tom before breakfast.','Before, breakfast Tom packed his bag.','A fronted adverbial comes at the start, followed by a comma: "<b>Before breakfast,</b> Tom packed his bag." It tells us <i>when</i>.'],['In the sentence "The children were excited because they had won the match", which word is the conjunction?','Because','Excited','Children','Won','A conjunction joins clauses. <b>Because</b> joins "they were excited" to the reason, "they had won".'],['Which word is the verb in the sentence "The postman delivers letters early every morning"?','Delivers','Postman','Letters','Early','A verb is a doing or being word. The action here is <b>delivers</b>. Early is an adverb telling us when.'],['Which sentence is written in the past tense?','We visited the museum last week.','We visit the museum every week.','We will visit the museum tomorrow.','We are visiting the museum now.','"<b>Visited</b>" plus the time marker "last week" places the sentence firmly in the past.'],['Which sentence uses an apostrophe correctly?',"It's raining outside.",'Its raining outside.',"The cat licked it's paws.","The bird built it's nest.",'<b>It\'s</b> is short for "it is", so "It\'s raining" is correct. <b>Its</b> (no apostrophe) means "belonging to it" — the cat licked <i>its</i> paws.'],['Which word is an adjective in the sentence "The narrow path led to a hidden cottage"?','Narrow','Path','Led','Cottage','An adjective describes a noun. <b>Narrow</b> describes the path. Path and cottage are nouns; led is a verb.'],['Which sentence is a command?','Shut the gate behind you.','Did you shut the gate?','The gate was shut.','What a tall gate that is!','A command (imperative) tells someone to do something and starts with a bossy verb: "<b>Shut</b> the gate behind you."']];
+var ENG_IDIOM=[['"to break the ice"','To help people relax when they first meet','To smash frozen water','To start an argument','To end a friendship','Idioms are not literal. <b>Breaking the ice</b> means easing the awkwardness when people meet for the first time.'],['"a piece of cake"','Something very easy','A birthday treat','Something very expensive','A difficult puzzle','If a test is "a piece of cake", it is <b>very easy</b> — no baking involved.'],['"to feel under the weather"','To feel slightly ill','To stand out in the rain','To feel very happy','To hide from someone','Feeling <b>under the weather</b> means feeling unwell. "I stayed home because I felt under the weather."'],['"to hit the books"','To start studying','To throw books across the room','To buy new books','To tidy the library','To <b>hit the books</b> means to begin studying seriously — useful advice before the 11+!'],['"once in a blue moon"','Very rarely','Every single night','At midnight','Only in winter','A blue moon is rare, so the idiom means something happens <b>very rarely</b>.'],['"to spill the beans"','To reveal a secret','To drop some food','To plant seeds in spring','To make a mess','<b>Spilling the beans</b> means giving away a secret — just like "letting the cat out of the bag".'],['"to cost an arm and a leg"','To be very expensive','To cause an injury','To need an operation','To be a real bargain','Something that costs an arm and a leg is <b>very expensive</b> indeed.'],['"the ball is in your court"','It is your turn to act','You have lost the game','You must play tennis','The ball has gone missing','From tennis: once the ball is in your court, <b>you</b> must respond — it is your turn to do something.'],['"raining cats and dogs"','Raining very heavily','Animals falling from the sky','A light shower of rain','Starting to snow','A classic British idiom for <b>very heavy rain</b>. No animals are harmed.'],['"to be over the moon"','To be extremely happy','To travel into space','To stay up all night','To feel very tired','Being <b>over the moon</b> means being delighted — "She was over the moon with her results."']];
+var ENG_HOMO=[['Choose the correct words:  ______ coat is hanging by the door because ______ coming with us.','Your / you\'re','You\'re / your','Your / your','You\'re / you\'re','<b>Your</b> = belonging to you ("your coat"). <b>You\'re</b> = you are ("you\'re coming"). If "you are" fits, use you\'re.'],['Choose the correct words:  Put the boxes over ______ — they are not ______ boxes, they belong to Class 5.','there / their','their / there','there / there','their / their','<b>There</b> = a place (over there). <b>Their</b> = belonging to them (their boxes).'],['Choose the correct words:  ______ is the jumper I should ______ for the school photograph?','Where / wear','Wear / where','Where / where','Wear / wear','<b>Where</b> asks about a place. <b>Wear</b> is what you do with clothes. Remember: you w<b>ear</b> clothes with your <b>ear</b>s nearby — both contain "ear".'],['Choose the correct words:  Come ______ so that you can ______ the announcement clearly.','here / hear','hear / here','here / here','hear / hear','<b>Here</b> is a place. You <b>hear</b> with your <b>ear</b> — hear contains "ear", which is your clue.'],['Choose the correct words:  ______ book is this? ______ left it on the bus?','Whose / Who\'s','Who\'s / Whose','Whose / Whose','Who\'s / Who\'s','<b>Whose</b> = belonging to whom. <b>Who\'s</b> = who is / who has ("Who\'s left it?").'],['Choose the correct words:  We walked ______ the park with ______ friends, and it was ______ hot to play football.','to / two / too','two / too / to','too / to / two','to / too / two','<b>To</b> = direction. <b>Two</b> = the number 2. <b>Too</b> = more than enough ("too hot") — it has an extra "o", just like "too much".'],['Choose the correct words:  You are not ______ to read ______ during the test.','allowed / aloud','aloud / allowed','allowed / allowed','aloud / aloud','<b>Allowed</b> = permitted. <b>Aloud</b> = out loud, so others can hear. They sound identical but mean different things.'],['Choose the correct words:  The bus ______ our stop, so we walked ______ the shops to get home.','passed / past','past / passed','passed / passed','past / past','<b>Passed</b> is the verb (the bus went by). <b>Past</b> is used for position or time (walked past the shops).'],['Choose the correct words:  Please ______ your name on the ______ line.','write / right','right / write','write / write','right / right','<b>Write</b> is what you do with a pen. <b>Right</b> here means the correct one — "the right line".'],['Choose the correct words:  The ______ was rough, so the sailors checked the ______ forecast again.','sea / weather','see / whether','sea / whether','see / weather','<b>Sea</b> = the ocean. <b>Weather</b> = rain, wind and sun. <b>See</b> is what eyes do, and <b>whether</b> means "if".']];
+var ENG_PUNCT=[['Choose the sentence that is punctuated correctly.','"Hurry up!" called Mum. "The bus is coming."','"Hurry up!" called Mum "the bus is coming."','"Hurry up! called Mum." The bus is coming.','Hurry up! "called Mum, the bus is coming."','Each piece of speech needs its own inverted commas. The first sentence ends after "Mum.", and the new speech starts with a capital letter.'],['Choose the sentence that is punctuated correctly.',"The children's coats were hung on the pegs.",'The childrens coats were hung on the pegs.',"The children's coat's were hung on the pegs.",'The childrens\' coats were hung on the pegs.','Coats belonging to the children: children is already plural, so the apostrophe goes before the s: <b>children\'s</b>. Never use an apostrophe just to make a plural (coat\'s is wrong).'],['Choose the sentence that is punctuated correctly.','For lunch she packed sandwiches, grapes, cheese and a yoghurt.','For lunch she packed sandwiches grapes cheese and a yoghurt.','For lunch, she packed, sandwiches, grapes, cheese and a yoghurt.','For lunch she packed sandwiches, grapes cheese and, a yoghurt.','Commas separate items in a list. You do not need a comma before the final "and", and commas never split a verb from its object ("she packed, sandwiches" is wrong).'],['Choose the sentence that is punctuated correctly.','"Have you finished?" asked the teacher.','"Have you finished." asked the teacher?','"Have you finished?" Asked the teacher.','Have you finished? "asked the teacher."','The question mark belongs <i>inside</i> the inverted commas, and "asked" stays lower case because it continues the sentence.'],['Choose the sentence that is punctuated correctly.','Last July, we visited Paris in France.','last July, we visited Paris in France.','Last July, we visited paris in France.','Last july, we Visited Paris in France.','Months and place names (proper nouns) need capital letters: <b>July</b> and <b>Paris</b>. Sentences also start with a capital letter.'],['Choose the sentence that is punctuated correctly.','"I can\'t believe it," whispered Zara.','"I can\'t believe it" whispered Zara.','I can\'t believe it, "whispered Zara."','"I can\'t believe it," Whispered Zara.','When speech is followed by "whispered Zara", put a comma inside the inverted commas and keep "whispered" in lower case.'],['Choose the sentence that is punctuated correctly.','You will need: a pencil, a ruler and a rubber.','You will need; a pencil, a ruler and a rubber.','You will need, a pencil: a ruler and a rubber.','You: will need a pencil, a ruler and a rubber.','A colon (:) introduces a list: "You will need<b>:</b> a pencil, a ruler and a rubber." A semicolon (;) is not used this way.'],['Choose the sentence that is punctuated correctly.','The oldest bridge in the town (built in 1890) is made of stone.','The oldest bridge in the town built in 1890) is made of stone.','The oldest bridge (in the town built in 1890 is made of stone.','The oldest bridge in the town (built in 1890 is made of stone).','Brackets must come in pairs and the extra information sits inside them: "(built in 1890)". The main sentence must still make sense if the brackets are removed.'],['Choose the sentence that is punctuated correctly.','"Stop the car!" shouted Dad. "There\'s a deer in the road!"','"Stop the car!" shouted Dad "there\'s a deer in the road!"','"Stop the car! shouted Dad." There\'s a deer in the road!','Stop the car! "shouted Dad, there\'s a deer in the road."','Two separate pieces of speech, two sets of inverted commas, and a capital letter to start the second piece of speech.'],['Choose the sentence that is punctuated correctly.','Mr Ahmed, who lives next door, grows giant sunflowers.','Mr Ahmed who lives next door, grows giant sunflowers.','Mr Ahmed, who lives next door grows, giant sunflowers.','Mr Ahmed who, lives next door, grows giant sunflowers.','Extra information in the middle of a sentence is wrapped in a pair of commas: "Mr Ahmed<b>, who lives next door,</b> grows giant sunflowers."']];
+
+function englishPaper(n){
+  var i=n-2, qs=[];
+  var pas=ENG_PASSAGES[i%ENG_PASSAGES.length];
+  pas.qs.forEach(function(e,qi){var q=mkQ(e[0],e[1],[e[2],e[3],e[4]],e[5],n+qi);q.passageText=pas.x;qs.push(q);});
+  var pu=ENG_PUNCT[(i*1)%ENG_PUNCT.length]; qs.push(mkQ(pu[0],pu[1],[pu[2],pu[3],pu[4]],pu[5],n+1));
+  var sy=ENG_SYN[(i*2+1)%ENG_SYN.length]; qs.push(mkQ('Which word is the closest synonym for "'+sy[0]+'"?',sy[1],[sy[2],sy[3],sy[4]],sy[5],n+2));
+  var sp=ENG_SPELL[(i*3+1)%ENG_SPELL.length]; qs.push(mkQ('Which word is spelled correctly?',sp[0],[sp[1],sp[2],sp[3]],sp[4],n+3));
+  var gr=ENG_GRAM[(i*2)%ENG_GRAM.length]; qs.push(mkQ(gr[0],gr[1],[gr[2],gr[3],gr[4]],gr[5],n));
+  var id=ENG_IDIOM[(i*3)%ENG_IDIOM.length]; qs.push(mkQ('What does the idiom '+id[0]+' mean?',id[1],[id[2],id[3],id[4]],id[5],n+1));
+  var ho=ENG_HOMO[(i*2+2)%ENG_HOMO.length]; qs.push(mkQ(ho[0],ho[1],[ho[2],ho[3],ho[4]],ho[5],n+2));
+  var an=ENG_ANT[(i*3+2)%ENG_ANT.length]; qs.push(mkQ('Which word is the antonym (opposite) of "'+an[0]+'"?',an[1],[an[2],an[3],an[4]],an[5],n+3));
+  return qs;
+}
+
+var VR_ANALOGY=[['Puppy is to dog as calf is to …','Cow','Horse','Sheep','Pig','A puppy is a young dog; a calf is a young <b>cow</b>. First name the relationship: "young animal → adult animal".'],['Author is to book as artist is to …','Painting','Brush','Easel','Gallery','An author creates a book; an artist creates a <b>painting</b>. A brush and easel are tools, and a gallery is a place — only painting is the thing created.'],['Hot is to cold as wet is to …','Dry','Damp','Soaked','Rainy','Hot and cold are opposites, so we need the opposite of wet: <b>dry</b>. Damp and soaked are near-synonyms of wet.'],['Wheel is to bicycle as wing is to …','Aeroplane','Feather','Nest','Sky','A wheel is a part of a bicycle; a wing is a part of an <b>aeroplane</b>. Feather is a smaller part of a wing, not the whole vehicle.'],['Glove is to hand as sock is to …','Foot','Shoe','Leg','Toe','A glove is worn on a hand; a sock is worn on a <b>foot</b>. A shoe goes over the sock, so it breaks the pattern.'],['Doctor is to hospital as teacher is to …','School','Pupil','Lesson','Book','A doctor works in a hospital; a teacher works in a <b>school</b>. The relationship is "person → workplace".'],['Hungry is to eat as thirsty is to …','Drink','Food','Sleep','Run','When you are hungry you eat; when you are thirsty you <b>drink</b>. Match the need to the action that solves it.'],['Caterpillar is to butterfly as tadpole is to …','Frog','Pond','Fish','Egg','A caterpillar grows into a butterfly; a tadpole grows into a <b>frog</b>. This is a "young → adult" life-cycle link.'],['Knife is to cut as pen is to …','Write','Erase','Read','Tear','A knife is a tool for cutting; a pen is a tool for <b>writing</b>. The relationship is "tool → its job".'],['Bee is to hive as bird is to …','Nest','Egg','Wing','Tree','A bee lives in a hive; a bird lives in a <b>nest</b>. Tree is where a nest might be, but nest is the home itself.']];
+var VR_HIDDEN=[['Find the hidden 4-letter word in this sentence. It is an animal:  "The cub earned a rosette at the fair."','BEAR','CUBE','EARN','FAIR','Look across the join: "cu<b>b ear</b>ned" — B + EAR = <b>BEAR</b>, hiding across "cub" and "earned".'],['Find the hidden 4-letter word in this sentence. It is a fruit:  "The shop earned a good profit."','PEAR','SHOP','EARN','PROF','Look across the join: "sho<b>p ear</b>ned" — P + EAR = <b>PEAR</b>. Hidden words love the join between two words.'],['Find the hidden 4-letter word in this sentence. You use it to see in the dark:  "The girl amplified her voice."','LAMP','GIRL','AMPL','VOIC','Look across the join: "gir<b>l amp</b>lified" — L + AMP = <b>LAMP</b>.'],['Find the hidden 4-letter word in this sentence. It is something you eat:  "For breakfast we had a pancake with honey."','CAKE','PAN','HONEY','BREA','The word hides inside a longer word: "pan<b>cake</b>" contains <b>CAKE</b>.'],['Find the hidden 4-letter word in this sentence. It shines in the night sky:  "At the start of the race, everyone cheered."','STAR','RACE','CHEER','NIGHT','Inside "start": "<b>star</b>t" — the first four letters spell <b>STAR</b>.'],['Find the hidden 4-letter word in this sentence. It is part of your body:  "Turn the handle gently to open the door."','HAND','TURN','DOOR','OPEN','Inside "handle": "<b>hand</b>le" begins with <b>HAND</b>.'],['Find the hidden 4-letter word in this sentence. It is the opposite of hot:  "Do not scold the puppy for chewing."','COLD','SCOL','PUPPY','CHEW','Inside "scold": "s<b>cold</b>" ends with <b>COLD</b>.'],['Find the hidden 4-letter word in this sentence. It falls from clouds:  "The train arrived at the station late."','RAIN','TRAIN','LATE','ARRIV','Inside "train": "t<b>rain</b>" ends with <b>RAIN</b>.'],['Find the hidden 4-letter word in this sentence. Campers sleep in one:  "The campers were content under the stars."','TENT','CAMP','STARS','UNDER','Inside "content": "con<b>tent</b>" ends with <b>TENT</b> — very fitting for campers!'],['Find the hidden 4-letter word in this sentence. Birds build one:  "Always be honest with your friends."','NEST','BIRD','FISH','CAKE','Inside "honest": "ho<b>nest</b>" ends with <b>NEST</b>. Scan each long word letter by letter — hidden words often sit at the end of a longer word.']];
+var VR_SYNP=[['Wealthy / Rich','Wealthy / Poor','Rich / Famous','Poor / Sad','<b>Wealthy</b> and <b>rich</b> both mean having a lot of money. Wealthy/Poor are opposites.'],['Begin / Commence','Begin / End','Commence / Stop','Start / Finish','<b>Begin</b> and <b>commence</b> both mean start. The other pairs are opposites.'],['Ancient / Old','Ancient / Modern','Old / New','Antique / Expensive','<b>Ancient</b> and <b>old</b> are synonyms. Ancient/Modern and Old/New are antonym pairs.'],['Rapid / Fast','Rapid / Slow','Fast / Late','Quick / Sudden','<b>Rapid</b> and <b>fast</b> both mean quick-moving. Rapid/Slow are opposites.'],['Generous / Kind','Generous / Stingy','Kind / Cruel','Giving / Selfish','<b>Generous</b> and <b>kind</b> describe someone thoughtful towards others. The other pairs are opposites.'],['Brave / Courageous','Brave / Afraid','Courageous / Cowardly','Bold / Shy','<b>Brave</b> and <b>courageous</b> are synonyms — both mean not fearful. Every other pair is an opposite pair.'],['Fragile / Delicate','Fragile / Strong','Delicate / Tough','Breakable / Heavy','<b>Fragile</b> and <b>delicate</b> both mean easily damaged.'],['Joyful / Delighted','Joyful / Sad','Delighted / Upset','Happy / Gloomy','<b>Joyful</b> and <b>delighted</b> both mean very happy. The rest pair happy words with sad ones.'],['Precise / Exact','Precise / Vague','Exact / Wrong','Accurate / Late','<b>Precise</b> and <b>exact</b> both mean perfectly accurate. Precise/Vague are opposites.'],['Rapid / Swift','Ancient / Modern','Generous / Stingy','Brave / Cowardly','<b>Rapid</b> and <b>swift</b> both mean fast. The other three pairs are all antonyms.']];
+var VR_COMPLETE=[['The opposite of "ancient" is M _ D _ _ N. Which word fits the pattern?','MODERN','MODORN','MADERN','MODREN','The opposite of ancient is <b>MODERN</b>: M-O-D-E-R-N. The pattern M_D__N matches exactly.'],['The opposite of "generous" is S _ L _ _ S H. Which word fits the pattern?','SELFISH','SELFESH','SELFIS','SELFSH','The opposite of generous is <b>SELFISH</b>: S-E-L-F-I-S-H. Say each option aloud and match it against the letter pattern.'],['The opposite of "brave" is C _ W _ _ D L Y. Which word fits the pattern?','COWARDLY','COWERDLY','COWARDLEY','COWADLY','<b>COWARDLY</b> means lacking courage: C-O-W-A-R-D-L-Y.'],['The opposite of "permanent" is T _ M _ O _ _ R Y. Which word fits the pattern?','TEMPORARY','TEMPORERY','TEMPERARY','TEMPORAY','<b>TEMPORARY</b> means lasting a short time: T-E-M-P-O-R-A-R-Y — count the letters against the pattern.'],['The opposite of "success" is F _ _ L _ R E. Which word fits the pattern?','FAILURE','FAILUER','FALIURE','FAILUR','<b>FAILURE</b>: F-A-I-L-U-R-E. Watch the ending — it is -URE, not -UER.'],['The opposite of "arrival" is D _ P _ _ T _ R E. Which word fits the pattern?','DEPARTURE','DEPARTRUE','DEPARTUER','DEPERTURE','<b>DEPARTURE</b> means leaving: D-E-P-A-R-T-U-R-E.'],['The opposite of "ordinary" is U _ U _ _ A L. Which word fits the pattern?','UNUSUAL','UNUSAL','UNUSUALL','UNUSUEL','<b>UNUSUAL</b>: U-N-U-S-U-A-L. It begins with three u-sounds — un-usu-al.'],['The opposite of "defeat" is V _ C _ O _ Y. Which word fits the pattern?','VICTORY','VICTERY','VICTREY','VICTORYE','<b>VICTORY</b>: V-I-C-T-O-R-Y. The pattern has exactly 7 letters.'],['The opposite of "complex" is S _ M _ L E. Which word fits the pattern?','SIMPLE','SIMPEL','SIMPAL','SIMBLE','<b>SIMPLE</b>: S-I-M-P-L-E. Complex means complicated; simple is its opposite.'],['The opposite of "victory" is D _ F _ _ T. Which word fits the pattern?','DEFEAT','DEFETE','DEFEET','DEFAAT','<b>DEFEAT</b>: D-E-F-E-A-T. It sounds like "de-feet" but is spelled -EAT at the end.']];
+var VR_LOGIC=[['Five friends queue for ice cream. Zara is ahead of Tom. Tom is ahead of Priya. Mia is last. Noah is just behind Zara. Who is FIRST?','Zara','Tom','Noah','Priya','Build the chain: Zara, then Noah (just behind Zara), then Tom, then Priya, then Mia last. So <b>Zara</b> is first. Draw the queue — never guess.'],['In a spelling test, Ben scores more than Amy. Amy scores more than Cleo. Dan scores less than Cleo. Eve scores the most of all. Who scores SECOND?','Ben','Amy','Eve','Cleo','Order from top: Eve, Ben, Amy, Cleo, Dan. Second place is <b>Ben</b>. Eve is first — read the question again before answering.'],['Four books sit on a shelf. The red book is to the left of the blue book. The green book is to the right of the blue book. The yellow book is far left. Which book is THIRD from the left?','Blue','Red','Green','Yellow','Left to right: Yellow (far left), Red (left of Blue), Blue, Green (right of Blue). Third is <b>Blue</b>.'],['Asha is taller than Ravi. Ravi is taller than Kim. Kim is taller than Leo. Who is the SHORTEST?','Leo','Kim','Ravi','Asha','Chain the heights: Asha > Ravi > Kim > Leo. The shortest is at the end of the chain: <b>Leo</b>.'],['Five runners finish a race. Grace finishes before Finn. Finn finishes before Harry. Ivy finishes last. Jack finishes just after Grace. Who finishes THIRD?','Finn','Jack','Harry','Grace','Order: Grace, Jack (just after Grace), Finn, Harry, Ivy. Third is <b>Finn</b>.'],['Tom has more marbles than Sam. Sam has more than Uma. Uma has more than Vic. Vic has more than Wes. Who has the SECOND FEWEST marbles?','Vic','Wes','Uma','Sam','From most to fewest: Tom, Sam, Uma, Vic, Wes. Fewest is Wes, so second fewest is <b>Vic</b>. Work from the end the question asks about.'],['Pupils line up for lunch. Nina is at the front. Max is behind Nina. Lily is behind Max. Oscar is behind Lily. Who is SECOND from the front?','Max','Lily','Nina','Oscar','Front to back: Nina, Max, Lily, Oscar. Second from the front is <b>Max</b>.'],['Four dogs race. Bruno is faster than Coco. Coco is faster than Duke. Duke is faster than Elsa. Which dog is SECOND fastest?','Coco','Duke','Bruno','Elsa','Fastest to slowest: Bruno, Coco, Duke, Elsa. Second fastest is <b>Coco</b>.'],['In a quiz, Team C scores more than Team B. Team B scores more than Team A. Team D scores the least. Which team is SECOND highest?','Team B','Team A','Team C','Team D','Highest to lowest: C, B, A, D. Second highest is <b>Team B</b>.'],['Five children stand in height order for a photo. Evie is the tallest. Sam is shorter than Evie but taller than Rosa. Rosa is taller than Ben. Ben is taller than Kit. Who is in the MIDDLE (third)?','Rosa','Sam','Ben','Kit','Tallest to shortest: Evie, Sam, Rosa, Ben, Kit. The middle of five is the third: <b>Rosa</b>.']];
+var VR_ODD=[['Carrot','Apple','Banana','Grape','Apple, banana and grape are <b>fruits</b>. A <b>carrot</b> is a vegetable — the odd one out.'],['Violin','Trumpet','Flute','Clarinet','Trumpet, flute and clarinet are <b>wind</b> instruments — you blow them. A <b>violin</b> is a string instrument.'],['Oak','Rose','Daisy','Tulip','Rose, daisy and tulip are <b>flowers</b>. An <b>oak</b> is a tree.'],['January','Spring','Summer','Autumn','Spring, summer and autumn are <b>seasons</b>. <b>January</b> is a month.'],['Sad','Happy','Joyful','Cheerful','Happy, joyful and cheerful all mean feeling glad. <b>Sad</b> is the opposite feeling — the odd one out.'],['River','Ocean','Sea','Lake','Ocean, sea and lake are large areas of (mostly) still water. A <b>river</b> flows — it is the odd one out.'],['Giggle','Cry','Sob','Weep','Cry, sob and weep are all to do with tears and sadness. To <b>giggle</b> is to laugh — the odd one out.'],['Bat','Sparrow','Eagle','Robin','Sparrow, eagle and robin are birds. A <b>bat</b> is a mammal — the only mammal that can fly.'],['Monday','January','February','March','January, February and March are <b>months</b>. <b>Monday</b> is a day of the week.'],['Shout','Whisper','Murmur','Mumble','Whisper, murmur and mumble are all <b>quiet</b> ways of speaking. To <b>shout</b> is loud.']];
+var VR_ALPHA=[['Peach','Pear','Plum','Prune','All start with P. Compare the second letters and beyond: Pea<b>c</b>h < Pea<b>r</b>, then Pl…, then P<b>r</b>une. R comes after L, so <b>Prune</b> is last.'],['Train','Tram','Truck','Tunnel','Tra… < Tru… < Tu…: the third letter decides it (a < u), and "Tu" comes after "Tr", so <b>Tunnel</b> is last.'],['Silver','Simple','Single','Sister','Si-l < Si-m < Si-n < Si-s: compare the third letter each time. <b>Sister</b> (Si-s) comes last.'],['Basket','Battery','Beacon','Button','Ba… < Be… < Bu…: the second letter decides it. <b>Button</b> (Bu) is last.'],['Candle','Cannon','Carpet','Castle','Can-d < Can-n < Car < Cas: work letter by letter. <b>Castle</b> is last.'],['Dragon','Dream','Dress','Drum','Dra < Dre-a < Dre-s < Dru: <b>Drum</b> comes last.'],['Market','Master','Meadow','Mirror','Mar < Mas < Me < Mi: the second letter rises a < e < i, so <b>Mirror</b> is last.'],['Pencil','Pepper','Piano','Picture','Pe < Pi, and within Pi: Pia < Pic, so <b>Picture</b> is last.'],['Window','Winter','Wisdom','Wizard','Win-d < Win-t < Wis < Wiz: compare the third letter (n < s) then the fourth. <b>Wizard</b> is last.'],['Apple','Apricot','Avocado','Banana','Ap < Av < B: <b>Banana</b> is last because B comes after A. Always check the very first letter before the tricky ones.']];
+var VR_WORDS=['HEN','PIG','BOX','SKY','EGG','ANT','OWL','JAM','BUS','WEB'];
+var VR_VALWORDS=['DAD','EGG','ACE','FAD','BEAD','DEED','CAFE','FACE','EDGE','BADGE'];
+
+function verbalPaper(n){
+  var i=n-2, qs=[];
+  var s=(n%3)+1, ew=VR_WORDS[(i+3)%VR_WORDS.length], tw=VR_WORDS[i%VR_WORDS.length];
+  qs.push(mkQ('In a code, '+ew+' is written as '+shiftWord(ew,s)+'. Each letter moves forward by the same amount. How would you write '+tw+' in the same code?',shiftWord(tw,s),[shiftWord(tw,s+1),shiftWord(tw,s-1),shiftWord(tw,-s)],'Compare '+ew+' → '+shiftWord(ew,s)+': every letter moves forward '+s+'. Apply the same move to '+tw+': <b>'+shiftWord(tw,s)+'</b>. Check every letter, not just the first.',n));
+  var fa=(n%6), fs=25-(n%5), pairs=[], pp=0;
+  for(pp=0;pp<4;pp++){pairs.push(String.fromCharCode(65+fa+pp)+String.fromCharCode(65+fs-pp));}
+  var nx=String.fromCharCode(65+fa+4)+String.fromCharCode(65+fs-4);
+  qs.push(mkQ('Find the next pair in this sequence:  '+pairs.join(',  ')+',  …',nx,[String.fromCharCode(65+fa+4)+String.fromCharCode(65+fs-3),String.fromCharCode(65+fa+3)+String.fromCharCode(65+fs-4),String.fromCharCode(65+fa+5)+String.fromCharCode(65+fs-4)],'First letters go forwards one at a time; second letters go backwards one at a time. Next first letter: '+String.fromCharCode(65+fa+4)+'. Next second letter: '+String.fromCharCode(65+fs-4)+'. So the pair is <b>'+nx+'</b>. Track the two halves separately.',n+1));
+  var an=VR_ANALOGY[(i*2)%VR_ANALOGY.length]; qs.push(mkQ(an[0],an[1],[an[2],an[3],an[4]],an[5],n+2));
+  var hd=VR_HIDDEN[(i*3+1)%VR_HIDDEN.length]; qs.push(mkQ(hd[0],hd[1],[hd[2],hd[3],hd[4]],hd[5],n+3));
+  var vw=VR_VALWORDS[(i*2+1)%VR_VALWORDS.length], vv=wordVal(vw), letters=vw.split('').map(function(ch){return ch+' = '+(ch.charCodeAt(0)-64);}).join(', ');
+  qs.push(mkQ('If A = 1, B = 2, C = 3 … Z = 26, what is the total value of the word '+vw+'?',''+vv,[''+(vv+2),''+(vv-2),''+(vv+5)],letters+'. Total = <b>'+vv+'</b>. Learn the landmark letters: A=1, E=5, J=10, O=15, T=20, Z=26.',n));
+  var sy=VR_SYNP[(i*3)%VR_SYNP.length]; qs.push(mkQ('Which pair of words are closest in meaning?',sy[0],[sy[1],sy[2],sy[3]],sy[4],n+1));
+  var cp=VR_COMPLETE[(i*2+2)%VR_COMPLETE.length]; qs.push(mkQ(cp[0],cp[1],[cp[2],cp[3],cp[4]],cp[5],n+2));
+  var lg=VR_LOGIC[(i*3+2)%VR_LOGIC.length]; qs.push(mkQ(lg[0],lg[1],[lg[2],lg[3],lg[4]],lg[5],n+3));
+  var al=VR_ALPHA[(i*2)%VR_ALPHA.length], alWords=[al[0],al[1],al[2],al[3]], alCorrect=alWords.slice().sort()[3];
+  qs.push(mkQ('Which word comes LAST in alphabetical order?',alCorrect,alWords.filter(function(w){return w!==alCorrect;}),al[4],n));
+  var od=VR_ODD[(i*3)%VR_ODD.length]; qs.push(mkQ('Odd one out: which word does NOT belong with the others?',od[0],[od[1],od[2],od[3]],od[4],n+1));
+  return qs;
+}
+
+var NVR_ODD=[['Hexagon — 6 sides','Square — 4 sides','Rectangle — 4 sides','Rhombus — 4 sides','Square, rectangle and rhombus all have <b>4 sides</b> (they are quadrilaterals). A <b>hexagon</b> has 6 sides — the odd one out. Count sides first.'],['Sphere','Cube','Cuboid','Pyramid','Cube, cuboid and pyramid are made only of <b>flat faces</b> with straight edges. A <b>sphere</b> is completely curved, with no edges or corners at all.'],['Semicircle','Triangle','Square','Pentagon','Triangle, square and pentagon are made only of <b>straight lines</b>. A <b>semicircle</b> has a curved edge — the odd one out.'],['Cylinder','Cube','Cuboid','Square-based pyramid','Cube, cuboid and pyramid have only flat faces. A <b>cylinder</b> has a <b>curved</b> surface (plus two circular faces) — the odd one out.'],['Octagon — 8 sides','Triangle — 3 sides','Pentagon — 5 sides','Heptagon — 7 sides','Triangle (3), pentagon (5) and heptagon (7) all have an <b>odd</b> number of sides. The octagon has 8 — an <b>even</b> number — so it is the odd one out.'],['Cube','Square','Rectangle','Triangle','Square, rectangle and triangle are flat <b>2D</b> shapes. A <b>cube</b> is a solid <b>3D</b> shape — the odd one out.'],['Cone','Cube','Cuboid','Pyramid','Cube, cuboid and pyramid are made only of flat faces. A <b>cone</b> has a curved surface that wraps around to a point — the odd one out.'],['Trapezium','Square','Rectangle','Parallelogram','Square, rectangle and parallelogram all have <b>two pairs</b> of parallel sides. A <b>trapezium</b> has only <b>one pair</b> — the odd one out.'],['Pentagon — 5 sides','Square — 4 sides','Hexagon — 6 sides','Octagon — 8 sides','Square (4), hexagon (6) and octagon (8) have an <b>even</b> number of sides. The pentagon has 5 — <b>odd</b> — so it is the odd one out.'],['Oval','Square','Rectangle','Triangle','Square, rectangle and triangle have straight sides. An <b>oval</b> is one smooth curve with no straight sides or corners — the odd one out.']];
+var NVR_NET=[['How many edges does a cube have?','12','6','8','24','A cube has <b>12 edges</b>: 4 around the top, 4 around the bottom and 4 joining them. Do not confuse edges (12) with faces (6) or vertices/corners (8).'],['How many vertices (corners) does a cube have?','8','6','12','4','A cube has <b>8 vertices</b> — 4 corners on the top face and 4 on the bottom face. Faces = 6, edges = 12, vertices = 8: learn all three.'],['On a standard dice, opposite faces always add up to 7. If 3 is on the top face, which number is on the bottom face?','4','2','5','6','Opposite faces add to 7, so the bottom is 7 − 3 = <b>4</b>. This dice rule appears in lots of 11+ questions.'],['On a standard dice, opposite faces always add up to 7. If 2 is on the top face, which number is on the bottom face?','5','4','3','6','7 − 2 = <b>5</b>. The opposite pairs on a dice are 1–6, 2–5 and 3–4.'],['How many faces does a triangular prism have?','5','4','6','9','A triangular prism has <b>5 faces</b>: 2 triangles (the ends) and 3 rectangles (the sides). It has 9 edges — a favourite distractor.'],['How many vertices (corners) does a square-based pyramid have?','5','4','8','6','A square-based pyramid has <b>5 vertices</b>: 4 corners on the square base plus 1 apex at the top.'],['How many squares are there in the net of a cube?','6','4','5','8','A cube has 6 faces, so its net is made of exactly <b>6 squares</b>. If a net has 5 or 7 squares, it cannot fold into a closed cube.'],['Which net folds up to make a cube?','A cross shape: 4 squares in a row, with 1 square attached above and 1 below the third square','Six squares all in one straight line','Six squares in a solid 2 × 3 block','Five squares in a row with one extra at the very end','The <b>1-4-1 cross</b> folds perfectly into a cube. Six in a line wraps round and overlaps, and a solid 2 × 3 block overlaps too. Learn the cross shape.'],['A cube is painted on all its faces and then cut into small cubes by one cut through the middle of each edge direction (making 8 small cubes). How many small cubes have paint on exactly 3 faces?','8','0','6','4','All 8 small cubes are corner cubes, and every corner cube has exactly 3 painted faces — so the answer is <b>8</b>. Picture the corners: a cube has 8 of them.'],['How many faces does a square-based pyramid have?','5','4','6','8','A square-based pyramid has <b>5 faces</b>: 1 square base and 4 triangular sides. Count the base — it is easy to forget.']];
+var NVR_MIRROR=[['b','d','p','q','A mirror flips left and right only. The letter <b>b</b> in a mirror becomes <b>d</b>. A top-to-bottom flip would give p, and both flips give q.'],['d','b','q','p','Mirror = left-right swap. The letter <b>d</b> becomes <b>b</b> in a mirror. The top stays at the top.'],['p','q','b','d','In a mirror, <b>p</b> flips left-to-right to become <b>q</b>. Flipping top-to-bottom instead would give b.'],['q','p','d','b','A mirror image of <b>q</b> is <b>p</b> — the bowl and stem swap sides, but nothing moves up or down.']];
+var NVR_NAMES={'●':'Black circle','○':'White circle','■':'Black square','□':'White square','▲':'Black triangle','△':'White triangle','◆':'Black diamond','◇':'White diamond','★':'Black star','☆':'White star'};
+var NVR_PAIRS=[['●','○'],['■','□'],['▲','△'],['◆','◇'],['★','☆']];
+
+function nonverbalPaper(n){
+  var i=n-2, qs=[];
+  var pr=NVR_PAIRS[i%NVR_PAIRS.length], A=pr[0], B=pr[1];
+  qs.push(mkQ("<div class='visual'>"+A+' &nbsp; '+B+' &nbsp; '+A+' &nbsp; '+B+' &nbsp; '+A+' &nbsp; ?</div>Which shape comes next in the sequence?',B+' — '+NVR_NAMES[B],[A+' — '+NVR_NAMES[A],'⬣ — Black hexagon','⬢ — White hexagon'],'The shapes alternate: '+NVR_NAMES[A].toLowerCase()+', '+NVR_NAMES[B].toLowerCase()+', and so on. After '+A+' comes <b>'+B+'</b>. Say the pattern aloud in your head.',n));
+  var dirs=[['▲','Up'],['▶','Right'],['▼','Down'],['◀','Left']], cw=(n%2===0), startI=n%4, seq=[], dI=0;
+  for(dI=0;dI<3;dI++){var idx=((startI+(cw?dI:-dI))%4+4)%4;seq.push(dirs[idx][0]);}
+  var nextI=((startI+(cw?3:-3))%4+4)%4;
+  qs.push(mkQ("<div class='visual'>"+seq.join(' &nbsp; ')+' &nbsp; ?</div>A triangle rotates 90° '+(cw?'clockwise':'anticlockwise')+' each time. Which direction does it point next?',dirs[nextI][0]+' — '+dirs[nextI][1],dirs.map(function(d,di){return di===nextI?null:d[0]+' — '+d[1];}).filter(Boolean),'Track the point step by step: '+seq.join(' → ')+' → each turn is 90° '+(cw?'clockwise':'anticlockwise')+', so next it points <b>'+dirs[nextI][1].toLowerCase()+'</b>.',n+1));
+  var od=NVR_ODD[(i*2)%NVR_ODD.length]; qs.push(mkQ('Which shape is the odd one out?',od[0],[od[1],od[2],od[3]],od[4],n+2));
+  var T=6, B0=(n%2===0)?5:2, step=(B0>3)?-1:1, counts=[B0,B0+step,B0+2*step], nB=B0+3*step;
+  function shadeRow(c){var s='',x=0;for(x=0;x<c;x++)s+='■';for(x=0;x<T-c;x++)s+='□';return s;}
+  function shadeDesc(c){return c+' black, '+(T-c)+' white';}
+  qs.push(mkQ("<div class='visual'>"+shadeRow(counts[0])+' &nbsp;|&nbsp; '+shadeRow(counts[1])+' &nbsp;|&nbsp; '+shadeRow(counts[2])+' &nbsp;|&nbsp; ?</div>What is the next picture in the sequence?',shadeDesc(nB),[shadeDesc(nB+1),shadeDesc(nB-1),shadeDesc(B0)],'Count the black squares: '+counts.join(' → ')+' — the number of black squares changes by '+step+' each step. Next there are <b>'+nB+' black</b> squares ('+shadeDesc(nB)+'). Counting beats guessing in NVR.',n+3));
+  var folds=1+(n%3), pu=1+(n%2), holes=pu*Math.pow(2,folds);
+  qs.push(mkQ('A square piece of paper is folded in half'+(folds>=2?', then in half again':'')+(folds>=3?', then in half a third time':'')+'. '+pu+' hole'+(pu>1?'s are':' is')+' punched through the folded paper. When it is unfolded, how many holes are there?',''+holes,[''+(holes+3),''+(holes*2),''+(holes+6)],'Each fold doubles the layers: '+(folds===1?'2':folds===2?'4':'8')+' layers after '+folds+' fold'+(folds>1?'s':'')+'. '+pu+' punch'+(pu>1?'es':'')+' × '+Math.pow(2,folds)+' layers = <b>'+holes+' holes</b>.',n));
+  var glyphs=['◆','●','■','▲','★'], gl=glyphs[i%glyphs.length], c0=1+(n%3), stp=1+(n%2), cn=c0+3*stp;
+  function rep(g,c){var s='',x=0;for(x=0;x<c;x++){if(x)s+=' ';s+=g;}return s;}
+  qs.push(mkQ("<div class='visual'>"+rep(gl,c0)+' &nbsp;|&nbsp; '+rep(gl,c0+stp)+' &nbsp;|&nbsp; '+rep(gl,c0+2*stp)+' &nbsp;|&nbsp; ?</div>How many shapes are in the next picture?',''+cn,[''+(cn-stp),''+(cn+stp),''+(cn+2*stp)],'Count: '+c0+', '+(c0+stp)+', '+(c0+2*stp)+' — '+stp+' extra shape'+(stp>1?'s':'')+' added each step. Next = '+(c0+2*stp)+' + '+stp+' = <b>'+cn+'</b>.',n+1));
+  var nt=NVR_NET[(i*3)%NVR_NET.length]; qs.push(mkQ(nt[0],nt[1],[nt[2],nt[3],nt[4]],nt[5],n+2));
+  var containers=['circle','square','triangle'], cont=containers[i%3], dets=['dots','small rings','stars'], det=dets[(i+1)%3];
+  qs.push(mkQ('A '+cont+' starts empty. In the next picture it has 1 '+det.slice(0,-1)+' inside, then 2, then 3. What does the NEXT picture show?','A '+cont+' with 4 '+det,['A '+cont+' with 3 '+det,'A '+cont+' with 5 '+det,'An empty '+cont],'The detail inside builds by one each step: 0, 1, 2, 3 — so next is <b>4 '+det+'</b>. In NVR sequences, check three things in order: number of shapes, size, and detail inside.',n+3));
+  var mr=NVR_MIRROR[i%NVR_MIRROR.length];
+  qs.push(mkQ("A shape looks like the letter '"+mr[0]+"'. Which one is its mirror image (as seen in a mirror placed to its right)?",mr[1]+' — flipped left-to-right',[mr[2]+' — flipped top-to-bottom',mr[3]+' — flipped both ways',mr[0]+' — exactly the same'],'A mirror flips left and right only, so "'+mr[0]+'" becomes "<b>'+mr[1]+'</b>". Top-to-bottom would give '+mr[2]+', and flipping both ways gives '+mr[3]+'.',n));
+  var secs=[3,4,5,2][i%4], totT=secs*(secs+1)/2;
+  qs.push(mkQ('A large triangle is divided by straight lines drawn from the top vertex down to the base, splitting it into '+secs+' smaller triangles side by side. How many triangles are there altogether?',''+totT,[''+secs,''+(totT+2),''+(totT+secs+1)],'Count systematically: the '+secs+' small triangles, plus the wider triangles made by joining neighbours ('+(secs-1)+' made of two small ones'+(secs>2?', '+(secs-2)+' made of three':'')+'), plus the 1 whole big triangle. Total = <b>'+totT+'</b>. Forgetting the combined triangles is the classic mistake.',n+1));
+  return qs;
+}
+
+var ALLQ={};
+Object.keys(PAPERS).forEach(function(key){
+  ALLQ[key]=[PAPERS[key].questions];
+  for(var n=2;n<=10;n++){
+    if(key==='maths')ALLQ[key].push(mathsPaper(n));
+    else if(key==='english')ALLQ[key].push(englishPaper(n));
+    else if(key==='verbal')ALLQ[key].push(verbalPaper(n));
+    else ALLQ[key].push(nonverbalPaper(n));
+  }
+});
+
+let currentPaper=0, subjectFilter="maths";
+let currentKey=null, currentIdx=0, answers=[], timerId=null, timeLeft=0, totalTime=0, startStamp=0;
+let best={}; // best score per paper, saved on this device
+let history=[]; // every finished attempt, most recent last, saved on this device
+let profile={name:'', avatar:'🦊', year:'Year 5', favourite:'maths'};
+const STORAGE_KEY='eleven-plus-mock-tests-v1';
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({profile:profile, best:best, history:history}));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    var raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    var data=JSON.parse(raw);
+    if(!data||typeof data!=='object') return;
+    if(data.profile&&typeof data.profile==='object'){
+      profile={
+        name:typeof data.profile.name==='string'?data.profile.name:'',
+        avatar:typeof data.profile.avatar==='string'&&data.profile.avatar?data.profile.avatar:'🦊',
+        year:typeof data.profile.year==='string'&&data.profile.year?data.profile.year:'Year 5',
+        favourite:typeof data.profile.favourite==='string'&&data.profile.favourite?data.profile.favourite:'maths'
+      };
+      if(!PAPERS[profile.favourite]) profile.favourite='maths';
+      subjectFilter=profile.favourite;
+    }
+    if(data.best&&typeof data.best==='object'&&!Array.isArray(data.best)){
+      var cleanBest={};
+      Object.keys(data.best).forEach(function(k){
+        var v=data.best[k];
+        if(v&&typeof v==='object'&&typeof v.score==='number') cleanBest[k]={score:v.score, pct:typeof v.pct==='number'?v.pct:v.score*10, time:typeof v.time==='string'?v.time:''};
+      });
+      best=cleanBest;
+    }
+    if(Array.isArray(data.history)){
+      history=data.history.filter(function(h){
+        return h&&typeof h==='object'&&typeof h.key==='string'&&PAPERS[h.key]&&typeof h.paper==='number'&&typeof h.score==='number';
+      }).map(function(h){
+        return {key:h.key, paper:h.paper, score:h.score, pct:typeof h.pct==='number'?h.pct:h.score*10, time:typeof h.time==='string'?h.time:'', secs:typeof h.secs==='number'?h.secs:0, when:typeof h.when==='string'?h.when:''};
+      });
+    }
+  }catch(e){}
+}
+let draftAvatar='🦊';
+const AVATARS=['🦊','🐼','🦉','🐰','🦁','🐯','🐸','🦋','🐙','🚀','🌟','🐬'];
+const BADGES=[
+  {id:'first', icon:'🎉', name:'First Steps', desc:'Finish your first paper', test:function(){return history.length>=1;}},
+  {id:'five', icon:'🔥', name:'High Five', desc:'Finish 5 papers', test:function(){return history.length>=5;}},
+  {id:'ten', icon:'🏅', name:'Super Ten', desc:'Finish 10 papers', test:function(){return history.length>=10;}},
+  {id:'perfect', icon:'💎', name:'Perfect Paper', desc:'Score 10 out of 10', test:function(){return history.some(function(h){return h.score===10;});}},
+  {id:'allsubj', icon:'🌈', name:'All-Rounder', desc:'Try all 4 subjects', test:function(){var s={};history.forEach(function(h){s[h.key]=1;});return Object.keys(s).length>=4;}},
+  {id:'stars50', icon:'⭐', name:'Star Collector', desc:'Earn 50 stars in total', test:function(){return totalStars()>=50;}}
+];
+function totalStars(){return history.reduce(function(t,h){return t+h.score;},0);}
+function starsFor(score){return score>=9?'★★★':(score>=7?'★★☆':(score>=4?'★☆☆':'☆☆☆'));}
+function subjectStats(key){
+  var done={}, sum=0;
+  history.forEach(function(h){if(h.key===key){done[h.paper]=1; sum+=h.score;}});
+  var attempts=history.filter(function(h){return h.key===key;}).length;
+  return {papersDone:Object.keys(done).length, attempts:attempts, avg:attempts?Math.round(sum/attempts*10):null};
+}
+function setFilter(k){subjectFilter=k;renderCards();var s=document.getElementById('papersSection');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}
+function renderOverview(){
+  var el=document.getElementById('overviewStrip'); if(!el)return;
+  var attempted=Object.keys(best).length;
+  var avg=history.length?Math.round(history.reduce(function(t,h){return t+h.pct;},0)/history.length):0;
+  el.innerHTML=
+    '<div class="ov"><b>'+attempted+' / 40</b><span>papers finished</span></div>'+
+    '<div class="ov"><b>⭐ '+totalStars()+'</b><span>stars earned</span></div>'+
+    '<div class="ov"><b>'+(history.length?avg+'%':'—')+'</b><span>average score</span></div>'+
+    '<div class="ov"><b>'+BADGES.filter(function(b){return b.test();}).length+' / '+BADGES.length+'</b><span>badges unlocked</span></div>';
+}
+function renderCards(){
+  renderOverview();
+  var sc=document.getElementById('subjectCards');
+  if(sc){
+    sc.innerHTML=Object.entries(PAPERS).map(function(e){
+      var key=e[0], subj=e[1], st=subjectStats(key);
+      return '<button class="subject-card '+(subjectFilter===key?'selected':'')+'" onclick="setFilter(\''+key+'\')"><span class="icon">'+subj.icon+'</span><span style="flex:1"><h4>'+subj.title+'</h4><p>'+subj.topics+'</p><span class="bar" style="display:block"><span class="bar-fill" style="display:block;width:'+(st.papersDone*10)+'%"></span></span><span class="bar-label" style="display:block">'+st.papersDone+' of 10 papers done'+(st.avg!==null?' • average '+st.avg+'/10':'')+'</span></span></button>';
+    }).join('');
+  }
+  var grid=document.getElementById('paperGrid'); if(!grid)return;
+  var p=PAPERS[subjectFilter];
+  document.getElementById('papersTitle').textContent='2. Choose a paper — '+p.title;
+  document.getElementById('papersSub').textContent=p.desc+' 10 questions • about '+p.mins+' minutes each.';
+  grid.innerHTML=ALLQ[subjectFilter].map(function(qs,pi){
+    var b=best[subjectFilter+'-'+pi];
+    var diff=pi<3?'Getting started':(pi<7?'Tricky':'Challenge');
+    return '<div class="paper-row '+(b?'done':'')+'"><span class="paper-num">'+(b?'✓':(pi+1))+'</span><span class="paper-info"><b>Paper '+(pi+1)+'</b><span>10 questions • ⏱ '+p.mins+' mins • '+diff+'</span></span>'+(b?'<span class="stars" title="Best score '+b.score+'/10">'+starsFor(b.score)+'</span><span style="font-weight:800;font-size:14px">Best: '+b.score+'/10</span>':'<span style="font-size:13px;color:var(--muted);font-weight:700">Not tried yet</span>')+'<button class="btn '+(b?'btn-outline':'btn-primary')+' btn-small" onclick="openInstructions(\''+subjectFilter+'\','+pi+')">'+(b?'Try again':'Start')+' →</button></div>';
+  }).join('');
+}
+function updateProfileUI(){
+  var name=profile.name||'';
+  document.getElementById('chipAvatar').textContent=profile.avatar;
+  document.getElementById('chipName').textContent=name?name:'Set up profile';
+  document.getElementById('welcomeAvatar').textContent=profile.avatar;
+  document.getElementById('progressAvatar').textContent=profile.avatar;
+  document.getElementById('welcomeTitle').textContent=name?('Hello, '+name+'! Ready to learn?'):'Hello! Ready to learn?';
+  document.getElementById('welcomeText').textContent=name?('Nice to see you, '+name+'. Pick a subject below, choose a paper, and see how many stars you can earn today.'):'Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.';
+  document.getElementById('welcomeProfileBtn').textContent=name?'Edit my profile':'Create my profile';
+  document.getElementById('progressTitle').textContent=name?(name+"'s Progress"):'My Progress';
+}
+function openProfile(){
+  draftAvatar=profile.avatar;
+  document.getElementById('modal').className='modal';
+  document.getElementById('modal').innerHTML='<div class="modal-box"><span class="kicker">My profile</span><h3 style="margin-top:10px">'+(profile.name?'Edit your profile':'Create your profile')+'</h3><p style="color:var(--muted);margin:0 0 16px;font-size:14.5px">Tell us a little about you so the app can cheer you on by name. It is saved on this device, so it will still be here when you come back.</p>'
+    +'<div class="field"><label for="profName">Your first name</label><input id="profName" type="text" maxlength="24" placeholder="e.g. Aarav" value="'+(profile.name||'').replace(/"/g,'&quot;')+'"></div>'
+    +'<div class="field"><label>Pick your learning buddy</label><div class="avatar-grid">'+AVATARS.map(function(a){return '<button type="button" class="avatar-opt '+(draftAvatar===a?'selected':'')+'" data-av="'+a+'" onclick="pickAvatar(this)">'+a+'</button>';}).join('')+'</div></div>'
+    +'<div class="field"><label for="profYear">School year</label><select id="profYear">'+['Year 4','Year 5','Year 6'].map(function(y){return '<option '+(profile.year===y?'selected':'')+'>'+y+'</option>';}).join('')+'</select></div>'
+    +'<div class="field"><label for="profFav">Favourite subject</label><select id="profFav">'+Object.entries(PAPERS).map(function(e){return '<option value="'+e[0]+'" '+(profile.favourite===e[0]?'selected':'')+'>'+e[1].title+'</option>';}).join('')+'</select></div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="btn btn-primary" style="flex:1" onclick="saveProfile()">Save my profile ✓</button><button class="btn btn-outline" onclick="closeModal()">Cancel</button></div></div>';
+}
+function pickAvatar(btn){draftAvatar=btn.getAttribute('data-av');document.querySelectorAll('.avatar-opt').forEach(function(b){b.classList.toggle('selected',b===btn);});}
+function saveProfile(){
+  var n=document.getElementById('profName').value.trim();
+  profile.name=n; profile.avatar=draftAvatar;
+  profile.year=document.getElementById('profYear').value;
+  profile.favourite=document.getElementById('profFav').value;
+  subjectFilter=profile.favourite;
+  saveState();
+  closeModal(); updateProfileUI(); renderCards();
+}
+function setNav(which){
+  document.getElementById('navHome').classList.toggle('active',which==='home');
+  document.getElementById('navProgress').classList.toggle('active',which==='progress');
+}
+function showProgress(){
+  clearInterval(timerId);
+  document.getElementById('view-home').classList.add('hidden');
+  document.getElementById('view-exam').classList.add('hidden');
+  document.getElementById('view-results').classList.add('hidden');
+  document.getElementById('view-progress').classList.remove('hidden');
+  setNav('progress'); updateProfileUI(); renderProgress(); window.scrollTo(0,0);
+}
+function renderProgress(){
+  renderOverviewInto('progressStats');
+  var sp=document.getElementById('subjectProgress');
+  sp.innerHTML=Object.entries(PAPERS).map(function(e){
+    var key=e[0], subj=e[1], st=subjectStats(key);
+    return '<div><div class="sp-head"><span style="color:var(--ink)">'+subj.icon+' '+subj.title+'</span><span>'+st.papersDone+' of 10 papers'+(st.avg!==null?' • average '+st.avg+'/10 • '+st.attempts+' attempt'+(st.attempts>1?'s':''):' • not started yet')+'</span></div><div class="bar" style="margin-top:6px"><div class="bar-fill" style="width:'+(st.papersDone*10)+'%"></div></div></div>';
+  }).join('');
+  document.getElementById('badgeGrid').innerHTML=BADGES.map(function(b){
+    var got=b.test();
+    return '<div class="badge '+(got?'':'locked')+'"><span class="bicon">'+b.icon+'</span><b>'+b.name+'</b><span>'+(got?'Unlocked! ':'')+b.desc+'</span></div>';
+  }).join('');
+  var hl=document.getElementById('historyList');
+  if(!history.length){hl.innerHTML='<div class="empty-note">No papers finished yet. Finish your first paper and it will appear here with your stars.</div>';}
+  else{
+    hl.innerHTML=history.slice().reverse().map(function(h){
+      var subj=PAPERS[h.key];
+      return '<div class="history-row"><span class="icon">'+subj.icon+'</span><span><b>'+subj.title+' — Paper '+(h.paper+1)+'</b><span>'+h.when+' • took '+h.time+' • '+starsFor(h.score)+'</span></span><span class="history-score">'+h.score+'/10</span></div>';
+    }).join('');
+  }
+}
+function renderOverviewInto(id){
+  var el=document.getElementById(id); if(!el)return;
+  var attempted=Object.keys(best).length;
+  var avg=history.length?Math.round(history.reduce(function(t,h){return t+h.pct;},0)/history.length):0;
+  var mins=history.reduce(function(t,h){return t+h.secs;},0);
+  el.innerHTML=
+    '<div class="ov"><b>'+attempted+' / 40</b><span>papers finished</span></div>'+
+    '<div class="ov"><b>⭐ '+totalStars()+'</b><span>stars earned</span></div>'+
+    '<div class="ov"><b>'+(history.length?avg+'%':'—')+'</b><span>average score</span></div>'+
+    '<div class="ov"><b>'+Math.round(mins/60)+' min</b><span>time practising</span></div>';
+}
+
+function openInstructions(key,pi){
+  const p=PAPERS[key];
+  document.getElementById('modal').className='modal';
+  document.getElementById('modal').innerHTML=`<div class="modal-box">
+    <div class="kicker">${p.title} • Paper ${pi+1} of 10 • 11+ Mock</div><h3>Before you start</h3>
+    <p style="color:var(--muted)">${p.desc}</p>
+    <ul style="line-height:1.8;font-size:14.5px;padding-left:20px">
+      <li><b>10 questions</b>, one mark each. You have <b>${p.mins} minutes</b>.</li>
+      <li>The timer starts when you press <b>Begin</b> and the paper auto-submits at zero.</li>
+      <li>Use the number buttons to jump between questions. You can change answers any time before submitting.</li>
+      <li>${key==='maths'?'No calculator — use scrap paper for working out.':'Have scrap paper and a pencil ready for working out.'}</li>
+      <li>After submitting you'll get your score plus a full explanation for every question.</li>
+    </ul>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn btn-gold" style="flex:1" onclick="startExam('${key}',${pi})">Begin — start timer →</button><button class="btn btn-outline" onclick="closeModal()">Not yet</button></div>
+  </div>`;
+}
+function closeModal(){document.getElementById('modal').className='hidden';document.getElementById('modal').innerHTML='';}
+function startExam(key,pi){
+  closeModal(); currentKey=key; currentPaper=pi||0; currentIdx=0; answers=Array(10).fill(null);
+  PAPERS[key].questions=ALLQ[key][currentPaper];
+  const p=PAPERS[key]; totalTime=p.mins*60; timeLeft=totalTime; startStamp=Date.now();
+  document.getElementById('view-home').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-exam').classList.remove('hidden'); setNav('home');
+  document.getElementById('examSubject').textContent=p.title+' • Medium–Hard';
+  document.getElementById('examTitle').textContent=p.title+' Mock Paper '+(currentPaper+1)+' of 10 — 10 Questions';
+  clearInterval(timerId); timerId=setInterval(tick,1000); tick(); renderQuestion(); window.scrollTo(0,0);
+}
+function tick(){
+  const m=Math.floor(timeLeft/60), s=timeLeft%60;
+  const el=document.getElementById('timer'); el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  el.classList.toggle('warn', timeLeft<=120);
+  if(timeLeft<=0){ submitExam(true); return; } timeLeft--;
+}
+function renderQuestion(){
+  const p=PAPERS[currentKey], q=p.questions[currentIdx];
+  const answered=answers.filter(a=>a!==null).length;
+  document.getElementById('progressText').textContent=answered+' of 10 answered';
+  document.getElementById('qPosition').textContent='Question '+(currentIdx+1)+' / 10';
+  document.getElementById('progressFill').style.width=(answered*10)+'%';
+  document.getElementById('navGrid').innerHTML=answers.map((a,i)=>`<button class="navdot ${a!==null?'done':''} ${i===currentIdx?'current':''}" onclick="goTo(${i})">${i+1}</button>`).join('');
+  const passageHtml=q.passageText?q.passageText:((q.passage && p.passage && currentIdx<3)?p.passage:'');
+  document.getElementById('qCard').innerHTML=`
+    <div class="qmeta"><span>${p.title} • Question ${currentIdx+1}</span><span>${answers[currentIdx]!==null?'Answered ✓':'Not answered yet'}</span></div>
+    <div class="qtext">${passageHtml}${q.q}</div>
+    <div class="options">${q.opts.map((o,i)=>`<button class="opt ${answers[currentIdx]===i?'selected':''}" onclick="pick(${i})"><span class="opt-letter">${'ABCD'[i]}</span><span>${o}</span></button>`).join('')}</div>`;
+  document.getElementById('prevBtn').disabled=currentIdx===0; document.getElementById('nextBtn').textContent=currentIdx===9?'Last question':'Next →';
+}
+function pick(i){answers[currentIdx]=i; renderQuestion();}
+function clearAnswer(){answers[currentIdx]=null; renderQuestion();}
+function goTo(i){currentIdx=i; renderQuestion();}
+function move(d){currentIdx=Math.min(9,Math.max(0,currentIdx+d)); renderQuestion();}
+function quitExam(){
+  document.getElementById('modal').className='modal';
+  document.getElementById('modal').innerHTML=`<div class="modal-box"><h3>Quit this paper?</h3><p style="color:var(--muted)">Your answers in this attempt will be lost and no score will be recorded.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-danger" onclick="closeModal();showHome()">Yes, quit</button><button class="btn btn-primary" onclick="closeModal()">Keep going</button></div></div>`;
+}
+function confirmSubmit(){
+  const left=answers.filter(a=>a===null).length;
+  document.getElementById('modal').className='modal';
+  document.getElementById('modal').innerHTML=`<div class="modal-box"><h3>Submit your paper?</h3><p style="color:var(--muted)">${left===0?'You have answered all 10 questions.':'You still have <b>'+left+' unanswered</b> question'+(left>1?'s':'')+' — those will be marked wrong.'} Once submitted you cannot change answers, but you will see full explanations.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-gold" onclick="submitExam(false)">Submit now ✓</button><button class="btn btn-outline" onclick="closeModal()">Keep working</button></div></div>`;
+}
+function fmtTime(sec){const m=Math.floor(sec/60),s=sec%60;return m+'m '+String(s).padStart(2,'0')+'s';}
+function submitExam(auto){
+  clearInterval(timerId); closeModal();
+  const p=PAPERS[currentKey];
+  const elapsed=Math.round((Date.now()-startStamp)/1000);
+  let score=0; p.questions.forEach((q,i)=>{if(answers[i]===q.ans)score++;});
+  const pct=score*10;
+  const bKey=currentKey+'-'+currentPaper; if(!best[bKey]||score>best[bKey].score) best[bKey]={score,pct,time:fmtTime(elapsed)};
+  history.push({key:currentKey,paper:currentPaper,score:score,pct:pct,time:fmtTime(elapsed),secs:elapsed,when:new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'})});
+  saveState();
+  let verdict, advice;
+  if(score>=9){verdict='Outstanding — grammar school standard! 🌟';advice='This is a very strong score on a hard paper. Keep stretching with timed practice and check the explanations for even faster methods.';}
+  else if(score>=7){verdict='Strong — you are on track 👍';advice='A solid 11+ score. Read the explanations for the ones you missed — those topics are your quickest wins before the real test.';}
+  else if(score>=5){verdict='Good effort — building nicely';advice='You have the foundations. Go through every explanation below, note the methods, then retake the paper in a few days and watch the score rise.';}
+  else{verdict='A brave attempt — now learn from it 💪';advice='These papers are deliberately hard. The review below is the most valuable part: work through it slowly with a parent, then try again. Every explanation teaches an exam method.';}
+  document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-results').classList.remove('hidden');
+  document.getElementById('scoreHero').innerHTML=`<div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#5EEAD4">${p.title} Mock Paper ${currentPaper+1} ${auto?'• Time ran out — auto-submitted':''}</div><div class="big">${score}<small> / 10</small></div><div style="font-size:21px;font-weight:800;margin-top:6px">${verdict}</div><p style="color:#CBD5E1;max-width:560px;margin:9px auto 0;font-size:15px;line-height:1.6">${advice}</p><div class="score-ring"><span>⭐ Stars earned: ${score} (${starsFor(score)})</span><span>🎯 Score: ${pct}%</span><span>⏱ Time: ${fmtTime(elapsed)} of ${p.mins} mins</span><span>✓ Correct: ${score}</span><span>To improve: ${10-score}</span></div>`;
+  document.getElementById('retakeBtn').onclick=()=>startExam(currentKey,currentPaper);
+  document.getElementById('reviewList').innerHTML=p.questions.map((q,i)=>{
+    const yours=answers[i], correct=yours===q.ans;
+    return `<article class="review-card ${correct?'correct':'wrong'}" data-kind="${correct?'correct':'wrong'}">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Question ${i+1} • ${p.title}</span><span style="font-weight:800">${correct?'✓ Correct':'✗ Not quite'}</span></div>
+      <h4>${q.q.replace(/<div class='visual'>/g,"<div class='visual' style='font-size:22px'>")}</h4>
+      <div class="ans-line yours ${correct?'right':''}"><b>Your answer:</b> ${yours===null?'No answer given':('ABCD'[yours]+' — '+q.opts[yours])}</div>
+      ${correct?'':`<div class="ans-line correct-ans"><b>Correct answer:</b> ${'ABCD'[q.ans]} — ${q.opts[q.ans]}</div>`}
+      <div class="explain"><b>Explanation:</b> ${q.exp}</div>
+    </article>`;
+  }).join('');
+  renderCards(); window.scrollTo(0,0);
+}
+function filterReview(kind){
+  document.querySelectorAll('.review-card').forEach(c=>{ c.style.display=(kind==='all'||c.dataset.kind===kind)?'':'none'; });
+}
+function showHome(){clearInterval(timerId); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0);}
+loadState();
+updateProfileUI();
+renderCards();
+</script>
+</body>
+</html>
