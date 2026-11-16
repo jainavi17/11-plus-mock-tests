@@ -224,6 +224,42 @@ a{color:var(--primary)}
 .kicker{display:inline-flex;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--primary-dark);background:var(--primary-soft);border:1px solid var(--primary-mid);padding:6px 10px;border-radius:999px}
 @media(prefers-color-scheme:dark){.kicker{color:var(--primary)}}
 .empty-note{background:var(--surface);border:1.5px dashed var(--line2);border-radius:16px;padding:22px;text-align:center;color:var(--muted);font-weight:600;font-size:14.5px}
+/* Landing / Hero + Auth */
+.landing-wrap{max-width:1120px;margin:0 auto;padding:28px 24px 8px}
+@media(max-width:640px){.landing-wrap{padding:20px 16px 4px}}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero-copy{background:var(--navy);color:#fff;border-radius:22px;padding:32px 28px 28px;border:1px solid var(--navy2);box-shadow:var(--shadow-lg)}
+@media(prefers-color-scheme:dark){.hero-copy{background:#F2F4F7;color:#101828;border-color:#F2F4F7}}
+.hero-copy .eyebrow{color:#84ADFF}
+@media(prefers-color-scheme:dark){.hero-copy .eyebrow{color:#175CD3}}
+.hero-copy h2{color:#fff;font-size:clamp(32px,4.2vw,48px);line-height:1.02;letter-spacing:-.04em;font-weight:800}
+@media(prefers-color-scheme:dark){.hero-copy h2{color:#101828}}
+.hero-copy p{color:#D0D5DD;font-size:16.5px;line-height:1.65;margin:14px 0 0;max-width:560px;font-weight:500}
+@media(prefers-color-scheme:dark){.hero-copy p{color:#344054}}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px}
+@media(prefers-color-scheme:dark){.hero-stat{background:#fff;border-color:var(--line)}}
+.hero-stat b{font-family:Lexend,sans-serif;font-size:22px;display:block;line-height:1}
+.hero-stat span{font-size:12.5px;opacity:.85;font-weight:600;display:block;margin-top:5px}
+.hero-bullets{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+.hero-bullets li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;font-weight:500;color:#EAECF0}
+@media(prefers-color-scheme:dark){.hero-bullets li{color:#344054}}
+.hero-bullets li b{color:#fff}
+@media(prefers-color-scheme:dark){.hero-bullets li b{color:#101828}}
+.auth-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow-lg)}
+.auth-card h3{font-size:22px;letter-spacing:-.02em}
+.auth-tabs{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px;margin:16px 0}
+.auth-tab{flex:1;border:none;background:transparent;border-radius:999px;padding:9px 10px;font-weight:700;font-size:14px;color:var(--muted);min-height:40px}
+.auth-tab.active{background:var(--navy);color:#fff}
+@media(prefers-color-scheme:dark){.auth-tab.active{background:#F2F4F7;color:#101828}}
+.auth-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+.auth-error{display:none;background:var(--rose-soft);border:1px solid #FECDC2;color:var(--rose);border-radius:10px;padding:11px 12px;font-size:13.5px;font-weight:600;line-height:1.5;margin-bottom:12px}
+.auth-error.show{display:block}
+.auth-success{display:none;background:var(--teal-soft);border:1px solid #A6F4C5;color:var(--teal-dark);border-radius:10px;padding:11px 12px;font-size:13.5px;font-weight:600;line-height:1.5;margin-bottom:12px}
+.auth-success.show{display:block}
+.cloud-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.02em;padding:6px 10px;border-radius:999px;border:1px solid var(--line2);background:var(--surface);color:var(--muted)}
+.cloud-pill.on{color:var(--teal-dark);border-color:#A6F4C5;background:var(--teal-soft)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -232,15 +268,89 @@ a{color:var(--primary)}
   <div class="topbar-inner">
   <button class="logo" onclick="showHome()"><span class="logo-badge">11+</span><span><h1>Mock Tests</h1><p>Year 5 · Grammar school practice</p></span></button>
   <nav class="top-nav" aria-label="Main">
+    <span class="cloud-pill" id="cloudPill">○ Not signed in</span>
     <button class="navbtn active" id="navHome" onclick="showHome()">Home</button>
     <button class="navbtn" id="navProgress" onclick="showProgress()">My Progress</button>
     <button class="profile-chip" id="profileChip" onclick="openProfile()"><span class="av" id="chipAvatar">🦊</span><span id="chipName">Set up profile</span></button>
+    <button class="btn btn-outline btn-small hidden" id="signOutBtn" onclick="signOutUser()">Sign out</button>
   </nav>
   </div>
 </header>
 
+<!-- LANDING / HERO -->
+<div id="view-landing">
+  <div class="landing-wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">11+ Grammar School Practice · Year 5</div>
+        <h2>Timed mock tests that help your child walk into the 11+ feeling ready.</h2>
+        <p>40 papers. 400 questions. Full explanations after every paper — so your child doesn't just get a score, they learn the method for next time. Maths, English, Verbal and Non-Verbal Reasoning, at GL &amp; CEM standard.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>40</b><span>full mock papers</span></div>
+          <div class="hero-stat"><b>400</b><span>questions with explanations</span></div>
+          <div class="hero-stat"><b>4</b><span>subjects covered</span></div>
+        </div>
+        <ul class="hero-bullets">
+          <li><span>✓</span><span><b>Parent account, child profile underneath.</b> You sign up with your email — your child never needs one. Just a first name, avatar, school year and favourite subject.</span></li>
+          <li><span>✓</span><span><b>Progress saved to the cloud.</b> Papers finished, stars, badges and history follow your child across phone, tablet and computer.</span></li>
+          <li><span>✓</span><span><b>Timed like the real thing.</b> Papers auto-submit when time runs out, with a calm, focused exam screen.</span></li>
+        </ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+          <button class="btn btn-gold" onclick="focusAuth('signup')">Create free parent account →</button>
+          <button class="btn btn-outline" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.35)" onclick="enterAsGuest()">Try a paper as guest</button>
+        </div>
+        <p style="font-size:12.5px;margin-top:14px;opacity:.75">Free on Firebase Spark. No card needed. Progress is private to your family account.</p>
+      </div>
+
+      <div class="auth-card" id="authCard">
+        <span class="kicker">Parent account</span>
+        <h3 style="margin-top:10px" id="authHeading">Save progress across devices</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin:8px 0 0;line-height:1.6">Sign up as a parent or guardian. Your child's learning profile lives under your account — no child email, no ads, no tracking.</p>
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tabSignup" onclick="setAuthMode('signup')">Sign up free</button>
+          <button class="auth-tab" id="tabLogin" onclick="setAuthMode('login')">Log in</button>
+        </div>
+        <div class="auth-error" id="authError" role="alert"></div>
+        <div class="auth-success" id="authSuccess" role="status"></div>
+
+        <form id="signupForm" onsubmit="handleSignup(event)">
+          <div class="field"><label for="suEmail">Parent email</label><input id="suEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+          <div class="field"><label for="suPass">Password</label><input id="suPass" type="password" autocomplete="new-password" required minlength="6" placeholder="At least 6 characters"></div>
+          <div class="field"><label for="suChildName">Child's first name</label><input id="suChildName" type="text" maxlength="24" required placeholder="e.g. Aarav"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="field"><label for="suYear">School year</label><select id="suYear"><option>Year 4</option><option selected>Year 5</option><option>Year 6</option></select></div>
+            <div class="field"><label for="suFav">Favourite subject</label><select id="suFav"><option value="maths">Maths</option><option value="english">English</option><option value="verbal">Verbal Reasoning</option><option value="nonverbal">Non-Verbal Reasoning</option></select></div>
+          </div>
+          <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.55;color:var(--ink2);font-weight:500;margin-bottom:16px"><input type="checkbox" id="suConsent" required style="width:18px;height:18px;margin-top:2px;flex:0 0 18px"> <span>I am the parent or guardian of this child and I consent to their first name, school year and practice progress being saved to our family account.</span></label>
+          <button class="btn btn-primary" style="width:100%" type="submit" id="signupBtn">Create account &amp; start practising →</button>
+        </form>
+
+        <form id="loginForm" class="hidden" onsubmit="handleLogin(event)">
+          <div class="field"><label for="liEmail">Parent email</label><input id="liEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+          <div class="field"><label for="liPass">Password</label><input id="liPass" type="password" autocomplete="current-password" required placeholder="Your password"></div>
+          <button class="btn btn-primary" style="width:100%" type="submit" id="loginBtn">Log in →</button>
+          <button class="btn btn-outline" style="width:100%;margin-top:8px" type="button" onclick="handleReset()">Forgot password? Email me a reset link</button>
+        </form>
+
+        <div class="auth-note" style="margin-top:16px"><b>Project:</b> plus-mock-tests (Firebase) · Auth: Email/Password · Database: Firestore, europe-west2. If sign-in is blocked, add <b>jainavi17.github.io</b> under Firebase Console → Authentication → Settings → Authorised domains.</div>
+      </div>
+    </div>
+
+    <div class="section" style="padding-left:0;padding-right:0">
+      <div class="section-head"><div><div class="section-num">What's inside</div><h3>Four subjects, ten papers each</h3><p>Every paper is 10 questions, timed, and followed by a step-by-step review. Papers get a little trickier as the numbers go up.</p></div></div>
+      <div class="subjects">
+        <div class="subject-card" style="cursor:default"><span class="icon">➗</span><span><h4>Maths</h4><p>Fractions, percentages, ratio, sequences and multi-step problem-solving — no calculator.</p></span></div>
+        <div class="subject-card" style="cursor:default"><span class="icon">📖</span><span><h4>English</h4><p>Comprehension passages, vocabulary, grammar, spelling and punctuation at 11+ standard.</p></span></div>
+        <div class="subject-card" style="cursor:default"><span class="icon">🧩</span><span><h4>Verbal Reasoning</h4><p>Letter codes, sequences, analogies, hidden words and logic puzzles — classic GL types.</p></span></div>
+        <div class="subject-card" style="cursor:default"><span class="icon">🔷</span><span><h4>Non-Verbal Reasoning</h4><p>Patterns, rotations, reflections and odd-one-out shapes. Sharp eyes, no words needed.</p></span></div>
+      </div>
+    </div>
+    <p class="footer">40 papers · 400 questions · GL &amp; CEM style · Year 5, medium to hard · For practice at home</p>
+  </div>
+</div>
+
 <!-- HOME -->
-<div id="view-home">
+<div id="view-home" class="hidden">
   <div class="wrap">
     <div class="hero-card">
       <div class="welcome">
@@ -364,6 +474,34 @@ a{color:var(--primary)}
 <!-- MODALS -->
 <div id="modal" class="hidden"></div>
 
+<script>
+/* Firebase globals declared here so the classic app script below can reference them before the module loads. */
+var fbAuth=null, fbDb=null, fbUser=null, cloudReady=false, cloudSaveTimer=null;
+var fbApi=null;
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+/* Firebase JS SDK 13.3.0 (modular) for project plus-mock-tests, using the web-app config provided by the user. */
+var firebaseConfig = {
+  apiKey: "AIzaSyAn90KZyfyAeGRax0hiY4xF-ZI-LwlXlJM",
+  authDomain: "plus-mock-tests.firebaseapp.com",
+  projectId: "plus-mock-tests",
+  storageBucket: "plus-mock-tests.firebasestorage.app",
+  messagingSenderId: "999149808211",
+  appId: "1:999149808211:web:9dcc7ead19a6a0c8bff4a6"
+};
+try{
+  var fbApp = initializeApp(firebaseConfig);
+  fbAuth = getAuth(fbApp); fbDb = getFirestore(fbApp);
+  window.fbAuth = fbAuth; window.fbDb = fbDb;
+  fbApi = { createUserWithEmailAndPassword: createUserWithEmailAndPassword, signInWithEmailAndPassword: signInWithEmailAndPassword, sendPasswordResetEmail: sendPasswordResetEmail, onAuthStateChanged: onAuthStateChanged, signOut: signOut, doc: doc, getDoc: getDoc, setDoc: setDoc, serverTimestamp: serverTimestamp };
+  window.fbApi = fbApi;
+  /* Module scripts run deferred, after the classic app script below has already called initAuth() once with fbAuth still null; run it again now that Auth/Firestore are ready. initAuth() guards against registering the listener twice. */
+  if (typeof initAuth === 'function') initAuth();
+}catch(e){ console.warn('Firebase init failed', e); }
+</script>
 <script>
 const PAPERS = {
 maths:{
@@ -607,6 +745,128 @@ function saveState(){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify({profile:profile, best:best, history:history}));
   }catch(e){}
+  scheduleCloudSave();
+}
+function scheduleCloudSave(){
+  if(!fbUser || !fbDb) return;
+  clearTimeout(cloudSaveTimer);
+  cloudSaveTimer=setTimeout(saveToCloud, 600);
+}
+function saveToCloud(){
+  if(!fbUser || !fbDb) return Promise.resolve();
+  var payload={profile:profile, best:best, history:history, parentEmail:fbUser.email||'', updatedAt: fbApi.serverTimestamp()};
+  return fbApi.setDoc(fbApi.doc(fbDb,'users',fbUser.uid), payload, {merge:true}).then(function(){ setCloudPill(true); }).catch(function(e){ console.warn('Cloud save failed', e); setCloudPill(true,'Cloud save failed — kept on this device'); });
+}
+function setCloudPill(on, label){
+  var el=document.getElementById('cloudPill'); if(!el) return;
+  if(label){ el.textContent='● '+label; el.classList.remove('on'); return; }
+  if(on && fbUser){ el.textContent='● Saved to cloud · '+(fbUser.email||''); el.classList.add('on'); }
+  else if(fbUser){ el.textContent='● Signed in · '+(fbUser.email||''); el.classList.add('on'); }
+  else { el.textContent='○ Not signed in'; el.classList.remove('on'); }
+}
+function authErrorMsg(e){
+  var c=e&&e.code?e.code:'';
+  if(c==='auth/email-already-in-use') return 'That email already has an account. Switch to Log in above.';
+  if(c==='auth/invalid-email') return 'That email address does not look right — please check it.';
+  if(c==='auth/weak-password') return 'Password is too weak — use at least 6 characters.';
+  if(c==='auth/user-not-found'||c==='auth/wrong-password'||c==='auth/invalid-credential') return 'Email or password is incorrect. Please try again.';
+  if(c==='auth/unauthorized-domain') return 'This website domain is not authorised in Firebase yet. In Firebase Console go to Authentication → Settings → Authorised domains and add jainavi17.github.io, then try again.';
+  if(c==='auth/operation-not-allowed') return 'Email/Password sign-in is not enabled yet. In Firebase Console go to Authentication → Sign-in method and enable Email/Password.';
+  if(c==='permission-denied') return 'Firestore blocked the save (permission denied). In Firestore → Rules, allow a signed-in parent to read/write only their own document: match /users/{uid} { allow read, write: if request.auth != null && request.auth.uid == uid; }';
+  return (e&&e.message)?e.message:'Something went wrong. Please try again.';
+}
+function showAuthError(msg){ var el=document.getElementById('authError'); if(el){el.textContent=msg; el.classList.add('show');} var s=document.getElementById('authSuccess'); if(s)s.classList.remove('show'); }
+function showAuthSuccess(msg){ var el=document.getElementById('authSuccess'); if(el){el.textContent=msg; el.classList.add('show');} var e=document.getElementById('authError'); if(e)e.classList.remove('show'); }
+function clearAuthMsgs(){ var e=document.getElementById('authError'); if(e)e.classList.remove('show'); var s=document.getElementById('authSuccess'); if(s)s.classList.remove('show'); }
+function setAuthMode(mode){
+  clearAuthMsgs();
+  document.getElementById('tabSignup').classList.toggle('active', mode==='signup');
+  document.getElementById('tabLogin').classList.toggle('active', mode==='login');
+  document.getElementById('signupForm').classList.toggle('hidden', mode!=='signup');
+  document.getElementById('loginForm').classList.toggle('hidden', mode!=='login');
+  document.getElementById('authHeading').textContent = mode==='signup' ? 'Save progress across devices' : 'Welcome back';
+}
+function focusAuth(mode){ setAuthMode(mode||'signup'); var c=document.getElementById('authCard'); if(c)c.scrollIntoView({behavior:'smooth',block:'start'}); }
+function enterAsGuest(){ document.getElementById('view-landing').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0); }
+function showLanding(){ clearInterval(timerId); ['view-home','view-progress','view-exam','view-results'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('view-landing').classList.remove('hidden'); window.scrollTo(0,0); }
+function handleSignup(ev){
+  ev.preventDefault(); clearAuthMsgs();
+  if(!fbAuth){ showAuthError('Firebase did not load — check your connection and refresh.'); return; }
+  var email=document.getElementById('suEmail').value.trim();
+  var pass=document.getElementById('suPass').value;
+  var childName=document.getElementById('suChildName').value.trim();
+  var year=document.getElementById('suYear').value;
+  var fav=document.getElementById('suFav').value;
+  var btn=document.getElementById('signupBtn'); btn.disabled=true; btn.textContent='Creating account…';
+  fbApi.createUserWithEmailAndPassword(fbAuth,email,pass).then(function(cred){
+    fbUser=cred.user;
+    profile.name=childName; profile.year=year; profile.favourite=fav; if(!profile.avatar) profile.avatar='🦊';
+    subjectFilter=fav;
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({profile:profile,best:best,history:history})); }catch(e){}
+    return saveToCloud();
+  }).then(function(){
+    btn.disabled=false; btn.textContent='Create account & start practising →';
+    showAuthSuccess('Account created — you are signed in and progress will now save to the cloud.');
+    setTimeout(function(){ showHome(); }, 500);
+  }).catch(function(e){ btn.disabled=false; btn.textContent='Create account & start practising →'; showAuthError(authErrorMsg(e)); });
+}
+function handleLogin(ev){
+  ev.preventDefault(); clearAuthMsgs();
+  if(!fbAuth){ showAuthError('Firebase did not load — check your connection and refresh.'); return; }
+  var email=document.getElementById('liEmail').value.trim();
+  var pass=document.getElementById('liPass').value;
+  var btn=document.getElementById('loginBtn'); btn.disabled=true; btn.textContent='Logging in…';
+  fbApi.signInWithEmailAndPassword(fbAuth,email,pass).then(function(){
+    btn.disabled=false; btn.textContent='Log in →';
+    // onAuthStateChanged loads cloud data and routes home
+  }).catch(function(e){ btn.disabled=false; btn.textContent='Log in →'; showAuthError(authErrorMsg(e)); });
+}
+function handleReset(){
+  clearAuthMsgs();
+  var email=document.getElementById('liEmail').value.trim();
+  if(!email){ showAuthError('Enter your parent email above first, then tap forgot password again.'); return; }
+  if(!fbAuth) return;
+  fbApi.sendPasswordResetEmail(fbAuth,email).then(function(){ showAuthSuccess('Password reset email sent to '+email+'. Check your inbox.'); }).catch(function(e){ showAuthError(authErrorMsg(e)); });
+}
+function signOutUser(){
+  if(!fbAuth){ showLanding(); return; }
+  fbApi.signOut(fbAuth).then(function(){ fbUser=null; setCloudPill(false); var b=document.getElementById('signOutBtn'); if(b)b.classList.add('hidden'); showLanding(); });
+}
+function initAuth(){
+  if(window.__fbAuthListenerAttached){ return; }
+  if(!fbAuth){ setCloudPill(false); return; }
+  window.__fbAuthListenerAttached=true;
+  fbApi.onAuthStateChanged(fbAuth, function(user){
+    fbUser=user||null;
+    var outBtn=document.getElementById('signOutBtn');
+    if(user){
+      if(outBtn) outBtn.classList.remove('hidden');
+      setCloudPill(true);
+      // Load cloud doc; merge local once if cloud is empty
+      fbApi.getDoc(fbApi.doc(fbDb,'users',user.uid)).then(function(snap){
+        if(snap.exists()){
+          var d=snap.data()||{};
+          if(d.profile) profile=d.profile;
+          if(d.best) best=d.best;
+          if(Array.isArray(d.history)) history=d.history;
+          if(profile.favourite && PAPERS[profile.favourite]) subjectFilter=profile.favourite;
+          try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({profile:profile,best:best,history:history})); }catch(e){}
+        } else {
+          // First sign-in for this account: migrate on-device data up once
+          return saveToCloud();
+        }
+      }).catch(function(e){ console.warn('Cloud load failed', e); showAuthError(authErrorMsg(e)); }).finally(function(){
+        cloudReady=true; updateProfileUI(); renderCards();
+        // Only auto-enter app if landing is visible (don't interrupt an exam)
+        var landingVisible=!document.getElementById('view-landing').classList.contains('hidden');
+        if(landingVisible) showHome();
+      });
+    } else {
+      if(outBtn) outBtn.classList.add('hidden');
+      setCloudPill(false);
+      cloudReady=false;
+    }
+  });
 }
 function loadState(){
   try{
@@ -703,7 +963,7 @@ function updateProfileUI(){
 function openProfile(){
   draftAvatar=profile.avatar;
   document.getElementById('modal').className='modal';
-  document.getElementById('modal').innerHTML='<div class="modal-box"><span class="kicker">My profile</span><h3 style="margin-top:10px">'+(profile.name?'Edit your profile':'Create your profile')+'</h3><p style="color:var(--muted);margin:0 0 16px;font-size:14.5px">Tell us a little about you so the app can cheer you on by name. It is saved on this device, so it will still be here when you come back.</p>'
+  document.getElementById('modal').innerHTML='<div class="modal-box"><span class="kicker">My profile</span><h3 style="margin-top:10px">'+(profile.name?'Edit your profile':'Create your profile')+'</h3><p style="color:var(--muted);margin:0 0 16px;font-size:14.5px">Tell us a little about you so the app can cheer you on by name. When signed in it saves to your family cloud account across devices; as a guest it stays on this device.</p>'
     +'<div class="field"><label for="profName">Your first name</label><input id="profName" type="text" maxlength="24" placeholder="e.g. Aarav" value="'+(profile.name||'').replace(/"/g,'&quot;')+'"></div>'
     +'<div class="field"><label>Pick your learning buddy</label><div class="avatar-grid">'+AVATARS.map(function(a){return '<button type="button" class="avatar-opt '+(draftAvatar===a?'selected':'')+'" data-av="'+a+'" onclick="pickAvatar(this)">'+a+'</button>';}).join('')+'</div></div>'
     +'<div class="field"><label for="profYear">School year</label><select id="profYear">'+['Year 4','Year 5','Year 6'].map(function(y){return '<option '+(profile.year===y?'selected':'')+'>'+y+'</option>';}).join('')+'</select></div>'
@@ -726,6 +986,7 @@ function setNav(which){
 }
 function showProgress(){
   clearInterval(timerId);
+  var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden');
   document.getElementById('view-home').classList.add('hidden');
   document.getElementById('view-exam').classList.add('hidden');
   document.getElementById('view-results').classList.add('hidden');
@@ -856,10 +1117,11 @@ function submitExam(auto){
 function filterReview(kind){
   document.querySelectorAll('.review-card').forEach(c=>{ c.style.display=(kind==='all'||c.dataset.kind===kind)?'':'none'; });
 }
-function showHome(){clearInterval(timerId); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0);}
+function showHome(){clearInterval(timerId); var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden'); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0);}
 loadState();
 updateProfileUI();
 renderCards();
+initAuth();
 </script>
 </body>
 </html>
