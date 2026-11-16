@@ -258,21 +258,40 @@ a{color:var(--primary)}
 .auth-error.show{display:block}
 .auth-success{display:none;background:var(--teal-soft);border:1px solid #A6F4C5;color:var(--teal-dark);border-radius:10px;padding:11px 12px;font-size:13.5px;font-weight:600;line-height:1.5;margin-bottom:12px}
 .auth-success.show{display:block}
-.cloud-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.02em;padding:6px 10px;border-radius:999px;border:1px solid var(--line2);background:var(--surface);color:var(--muted)}
-.cloud-pill.on{color:var(--teal-dark);border-color:#A6F4C5;background:var(--teal-soft)}
+/* Account menu (top-right avatar dropdown, signed in only) */
+.account-menu{position:relative}
+.account-menu .caret{font-size:11px;color:var(--muted)}
+.account-menu-pop{position:absolute;right:0;top:calc(100% + 8px);min-width:248px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:6px;z-index:60;text-align:left}
+.account-menu-head{padding:10px 12px 8px;font-size:12.5px;font-weight:600;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-bottom:1px solid var(--line);margin-bottom:6px}
+.account-menu-item{display:block;width:100%;text-align:left;background:transparent;border:none;color:var(--ink);font-weight:600;font-size:14px;padding:10px 12px;border-radius:10px;min-height:40px}
+.account-menu-item:hover{background:var(--surface2)}
+.account-menu-item.danger{color:var(--rose)}
+.account-menu-sep{border-top:1px solid var(--line);margin:6px 4px 0}
+.guest-note{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;margin:18px 0 2px;font-size:14px;font-weight:500;color:var(--ink2)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-  <button class="logo" onclick="showHome()"><span class="logo-badge">11+</span><span><h1>Mock Tests</h1><p>Year 5 · Grammar school practice</p></span></button>
+  <button class="logo" onclick="goHome()"><span class="logo-badge">11+</span><span><h1>Mock Tests</h1><p>Year 5 · Grammar school practice</p></span></button>
   <nav class="top-nav" aria-label="Main">
-    <span class="cloud-pill" id="cloudPill">○ Not signed in</span>
-    <button class="navbtn active" id="navHome" onclick="showHome()">Home</button>
-    <button class="navbtn" id="navProgress" onclick="showProgress()">My Progress</button>
-    <button class="profile-chip" id="profileChip" onclick="openProfile()"><span class="av" id="chipAvatar">🦊</span><span id="chipName">Set up profile</span></button>
-    <button class="btn btn-outline btn-small hidden" id="signOutBtn" onclick="signOutUser()">Sign out</button>
+    <button class="navbtn active" id="navHome" onclick="goHome()">Home</button>
+    <button class="navbtn" id="navPractice" onclick="showHome()">Practice</button>
+    <span id="authLoggedOut" style="display:flex;gap:8px;align-items:center">
+      <button class="btn btn-outline btn-small" onclick="goAuth('login')">Log in</button>
+      <button class="btn btn-primary btn-small" onclick="goAuth('signup')">Sign up free</button>
+    </span>
+    <div class="account-menu hidden" id="accountMenuWrap">
+      <button class="profile-chip" id="profileChip" aria-haspopup="true" aria-expanded="false" aria-controls="accountMenu" onclick="toggleAccountMenu(event)"><span class="av" id="chipAvatar">🦊</span><span id="chipName">My account</span><span class="caret">▾</span></button>
+      <div class="account-menu-pop hidden" id="accountMenu" role="menu" aria-label="Account">
+        <div class="account-menu-head" id="menuEmail"></div>
+        <button class="account-menu-item" role="menuitem" onclick="closeAccountMenu();showProgress()">My Progress</button>
+        <button class="account-menu-item" role="menuitem" onclick="closeAccountMenu();openProfile()">Edit profile</button>
+        <div class="account-menu-sep"></div>
+        <button class="account-menu-item danger" role="menuitem" onclick="signOutUser()">Sign out</button>
+      </div>
+    </div>
   </nav>
   </div>
 </header>
@@ -352,6 +371,7 @@ a{color:var(--primary)}
 <!-- HOME -->
 <div id="view-home" class="hidden">
   <div class="wrap">
+    <div class="guest-note hidden" id="guestNote"><span>You&rsquo;re practising as a guest &mdash; scores won&rsquo;t be saved. Create a free parent account to track progress.</span><span style="display:flex;gap:8px"><button class="btn btn-primary btn-small" onclick="goAuth('signup')">Sign up free</button><button class="btn btn-outline btn-small" onclick="goAuth('login')">Log in</button></span></div>
     <div class="hero-card">
       <div class="welcome">
         <div class="big-av" id="welcomeAvatar">🦊</div>
@@ -424,6 +444,27 @@ a{color:var(--primary)}
     <div class="section-head"><h3>Papers I've finished</h3><p>Your most recent papers are at the top.</p></div>
     <div class="history-list" id="historyList"></div>
     <div style="text-align:center;margin-top:18px"><button class="btn btn-primary" onclick="showHome()">Practise another paper →</button></div>
+  </div>
+</div>
+
+<!-- SIGN-IN REQUIRED (shown instead of My Progress when logged out) -->
+<div id="view-auth-required" class="hidden">
+  <div class="wrap">
+    <div class="hero-card">
+      <div class="welcome">
+        <div class="big-av">🔒</div>
+        <div style="flex:1;min-width:240px">
+          <div class="eyebrow">My Progress</div>
+          <h2>Sign in to track progress</h2>
+          <p>Create a free parent account to track progress &mdash; papers finished, stars, badges and history, saved to the cloud across devices. You can still practise papers as a guest, but scores won&rsquo;t be saved.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="goAuth('signup')">Sign up free</button>
+            <button class="btn btn-outline" onclick="goAuth('login')">Log in</button>
+            <button class="btn btn-outline" onclick="showHome()">Try a paper as guest</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -758,11 +799,10 @@ function saveToCloud(){
   return fbApi.setDoc(fbApi.doc(fbDb,'users',fbUser.uid), payload, {merge:true}).then(function(){ setCloudPill(true); }).catch(function(e){ console.warn('Cloud save failed', e); setCloudPill(true,'Cloud save failed — kept on this device'); });
 }
 function setCloudPill(on, label){
-  var el=document.getElementById('cloudPill'); if(!el) return;
-  if(label){ el.textContent='● '+label; el.classList.remove('on'); return; }
-  if(on && fbUser){ el.textContent='● Saved to cloud · '+(fbUser.email||''); el.classList.add('on'); }
-  else if(fbUser){ el.textContent='● Signed in · '+(fbUser.email||''); el.classList.add('on'); }
-  else { el.textContent='○ Not signed in'; el.classList.remove('on'); }
+  /* No visible signed-out / cloud pill: the header shows Log in / Sign up
+     when logged out and the avatar menu when signed in. Cloud saves still
+     happen silently in the background; failures are logged to the console. */
+  updateAuthUI();
 }
 function authErrorMsg(e){
   var c=e&&e.code?e.code:'';
@@ -787,8 +827,35 @@ function setAuthMode(mode){
   document.getElementById('authHeading').textContent = mode==='signup' ? 'Save progress across devices' : 'Welcome back';
 }
 function focusAuth(mode){ setAuthMode(mode||'signup'); var c=document.getElementById('authCard'); if(c)c.scrollIntoView({behavior:'smooth',block:'start'}); }
-function enterAsGuest(){ document.getElementById('view-landing').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0); }
-function showLanding(){ clearInterval(timerId); ['view-home','view-progress','view-exam','view-results'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('view-landing').classList.remove('hidden'); window.scrollTo(0,0); }
+function updateAuthUI(){
+  var signedIn=!!fbUser;
+  var lo=document.getElementById('authLoggedOut'); if(lo) lo.classList.toggle('hidden', signedIn);
+  var wrap=document.getElementById('accountMenuWrap'); if(wrap) wrap.classList.toggle('hidden', !signedIn);
+  if(signedIn){
+    var av=document.getElementById('chipAvatar'); if(av) av.textContent=profile.avatar||'🦊';
+    var nm=document.getElementById('chipName'); if(nm) nm.textContent=profile.name||'My account';
+    var em=document.getElementById('menuEmail'); if(em) em.textContent=fbUser.email||'';
+  }
+  var gn=document.getElementById('guestNote'); if(gn) gn.classList.toggle('hidden', signedIn);
+  if(!signedIn) closeAccountMenu();
+}
+function toggleAccountMenu(ev){
+  if(ev) ev.stopPropagation();
+  if(!fbUser) return;
+  var m=document.getElementById('accountMenu'); if(!m) return;
+  var open=m.classList.toggle('hidden');
+  var b=document.getElementById('profileChip'); if(b) b.setAttribute('aria-expanded', String(!open));
+}
+function closeAccountMenu(){
+  var m=document.getElementById('accountMenu'); if(m) m.classList.add('hidden');
+  var b=document.getElementById('profileChip'); if(b) b.setAttribute('aria-expanded','false');
+}
+function goHome(){ if(fbUser){ showHome(); } else { showLanding(); } }
+function goAuth(mode){ closeAccountMenu(); showLanding(); focusAuth(mode||'signup'); }
+document.addEventListener('click', function(ev){ var w=document.getElementById('accountMenuWrap'); if(w && !w.contains(ev.target)) closeAccountMenu(); });
+document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') closeAccountMenu(); });
+function enterAsGuest(){ document.getElementById('view-landing').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0); }
+function showLanding(){ clearInterval(timerId); closeAccountMenu(); ['view-home','view-progress','view-exam','view-results','view-auth-required'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('view-landing').classList.remove('hidden'); setNav('home'); updateAuthUI(); window.scrollTo(0,0); }
 function handleSignup(ev){
   ev.preventDefault(); clearAuthMsgs();
   if(!fbAuth){ showAuthError('Firebase did not load — check your connection and refresh.'); return; }
@@ -829,19 +896,18 @@ function handleReset(){
   fbApi.sendPasswordResetEmail(fbAuth,email).then(function(){ showAuthSuccess('Password reset email sent to '+email+'. Check your inbox.'); }).catch(function(e){ showAuthError(authErrorMsg(e)); });
 }
 function signOutUser(){
-  if(!fbAuth){ showLanding(); return; }
-  fbApi.signOut(fbAuth).then(function(){ fbUser=null; setCloudPill(false); var b=document.getElementById('signOutBtn'); if(b)b.classList.add('hidden'); showLanding(); });
+  closeAccountMenu();
+  if(!fbAuth){ fbUser=null; updateAuthUI(); showLanding(); return; }
+  fbApi.signOut(fbAuth).then(function(){ fbUser=null; updateAuthUI(); showLanding(); });
 }
 function initAuth(){
   if(window.__fbAuthListenerAttached){ return; }
-  if(!fbAuth){ setCloudPill(false); return; }
+  if(!fbAuth){ updateAuthUI(); return; }
   window.__fbAuthListenerAttached=true;
   fbApi.onAuthStateChanged(fbAuth, function(user){
     fbUser=user||null;
-    var outBtn=document.getElementById('signOutBtn');
     if(user){
-      if(outBtn) outBtn.classList.remove('hidden');
-      setCloudPill(true);
+      updateAuthUI();
       // Load cloud doc; merge local once if cloud is empty
       fbApi.getDoc(fbApi.doc(fbDb,'users',user.uid)).then(function(snap){
         if(snap.exists()){
@@ -856,14 +922,13 @@ function initAuth(){
           return saveToCloud();
         }
       }).catch(function(e){ console.warn('Cloud load failed', e); showAuthError(authErrorMsg(e)); }).finally(function(){
-        cloudReady=true; updateProfileUI(); renderCards();
+        cloudReady=true; updateProfileUI(); updateAuthUI(); renderCards();
         // Only auto-enter app if landing is visible (don't interrupt an exam)
         var landingVisible=!document.getElementById('view-landing').classList.contains('hidden');
         if(landingVisible) showHome();
       });
     } else {
-      if(outBtn) outBtn.classList.add('hidden');
-      setCloudPill(false);
+      updateAuthUI();
       cloudReady=false;
     }
   });
@@ -952,15 +1017,17 @@ function renderCards(){
 function updateProfileUI(){
   var name=profile.name||'';
   document.getElementById('chipAvatar').textContent=profile.avatar;
-  document.getElementById('chipName').textContent=name?name:'Set up profile';
+  document.getElementById('chipName').textContent=name?name:'My account';
   document.getElementById('welcomeAvatar').textContent=profile.avatar;
   document.getElementById('progressAvatar').textContent=profile.avatar;
   document.getElementById('welcomeTitle').textContent=name?('Hello, '+name+'! Ready to learn?'):'Hello! Ready to learn?';
   document.getElementById('welcomeText').textContent=name?('Nice to see you, '+name+'. Pick a subject below, choose a paper, and see how many stars you can earn today.'):'Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.';
-  document.getElementById('welcomeProfileBtn').textContent=name?'Edit my profile':'Create my profile';
+  var wpb=document.getElementById('welcomeProfileBtn'); if(wpb){ wpb.textContent=name?'Edit my profile':'Create my profile'; wpb.classList.toggle('hidden', !fbUser); }
+  var gn=document.getElementById('guestNote'); if(gn) gn.classList.toggle('hidden', !!fbUser);
   document.getElementById('progressTitle').textContent=name?(name+"'s Progress"):'My Progress';
 }
 function openProfile(){
+  if(!fbUser){ closeAccountMenu(); showLanding(); focusAuth('signup'); return; }
   draftAvatar=profile.avatar;
   document.getElementById('modal').className='modal';
   document.getElementById('modal').innerHTML='<div class="modal-box"><span class="kicker">My profile</span><h3 style="margin-top:10px">'+(profile.name?'Edit your profile':'Create your profile')+'</h3><p style="color:var(--muted);margin:0 0 16px;font-size:14.5px">Tell us a little about you so the app can cheer you on by name. When signed in it saves to your family cloud account across devices; as a guest it stays on this device.</p>'
@@ -981,17 +1048,22 @@ function saveProfile(){
   closeModal(); updateProfileUI(); renderCards();
 }
 function setNav(which){
-  document.getElementById('navHome').classList.toggle('active',which==='home');
-  document.getElementById('navProgress').classList.toggle('active',which==='progress');
+  var h=document.getElementById('navHome'); if(h) h.classList.toggle('active',which==='home');
+  var p=document.getElementById('navPractice'); if(p) p.classList.toggle('active',which==='practice');
 }
 function showProgress(){
   clearInterval(timerId);
+  closeAccountMenu();
   var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden');
   document.getElementById('view-home').classList.add('hidden');
   document.getElementById('view-exam').classList.add('hidden');
   document.getElementById('view-results').classList.add('hidden');
+  document.getElementById('view-progress').classList.add('hidden');
+  document.getElementById('view-auth-required').classList.add('hidden');
+  setNav('practice'); updateAuthUI();
+  if(!fbUser){ document.getElementById('view-auth-required').classList.remove('hidden'); window.scrollTo(0,0); return; }
   document.getElementById('view-progress').classList.remove('hidden');
-  setNav('progress'); updateProfileUI(); renderProgress(); window.scrollTo(0,0);
+  updateProfileUI(); renderProgress(); window.scrollTo(0,0);
 }
 function renderProgress(){
   renderOverviewInto('progressStats');
@@ -1046,7 +1118,7 @@ function startExam(key,pi){
   closeModal(); currentKey=key; currentPaper=pi||0; currentIdx=0; answers=Array(10).fill(null);
   PAPERS[key].questions=ALLQ[key][currentPaper];
   const p=PAPERS[key]; totalTime=p.mins*60; timeLeft=totalTime; startStamp=Date.now();
-  document.getElementById('view-home').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-exam').classList.remove('hidden'); setNav('home');
+  document.getElementById('view-home').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-exam').classList.remove('hidden'); setNav('practice');
   document.getElementById('examSubject').textContent=p.title+' • Medium–Hard';
   document.getElementById('examTitle').textContent=p.title+' Mock Paper '+(currentPaper+1)+' of 10 — 10 Questions';
   clearInterval(timerId); timerId=setInterval(tick,1000); tick(); renderQuestion(); window.scrollTo(0,0);
@@ -1099,7 +1171,7 @@ function submitExam(auto){
   else if(score>=7){verdict='Strong — you are on track 👍';advice='A solid 11+ score. Read the explanations for the ones you missed — those topics are your quickest wins before the real test.';}
   else if(score>=5){verdict='Good effort — building nicely';advice='You have the foundations. Go through every explanation below, note the methods, then retake the paper in a few days and watch the score rise.';}
   else{verdict='A brave attempt — now learn from it 💪';advice='These papers are deliberately hard. The review below is the most valuable part: work through it slowly with a parent, then try again. Every explanation teaches an exam method.';}
-  document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-results').classList.remove('hidden');
+  document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-results').classList.remove('hidden');
   document.getElementById('scoreHero').innerHTML=`<div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#5EEAD4">${p.title} Mock Paper ${currentPaper+1} ${auto?'• Time ran out — auto-submitted':''}</div><div class="big">${score}<small> / 10</small></div><div style="font-size:21px;font-weight:800;margin-top:6px">${verdict}</div><p style="color:#CBD5E1;max-width:560px;margin:9px auto 0;font-size:15px;line-height:1.6">${advice}</p><div class="score-ring"><span>⭐ Stars earned: ${score} (${starsFor(score)})</span><span>🎯 Score: ${pct}%</span><span>⏱ Time: ${fmtTime(elapsed)} of ${p.mins} mins</span><span>✓ Correct: ${score}</span><span>To improve: ${10-score}</span></div>`;
   document.getElementById('retakeBtn').onclick=()=>startExam(currentKey,currentPaper);
   document.getElementById('reviewList').innerHTML=p.questions.map((q,i)=>{
@@ -1117,9 +1189,10 @@ function submitExam(auto){
 function filterReview(kind){
   document.querySelectorAll('.review-card').forEach(c=>{ c.style.display=(kind==='all'||c.dataset.kind===kind)?'':'none'; });
 }
-function showHome(){clearInterval(timerId); var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden'); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('home'); updateProfileUI(); renderCards(); window.scrollTo(0,0);}
+function showHome(){clearInterval(timerId); var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden'); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0);}
 loadState();
 updateProfileUI();
+updateAuthUI();
 renderCards();
 initAuth();
 </script>
