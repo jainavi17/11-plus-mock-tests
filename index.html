@@ -380,7 +380,6 @@ a{color:var(--primary)}
           <h2 id="welcomeTitle">Hello! Ready to learn?</h2>
           <p id="welcomeText">Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.</p>
           <div class="hero-actions">
-            <button class="btn btn-outline" id="welcomeProfileBtn" onclick="openProfile()">Create my profile</button>
             <button class="btn btn-primary" onclick="document.getElementById('papersSection').scrollIntoView({behavior:'smooth'})">Choose a paper ↓</button>
           </div>
         </div>
@@ -425,7 +424,6 @@ a{color:var(--primary)}
           <h2 id="progressTitle">My Progress</h2>
           <p>See every paper you've finished, the stars you've earned, and which subject to practise next.</p>
         </div>
-        <button class="btn btn-outline" onclick="openProfile()">Edit profile</button>
       </div>
     </div>
     <div class="overview" id="progressStats"></div>
@@ -2568,7 +2566,6 @@ function updateProfileUI(){
   document.getElementById('progressAvatar').textContent=profile.avatar;
   document.getElementById('welcomeTitle').textContent=name?('Hello, '+name+'! Ready to learn?'):'Hello! Ready to learn?';
   document.getElementById('welcomeText').textContent=name?('Nice to see you, '+name+'. Pick a subject below, choose a paper, and see how many stars you can earn today.'):'Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.';
-  var wpb=document.getElementById('welcomeProfileBtn'); if(wpb){ wpb.textContent=name?'Edit my profile':'Create my profile'; wpb.classList.toggle('hidden', !fbUser); }
   var gn=document.getElementById('guestNote'); if(gn) gn.classList.toggle('hidden', !!fbUser);
   document.getElementById('progressTitle').textContent=name?(name+"'s Progress"):'My Progress';
 }
