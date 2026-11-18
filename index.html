@@ -218,6 +218,13 @@ a{color:var(--primary)}
 .explain{background:var(--amber-soft);border:1px solid #FDECC8;border-radius:12px;padding:14px 15px;font-size:14.5px;line-height:1.7;margin-top:10px;color:var(--ink2)}
 @media(prefers-color-scheme:dark){.explain{border-color:var(--line)}}
 .hidden{display:none!important}
+/* Auth gate: hide landing/home until Firebase tells us if the user is signed in, so a returning user never flashes the hero. The loading splash shows instead. */
+#view-loading{display:none;min-height:70vh;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:40px 20px}
+#view-loading .load-badge{font-family:Lexend,sans-serif;font-weight:800;font-size:22px;background:var(--navy);color:#fff;border-radius:14px;padding:10px 16px}
+#view-loading .load-spin{width:26px;height:26px;border-radius:50%;border:3px solid var(--line2);border-top-color:var(--primary);animation:loadspin 0.8s linear infinite}
+@keyframes loadspin{to{transform:rotate(360deg)}}
+html.auth-pending #view-landing,html.auth-pending #view-home,html.auth-pending #view-progress,html.auth-pending #view-exam,html.auth-pending #view-results,html.auth-pending #view-auth-required{display:none!important}
+html.auth-pending #view-loading{display:flex!important}
 .modal{position:fixed;inset:0;background:rgba(16,24,40,.62);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;z-index:50}
 .modal-box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px;max-width:520px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg)}
 .modal-box h3{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;line-height:1.2}
@@ -270,6 +277,7 @@ a{color:var(--primary)}
 .guest-note{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;margin:18px 0 2px;font-size:14px;font-weight:500;color:var(--ink2)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
+<script>document.documentElement.classList.add('auth-pending');</script>
 </head>
 <body>
 <header class="topbar">
@@ -296,6 +304,7 @@ a{color:var(--primary)}
   </div>
 </header>
 
+<div id="view-loading" role="status" aria-live="polite"><span class="load-badge">11+</span><span class="load-spin" aria-hidden="true"></span><p style="color:var(--muted);font-weight:600;font-size:14.5px;margin:0">Loading your practice&hellip;</p></div>
 <!-- LANDING / HERO -->
 <div id="view-landing">
   <div class="landing-wrap">
@@ -2391,8 +2400,8 @@ function goHome(){ if(fbUser){ showHome(); } else { showLanding(); } }
 function goAuth(mode){ closeAccountMenu(); showLanding(); focusAuth(mode||'signup'); }
 document.addEventListener('click', function(ev){ var w=document.getElementById('accountMenuWrap'); if(w && !w.contains(ev.target)) closeAccountMenu(); });
 document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') closeAccountMenu(); });
-function enterAsGuest(){ document.getElementById('view-landing').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0); }
-function showLanding(){ clearInterval(timerId); closeAccountMenu(); ['view-home','view-progress','view-exam','view-results','view-auth-required'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('view-landing').classList.remove('hidden'); setNav('home'); updateAuthUI(); window.scrollTo(0,0); }
+function enterAsGuest(){ resolveAuth(); document.getElementById('view-landing').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0); }
+function showLanding(){ resolveAuth(); clearInterval(timerId); closeAccountMenu(); ['view-home','view-progress','view-exam','view-results','view-auth-required'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('view-landing').classList.remove('hidden'); setNav('home'); updateAuthUI(); window.scrollTo(0,0); }
 function handleSignup(ev){
   ev.preventDefault(); clearAuthMsgs();
   if(!fbAuth){ showAuthError('Firebase did not load — check your connection and refresh.'); return; }
@@ -2437,14 +2446,25 @@ function signOutUser(){
   if(!fbAuth){ fbUser=null; updateAuthUI(); showLanding(); return; }
   fbApi.signOut(fbAuth).then(function(){ fbUser=null; updateAuthUI(); showLanding(); });
 }
+function resolveAuth(){
+  if(window.__authResolved) return;
+  window.__authResolved=true;
+  document.documentElement.classList.remove('auth-pending');
+  var l=document.getElementById('view-loading'); if(l) l.classList.add('hidden');
+}
 function initAuth(){
   if(window.__fbAuthListenerAttached){ return; }
   if(!fbAuth){ updateAuthUI(); return; }
   window.__fbAuthListenerAttached=true;
   fbApi.onAuthStateChanged(fbAuth, function(user){
     fbUser=user||null;
+    resolveAuth();
     if(user){
+      try{ localStorage.setItem('eleven-plus-signed-in','1'); }catch(e){}
       updateAuthUI();
+      // Enter home at once with on-device data; the cloud load below merges in the background.
+      var landingVisibleNow=!document.getElementById('view-landing').classList.contains('hidden');
+      if(landingVisibleNow) showHome();
       // Load cloud doc; merge local once if cloud is empty
       fbApi.getDoc(fbApi.doc(fbDb,'users',user.uid)).then(function(snap){
         if(snap.exists()){
@@ -2460,13 +2480,12 @@ function initAuth(){
         }
       }).catch(function(e){ console.warn('Cloud load failed', e); showAuthError(authErrorMsg(e)); }).finally(function(){
         cloudReady=true; updateProfileUI(); updateAuthUI(); renderCards();
-        // Only auto-enter app if landing is visible (don't interrupt an exam)
-        var landingVisible=!document.getElementById('view-landing').classList.contains('hidden');
-        if(landingVisible) showHome();
       });
     } else {
+      try{ localStorage.removeItem('eleven-plus-signed-in'); }catch(e){}
       updateAuthUI();
       cloudReady=false;
+      showLanding();
     }
   });
 }
@@ -2731,12 +2750,13 @@ function submitExam(auto){
 function filterReview(kind){
   document.querySelectorAll('.review-card').forEach(c=>{ c.style.display=(kind==='all'||c.dataset.kind===kind)?'':'none'; });
 }
-function showHome(){clearInterval(timerId); var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden'); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0);}
+function showHome(){resolveAuth(); clearInterval(timerId); var lv=document.getElementById('view-landing'); if(lv) lv.classList.add('hidden'); document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-results').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-home').classList.remove('hidden'); setNav('practice'); updateProfileUI(); updateAuthUI(); renderCards(); window.scrollTo(0,0);}
 loadState();
 updateProfileUI();
 updateAuthUI();
 renderCards();
 initAuth();
+setTimeout(function(){ if(!window.__authResolved){ resolveAuth(); showLanding(); } }, 5000);
 </script>
 </body>
 </html>
