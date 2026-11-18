@@ -10,13 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F8F9FB; --surface:#FFFFFF; --surface2:#F2F4F7; --surface3:#F9FAFB;
-  --ink:#101828; --ink2:#344054; --muted:#667085; --muted2:#98A2B3;
-  --line:#EAECF0; --line2:#D0D5DD;
-  --navy:#101828; --navy2:#1D2939;
-  --primary:#175CD3; --primary-dark:#1849A9; --primary-soft:#EFF4FF; --primary-mid:#D1E0FF;
+  --bg:#FAF7F1; --surface:#FFFFFF; --surface2:#F3EFE7; --surface3:#FCFAF6;
+  --ink:#1E2A28; --ink2:#3D4F4B; --muted:#5F6F6B; --muted2:#8A9A95;
+  --line:#E9E3D7; --line2:#D6CFC2;
+  --primary:#0F766E; --primary-dark:#0B5E57; --primary-soft:#E6F4F1; --primary-mid:#A7D8D0;
   --teal:#067647; --teal-dark:#054F31; --teal-soft:#ECFDF3;
-  --amber:#DC6803; --amber-bright:#F79009; --amber-soft:#FFFAEB;
+  --amber:#D97706; --amber-bright:#F59E0B; --amber-soft:#FFFBEB;
+  --hero-bg:linear-gradient(160deg,#E6F4F1 0%,#EFF8F5 45%,#FFF7E6 100%);
+  --hero-border:#BFE3DB;
   --rose:#B42318; --rose-soft:#FEF3F2;
   --green:#067647; --green-bg:#ECFDF3; --red-bg:#FEF3F2;
   --shadow:0 1px 2px rgba(16,24,40,.05), 0 1px 3px rgba(16,24,40,.06);
@@ -27,12 +28,13 @@
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#0B1220; --surface:#121A2E; --surface2:#1A253D; --surface3:#162035;
-    --ink:#F2F4F7; --ink2:#D0D5DD; --muted:#98A2B3; --muted2:#667085;
-    --line:#1E2A44; --line2:#2A3A5C;
-    --navy:#0B1220; --navy2:#1D2939;
-    --primary:#84ADFF; --primary-dark:#B2CCFF; --primary-soft:#182A4D; --primary-mid:#253A66;
-    --teal-soft:#0A2E22; --amber-soft:#2E2008; --green-bg:#0A2E22; --red-bg:#331A18; --rose-soft:#331A18;
+    --bg:#0F1A19; --surface:#172724; --surface2:#1F322E; --surface3:#1B2E2A;
+    --ink:#EFF7F4; --ink2:#CBD8D4; --muted:#9DB0AB; --muted2:#7A8F89;
+    --line:#26403A; --line2:#35514A;
+    --primary:#2DD4BF; --primary-dark:#5EEAD4; --primary-soft:#123B35; --primary-mid:#1F5C52;
+    --teal-soft:#0A2E22; --amber-soft:#33270A; --green-bg:#0A2E22; --red-bg:#331A18; --rose-soft:#331A18;
+    --hero-bg:linear-gradient(160deg,#123B35 0%,#14302C 55%,#2A2410 100%);
+    --hero-border:#2A5A51;
     --shadow:0 1px 2px rgba(0,0,0,.3); --shadow-md:0 4px 12px rgba(0,0,0,.35); --shadow-lg:0 16px 32px rgba(0,0,0,.45);
   }
 }
@@ -48,15 +50,15 @@ a{color:var(--primary)}
 .topbar{background:var(--surface);border-bottom:1px solid var(--line);padding:10px 24px;min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:30;max-width:100%}
 .topbar-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .logo{display:flex;gap:12px;align-items:center;background:none;border:none;text-align:left;padding:6px 0;color:var(--ink);min-height:auto}
-.logo-badge{width:40px;height:40px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:"Lexend",sans-serif;font-weight:800;font-size:15px;letter-spacing:-.03em;border-radius:10px;flex:0 0 40px}
-@media(prefers-color-scheme:dark){.logo-badge{background:#F2F4F7;color:#101828}}
+.logo-badge{width:40px;height:40px;background:var(--primary);color:#fff;display:grid;place-items:center;font-family:"Lexend",sans-serif;font-weight:800;font-size:15px;letter-spacing:-.03em;border-radius:10px;flex:0 0 40px}
+@media(prefers-color-scheme:dark){.logo-badge{background:var(--primary);color:#0F1A19}}
 .logo h1{font-size:16px;line-height:1.05;font-weight:700;letter-spacing:-.02em}
 .logo p{margin:3px 0 0;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.01em}
 .top-nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
 .navbtn{border:1px solid transparent;background:transparent;color:var(--muted);font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px;min-height:38px}
 .navbtn:hover{background:var(--surface2);color:var(--ink)}
-.navbtn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-@media(prefers-color-scheme:dark){.navbtn.active{background:#F2F4F7;color:#101828;border-color:#F2F4F7}}
+.navbtn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+@media(prefers-color-scheme:dark){.navbtn.active{background:var(--primary);color:#0F1A19;border-color:var(--primary)}}
 .profile-chip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line2);border-radius:999px;padding:5px 12px 5px 5px;font-weight:700;font-size:13.5px;color:var(--ink);min-height:40px;box-shadow:var(--shadow)}
 .profile-chip:hover{border-color:var(--muted2)}
 .profile-chip .av{width:30px;height:30px;border-radius:50%;background:var(--amber-soft);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;flex:0 0 30px}
@@ -64,7 +66,7 @@ a{color:var(--primary)}
 .wrap{max-width:1120px;margin:0 auto;padding:28px 24px 8px}
 @media(max-width:640px){.wrap{padding:20px 16px 4px}.topbar{padding:10px 16px}.logo p{display:none}.topbar-inner{flex-wrap:wrap}.hero-card{padding:22px 18px}}
 /* Hero / Welcome */
-.hero-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 28px 24px;box-shadow:var(--shadow);display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.hero-card{background:var(--hero-bg);border:1px solid var(--hero-border);border-radius:20px;padding:28px 28px 24px;box-shadow:var(--shadow);display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
 .welcome{display:contents}
 .welcome .big-av{width:64px;height:64px;border-radius:18px;background:var(--amber-soft);border:1px solid #FDE6C8;display:grid;place-items:center;font-size:34px;flex:0 0 64px}
 @media(prefers-color-scheme:dark){.welcome .big-av{border-color:var(--line)}}
@@ -76,8 +78,8 @@ a{color:var(--primary)}
 .journey{display:flex;gap:0;align-items:center;flex-wrap:wrap;margin:20px 2px 4px;font-size:13px;font-weight:600;color:var(--muted)}
 .journey .step{display:flex;align-items:center;gap:8px;padding:6px 4px}
 .journey .step b{width:24px;height:24px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line2);color:var(--ink2);display:grid;place-items:center;font-size:12px;font-family:"Lexend",sans-serif;font-weight:700;flex:0 0 24px}
-.journey .step:first-child b{background:var(--navy);border-color:var(--navy);color:#fff}
-@media(prefers-color-scheme:dark){.journey .step:first-child b{background:#F2F4F7;color:#101828;border-color:#F2F4F7}}
+.journey .step:first-child b{background:var(--primary);border-color:var(--primary);color:#fff}
+@media(prefers-color-scheme:dark){.journey .step:first-child b{background:var(--primary);color:#0F1A19;border-color:var(--primary)}}
 .journey .arrow{color:var(--line2);margin:0 8px;font-weight:400}
 /* Overview - unified stat bar */
 .overview{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:18px 0 2px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
@@ -121,11 +123,11 @@ a{color:var(--primary)}
 /* Buttons */
 .btn{border:1px solid transparent;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:7px;line-height:1.2;white-space:nowrap}
 .btn:active{transform:scale(.985)}
-.btn-primary{background:var(--navy);color:#fff;border-color:var(--navy)}
-.btn-primary:hover{background:var(--navy2);border-color:var(--navy2)}
-@media(prefers-color-scheme:dark){.btn-primary{background:#F2F4F7;color:#101828;border-color:#F2F4F7}.btn-primary:hover{background:#fff}}
-.btn-gold{background:var(--amber-bright);color:#101828;border-color:var(--amber-bright)}
-.btn-gold:hover{background:#DC6803;border-color:#DC6803;color:#fff}
+.btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn-primary:hover{background:var(--primary-dark);border-color:var(--primary-dark)}
+@media(prefers-color-scheme:dark){.btn-primary{background:var(--primary);color:#0F1A19;border-color:var(--primary)}.btn-primary:hover{background:#5EEAD4;border-color:var(--primary-dark)}}
+.btn-gold{background:var(--amber-bright);color:#1E2A28;border-color:var(--amber-bright)}
+.btn-gold:hover{background:#D97706;border-color:#D97706;color:#fff}
 .btn-outline{background:var(--surface);border:1px solid var(--line2);color:var(--ink2);box-shadow:var(--shadow)}
 .btn-outline:hover{border-color:var(--muted2);color:var(--ink);background:var(--surface3)}
 .btn-danger{background:var(--rose);color:#fff;border-color:var(--rose)}
@@ -170,8 +172,8 @@ a{color:var(--primary)}
 .exam-head{position:sticky;top:84px;z-index:10;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-md)}
 @media(max-width:640px){.exam-head{top:76px}}
 .timerbar{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.timer{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:17px;background:var(--navy);color:#fff;padding:9px 14px;border-radius:10px;min-width:108px;text-align:center;letter-spacing:.02em}
-@media(prefers-color-scheme:dark){.timer{background:#F2F4F7;color:#101828}}
+.timer{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:17px;background:var(--primary);color:#fff;padding:9px 14px;border-radius:10px;min-width:108px;text-align:center;letter-spacing:.02em}
+@media(prefers-color-scheme:dark){.timer{background:var(--primary);color:#0F1A19}}
 .timer.warn{background:#B42318;color:#fff;animation:pulse 1s infinite}
 @keyframes pulse{50%{opacity:.75}}
 .progress{flex:1;min-width:160px}
@@ -183,29 +185,30 @@ a{color:var(--primary)}
 .qtext{font-size:18.5px;line-height:1.65;font-weight:500;margin:16px 0 20px;color:var(--ink);font-family:"Plus Jakarta Sans",sans-serif}
 .qtext .passage{background:var(--amber-soft);border:1px solid #FDECC8;border-radius:14px;padding:18px;font-weight:500;font-size:15.5px;line-height:1.75;margin-bottom:16px;color:var(--ink2)}
 @media(prefers-color-scheme:dark){.qtext .passage{border-color:var(--line)}}
-.qtext .visual{background:#fff;color:#101828;border:1px solid var(--line2);border-radius:14px;padding:20px 16px;text-align:center;font-size:26px;letter-spacing:.12em;line-height:1.5;margin:12px 0;font-family:"Lexend",sans-serif}
+.qtext .visual{background:var(--surface);color:var(--ink);border:1px solid var(--line2);border-radius:14px;padding:20px 16px;text-align:center;font-size:26px;letter-spacing:.12em;line-height:1.5;margin:12px 0;font-family:"Lexend",sans-serif}
 .options{display:grid;gap:10px}
 .opt{width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;display:flex;gap:12px;align-items:center;font-size:16px;font-weight:600;color:var(--ink);line-height:1.45}
 .opt:hover{border-color:var(--line2);background:var(--surface3)}
 .opt.selected{border-color:var(--primary);background:var(--primary-soft);box-shadow:0 0 0 1px var(--primary)}
 .opt-letter{width:36px;height:36px;flex:0 0 36px;border-radius:10px;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-family:"Lexend",sans-serif;font-weight:700;font-size:13.5px;color:var(--ink2)}
 .opt.selected .opt-letter{background:var(--primary);border-color:var(--primary);color:#fff}
+@media(prefers-color-scheme:dark){.opt.selected .opt-letter{color:#0F1A19}}
 .navgrid{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
 .navdot{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:13.5px;color:var(--muted);font-family:"Lexend",sans-serif;min-height:38px}
 .navdot:hover{border-color:var(--line2);color:var(--ink)}
-.navdot.done{background:var(--navy);color:#fff;border-color:var(--navy)}
-@media(prefers-color-scheme:dark){.navdot.done{background:#F2F4F7;color:#101828;border-color:#F2F4F7}}
+.navdot.done{background:var(--primary);color:#fff;border-color:var(--primary)}
+@media(prefers-color-scheme:dark){.navdot.done{background:var(--primary);color:#0F1A19;border-color:var(--primary)}}
 .navdot.current{box-shadow:0 0 0 2px var(--surface), 0 0 0 4px var(--amber-bright);color:var(--ink);border-color:var(--amber-bright)}
 .navdot.done.current{color:#fff}
-@media(prefers-color-scheme:dark){.navdot.done.current{color:#101828}}
+@media(prefers-color-scheme:dark){.navdot.done.current{color:#0F1A19}}
 .exam-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .exam-actions .btn{flex:1;min-width:120px}
 /* Results */
-.score-hero{background:var(--navy);color:#fff;border-radius:20px;padding:32px 24px 28px;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--navy2)}
+.score-hero{background:var(--primary-soft);color:var(--ink);border-radius:20px;padding:32px 24px 28px;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--primary-mid)}
 .score-hero .big{font-family:"Lexend",sans-serif;font-size:72px;line-height:.95;font-weight:800;letter-spacing:-.04em;margin-top:10px}
-.score-hero .big small{font-size:30px;color:#98A2B3;font-weight:600;letter-spacing:-.02em}
+.score-hero .big small{font-size:30px;color:var(--muted);font-weight:600;letter-spacing:-.02em}
 .score-ring{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-.score-ring span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:999px;font-size:12.5px;font-weight:600;color:#EAECF0}
+.score-ring span{background:var(--surface);border:1px solid var(--line);padding:7px 12px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--ink2)}
 .review{margin-top:16px;display:grid;gap:12px}
 .review-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
 .review-card.correct{border-left:4px solid var(--teal)}
@@ -220,7 +223,8 @@ a{color:var(--primary)}
 .hidden{display:none!important}
 /* Auth gate: hide landing/home until Firebase tells us if the user is signed in, so a returning user never flashes the hero. The loading splash shows instead. */
 #view-loading{display:none;min-height:70vh;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:40px 20px}
-#view-loading .load-badge{font-family:Lexend,sans-serif;font-weight:800;font-size:22px;background:var(--navy);color:#fff;border-radius:14px;padding:10px 16px}
+#view-loading .load-badge{font-family:Lexend,sans-serif;font-weight:800;font-size:22px;background:var(--primary);color:#fff;border-radius:14px;padding:10px 16px}
+@media(prefers-color-scheme:dark){#view-loading .load-badge{background:var(--primary);color:#0F1A19}}
 #view-loading .load-spin{width:26px;height:26px;border-radius:50%;border:3px solid var(--line2);border-top-color:var(--primary);animation:loadspin 0.8s linear infinite}
 @keyframes loadspin{to{transform:rotate(360deg)}}
 html.auth-pending #view-landing,html.auth-pending #view-home,html.auth-pending #view-progress,html.auth-pending #view-exam,html.auth-pending #view-results,html.auth-pending #view-auth-required{display:none!important}
@@ -236,30 +240,24 @@ html.auth-pending #view-loading{display:flex!important}
 @media(max-width:640px){.landing-wrap{padding:20px 16px 4px}}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
-.hero-copy{background:var(--navy);color:#fff;border-radius:22px;padding:32px 28px 28px;border:1px solid var(--navy2);box-shadow:var(--shadow-lg)}
-@media(prefers-color-scheme:dark){.hero-copy{background:#F2F4F7;color:#101828;border-color:#F2F4F7}}
-.hero-copy .eyebrow{color:#84ADFF}
-@media(prefers-color-scheme:dark){.hero-copy .eyebrow{color:#175CD3}}
-.hero-copy h2{color:#fff;font-size:clamp(32px,4.2vw,48px);line-height:1.02;letter-spacing:-.04em;font-weight:800}
-@media(prefers-color-scheme:dark){.hero-copy h2{color:#101828}}
-.hero-copy p{color:#D0D5DD;font-size:16.5px;line-height:1.65;margin:14px 0 0;max-width:560px;font-weight:500}
-@media(prefers-color-scheme:dark){.hero-copy p{color:#344054}}
+.hero-copy{background:var(--hero-bg);color:var(--ink);border-radius:22px;padding:32px 28px 28px;border:1px solid var(--hero-border);box-shadow:var(--shadow-lg)}
+.hero-copy .eyebrow{color:var(--primary-dark)}
+.hero-copy h2{color:var(--ink);font-size:clamp(32px,4.2vw,48px);line-height:1.02;letter-spacing:-.04em;font-weight:800}
+.hero-copy h2 .accent{color:var(--primary-dark)}
+.hero-copy p{color:var(--ink2);font-size:16.5px;line-height:1.65;margin:14px 0 0;max-width:560px;font-weight:500}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px}
-@media(prefers-color-scheme:dark){.hero-stat{background:#fff;border-color:var(--line)}}
+.hero-stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
 .hero-stat b{font-family:Lexend,sans-serif;font-size:22px;display:block;line-height:1}
 .hero-stat span{font-size:12.5px;opacity:.85;font-weight:600;display:block;margin-top:5px}
 .hero-bullets{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
-.hero-bullets li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;font-weight:500;color:#EAECF0}
-@media(prefers-color-scheme:dark){.hero-bullets li{color:#344054}}
-.hero-bullets li b{color:#fff}
-@media(prefers-color-scheme:dark){.hero-bullets li b{color:#101828}}
+.hero-bullets li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;font-weight:500;color:var(--ink2)}
+.hero-bullets li b{color:var(--ink)}
 .auth-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow-lg)}
 .auth-card h3{font-size:22px;letter-spacing:-.02em}
 .auth-tabs{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px;margin:16px 0}
 .auth-tab{flex:1;border:none;background:transparent;border-radius:999px;padding:9px 10px;font-weight:700;font-size:14px;color:var(--muted);min-height:40px}
-.auth-tab.active{background:var(--navy);color:#fff}
-@media(prefers-color-scheme:dark){.auth-tab.active{background:#F2F4F7;color:#101828}}
+.auth-tab.active{background:var(--primary);color:#fff}
+@media(prefers-color-scheme:dark){.auth-tab.active{background:var(--primary);color:#0F1A19}}
 .auth-note{font-size:13px;color:var(--muted);line-height:1.6;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
 .auth-error{display:none;background:var(--rose-soft);border:1px solid #FECDC2;color:var(--rose);border-radius:10px;padding:11px 12px;font-size:13.5px;font-weight:600;line-height:1.5;margin-bottom:12px}
 .auth-error.show{display:block}
@@ -275,6 +273,20 @@ html.auth-pending #view-loading{display:flex!important}
 .account-menu-item.danger{color:var(--rose)}
 .account-menu-sep{border-top:1px solid var(--line);margin:6px 4px 0}
 .guest-note{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;margin:18px 0 2px;font-size:14px;font-weight:500;color:var(--ink2)}
+.filter-bar{margin-top:14px}
+.subject-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.subj-tab{border:1px solid var(--line2);background:var(--surface);color:var(--ink2);font-weight:700;font-size:13.5px;padding:8px 14px;border-radius:999px;min-height:38px}
+.subj-tab:hover{border-color:var(--primary);color:var(--primary-dark)}
+.subj-tab.active{background:var(--primary);border-color:var(--primary);color:#fff}
+@media(prefers-color-scheme:dark){.subj-tab.active{color:#0F1A19}}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.filter-field{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:700;color:var(--ink2);letter-spacing:.01em}
+.filter-field select{padding:10px 12px;border:1px solid var(--line2);border-radius:10px;font-size:14px;font-weight:600;background:var(--surface);color:var(--ink);min-height:42px}
+.filter-field select:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-soft)}
+.filter-count{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--muted);align-self:center;padding:6px 0}
+.nextup-card{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--primary-soft);border:1px solid var(--primary-mid);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.new-badge{display:inline-block;background:#FEF3C7;color:#92400E;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:800;margin-left:4px}
+@media(prefers-color-scheme:dark){.new-badge{background:#453303;color:#FCD34D}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 <script>document.documentElement.classList.add('auth-pending');</script>
@@ -311,7 +323,7 @@ html.auth-pending #view-loading{display:flex!important}
     <div class="hero-grid">
       <div class="hero-copy">
         <div class="eyebrow">11+ Grammar School Practice · Year 5</div>
-        <h2>Timed mock tests that help your child walk into the 11+ feeling ready.</h2>
+        <h2>Timed mock tests that help your child walk into the 11+ <span class="accent">feeling ready.</span></h2>
         <p>80 papers. 800 questions. Full explanations after every paper — so your child doesn't just get a score, they learn the method for next time. Maths, English, Verbal and Non-Verbal Reasoning, at GL &amp; CEM standard.</p>
         <div class="hero-stats">
           <div class="hero-stat"><b>80</b><span>full mock papers</span></div>
@@ -325,7 +337,7 @@ html.auth-pending #view-loading{display:flex!important}
         </ul>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
           <button class="btn btn-gold" onclick="focusAuth('signup')">Create free parent account →</button>
-          <button class="btn btn-outline" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.35)" onclick="enterAsGuest()">Try a paper as guest</button>
+          <button class="btn btn-outline" onclick="enterAsGuest()">Try a paper as guest</button>
         </div>
         <p style="font-size:12.5px;margin-top:14px;opacity:.75">Free on Firebase Spark. No card needed. Progress is private to your family account.</p>
       </div>
@@ -403,12 +415,46 @@ html.auth-pending #view-loading{display:flex!important}
   </div>
 
   <div class="section">
-    <div class="section-head"><div><div class="section-num">Step 1 — Subjects</div><h3>Choose a subject</h3><p>Tap a subject to see its 20 papers. Start with Paper 1 and work your way up — they get a little trickier each time.</p></div></div>
+    <div class="section-head"><div><div class="section-num">Your subjects</div><h3>Progress by subject</h3><p>Tap a subject card to filter the papers below. Start with Paper 1 and work your way up — they get a little trickier each time.</p></div></div>
     <div class="subjects" id="subjectCards"></div>
   </div>
 
   <div class="section" id="papersSection">
-    <div class="section-head"><div><div class="section-num">Step 2 — Papers</div><h3 id="papersTitle">Choose a paper</h3><p id="papersSub">10 questions per paper. No calculators for Maths — have scrap paper and a pencil ready.</p></div></div>
+    <div class="section-head"><div><div class="section-num">Papers</div><h3 id="papersTitle">Choose a paper</h3><p id="papersSub">10 questions per paper. No calculators for Maths — have scrap paper and a pencil ready.</p></div></div>
+    <div class="filter-bar" aria-label="Filter papers">
+      <div class="subject-tabs" role="tablist" aria-label="Filter by subject">
+        <button class="subj-tab active" data-subj="all" role="tab" aria-selected="true" onclick="setSubjectTab('all')">All subjects</button>
+        <button class="subj-tab" data-subj="maths" role="tab" aria-selected="false" onclick="setSubjectTab('maths')">Maths</button>
+        <button class="subj-tab" data-subj="english" role="tab" aria-selected="false" onclick="setSubjectTab('english')">English</button>
+        <button class="subj-tab" data-subj="verbal" role="tab" aria-selected="false" onclick="setSubjectTab('verbal')">Verbal Reasoning</button>
+        <button class="subj-tab" data-subj="nonverbal" role="tab" aria-selected="false" onclick="setSubjectTab('nonverbal')">Non-Verbal Reasoning</button>
+      </div>
+      <div class="filter-row">
+        <label class="filter-field">Student year
+          <select id="yearFilter" onchange="setYearFilter(this.value)">
+            <option value="Year 4">Year 4</option>
+            <option value="Year 5">Year 5</option>
+          </select>
+        </label>
+        <label class="filter-field">Month
+          <select id="monthFilter" onchange="setMonthFilter(this.value)">
+            <option value="all">All months</option>
+            <option value="November 2026">November 2026</option>
+            <option value="December 2026">December 2026</option>
+          </select>
+        </label>
+        <label class="filter-field">Difficulty
+          <select id="diffFilter" onchange="setDiffFilter(this.value)">
+            <option value="all">All difficulties</option>
+            <option value="Getting started">Getting started</option>
+            <option value="Tricky">Tricky</option>
+            <option value="Challenge">Challenge</option>
+          </select>
+        </label>
+        <span class="filter-count" id="paperCount" aria-live="polite">Showing 20 of 80 papers</span>
+      </div>
+    </div>
+    <div id="nextUpCard" style="margin-top:14px"></div>
     <div class="paper-panel"><div class="paper-list" id="paperGrid"></div></div>
   </div>
 
@@ -2322,7 +2368,15 @@ Object.keys(PAPERS).forEach(function(key){
   }
 });
 
-let currentPaper=0, subjectFilter="maths";
+let currentPaper=0, subjectFilter="all";
+let yearFilter="Year 4", monthFilter="all", diffFilter="all", yearFilterManual=false;
+function diffLabel(pi){return pi<6?'Getting started':(pi<14?'Tricky':'Challenge');}
+function defaultYearFilter(){return fbUser?(profile.year==='Year 4'?'Year 4':'Year 5'):'Year 4';}
+function syncYearFilter(){if(!yearFilterManual){yearFilter=defaultYearFilter();}var s=document.getElementById('yearFilter');if(s)s.value=yearFilter;}
+function setYearFilter(v){yearFilter=(v==='Year 5')?'Year 5':'Year 4';yearFilterManual=true;renderCards();}
+function setMonthFilter(v){monthFilter=v;renderCards();}
+function setDiffFilter(v){diffFilter=v;renderCards();}
+function setSubjectTab(k){subjectFilter=k;renderCards();}
 let currentKey=null, currentIdx=0, answers=[], timerId=null, timeLeft=0, totalTime=0, startStamp=0;
 let best={}; // best score per paper, saved on this device
 let history=[]; // every finished attempt, most recent last, saved on this device
@@ -2482,6 +2536,7 @@ function initAuth(){
         cloudReady=true; updateProfileUI(); updateAuthUI(); renderCards();
       });
     } else {
+      yearFilterManual=false;
       try{ localStorage.removeItem('eleven-plus-signed-in'); }catch(e){}
       updateAuthUI();
       cloudReady=false;
@@ -2553,6 +2608,7 @@ function renderOverview(){
 }
 function renderCards(){
   renderOverview();
+  syncYearFilter();
   var sc=document.getElementById('subjectCards');
   if(sc){
     sc.innerHTML=Object.entries(PAPERS).map(function(e){
@@ -2560,21 +2616,43 @@ function renderCards(){
       return '<button class="subject-card '+(subjectFilter===key?'selected':'')+'" onclick="setFilter(\''+key+'\')"><span class="icon">'+subj.icon+'</span><span style="flex:1"><h4>'+subj.title+'</h4><p>'+subj.topics+'</p><span class="bar" style="display:block"><span class="bar-fill" style="display:block;width:'+(st.papersDone*5)+'%"></span></span><span class="bar-label" style="display:block">'+st.papersDone+' of 20 papers done'+(st.avg!==null?' • average '+st.avg+'/10':'')+'</span></span></button>';
     }).join('');
   }
-  var grid=document.getElementById('paperGrid'); if(!grid)return;
-  var p=PAPERS[subjectFilter];
-  document.getElementById('papersTitle').textContent='Choose a paper — '+p.title;
-  document.getElementById('papersSub').textContent=p.desc+' 10 questions • about '+p.mins+' minutes each.';
+  document.querySelectorAll('.subj-tab').forEach(function(b){var on=b.getAttribute('data-subj')===subjectFilter;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));});
+  var keys=subjectFilter==='all'?Object.keys(PAPERS):[subjectFilter];
+  var titleEl=document.getElementById('papersTitle');
+  if(titleEl) titleEl.textContent=subjectFilter==='all'?'Choose a paper \u2014 all subjects':'Choose a paper \u2014 '+PAPERS[subjectFilter].title;
+  var subEl=document.getElementById('papersSub');
+  if(subEl) subEl.textContent=subjectFilter==='all'?'All four subjects, 20 papers each. 10 questions per paper, timed.':(PAPERS[subjectFilter].desc+' 10 questions \u2022 about '+PAPERS[subjectFilter].mins+' minutes each.');
   var packs=[{month:'November 2026',start:0},{month:'December 2026',start:10}];
-  if(fbUser && profile.year==='Year 5') packs.reverse();
-  grid.innerHTML=packs.map(function(pk){
+  if(yearFilter==='Year 5') packs.reverse();
+  var shown=0, rowsHtml='', firstUntried=null;
+  packs.forEach(function(pk){
+    if(monthFilter!=='all'&&monthFilter!==pk.month) return;
     var rows='';
     for(var pi=pk.start; pi<pk.start+10; pi++){
-      var b=best[subjectFilter+'-'+pi];
-      var diff=pi<6?'Getting started':(pi<14?'Tricky':'Challenge');
-      rows+='<div class="paper-row '+(b?'done':'')+'"><span class="paper-num">'+(b?'✓':(pi+1))+'</span><span class="paper-info"><b>Paper '+(pi+1)+(pi>=10?' <span style="display:inline-block;background:#FEF3C7;color:#92400E;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:800;margin-left:4px">New</span>':'')+'</b><span>10 questions • ⏱ '+p.mins+' mins • '+diff+'</span></span>'+(b?'<span class="stars" title="Best score '+b.score+'/10">'+starsFor(b.score)+'</span><span style="font-weight:800;font-size:14px">Best: '+b.score+'/10</span>':'<span style="font-size:13px;color:var(--muted);font-weight:700">Not tried yet</span>')+'<button class="btn '+(b?'btn-outline':'btn-primary')+' btn-small" onclick="openInstructions(\''+subjectFilter+'\','+pi+')">'+(b?'Try again':'Start')+' →</button></div>';
+      if(diffFilter!=='all'&&diffFilter!==diffLabel(pi)) continue;
+      keys.forEach(function(key){
+        var subj=PAPERS[key];
+        var b=best[key+'-'+pi];
+        var diff=diffLabel(pi);
+        shown++;
+        if(!firstUntried&&!b) firstUntried={key:key,pi:pi,diff:diff};
+        rows+='<div class="paper-row '+(b?'done':'')+'"><span class="paper-num">'+(b?'\u2713':(pi+1))+'</span><span class="paper-info"><b>'+(subjectFilter==='all'?subj.title+' \u2014 ':'')+'Paper '+(pi+1)+(pi>=10?' <span class="new-badge">New</span>':'')+'</b><span>'+subj.icon+' '+subj.title+' \u2022 10 questions \u2022 \u23f1 '+subj.mins+' mins \u2022 '+diff+'</span></span>'+(b?'<span class="stars" title="Best score '+b.score+'/10">'+starsFor(b.score)+'</span><span style="font-weight:800;font-size:14px">Best: '+b.score+'/10</span>':'<span style="font-size:13px;color:var(--muted);font-weight:700">Not tried yet</span>')+'<button class="btn '+(b?'btn-outline':'btn-primary')+' btn-small" onclick="openInstructions(\''+key+'\','+pi+')">'+(b?'Try again':'Start')+' \u2192</button></div>';
+      });
     }
-    return '<div style="margin:4px 0 10px;font-weight:800;font-size:15px">'+pk.month+'</div>'+rows;
-  }).join('');
+    if(rows) rowsHtml+='<div style="margin:4px 0 10px;font-weight:800;font-size:15px">'+pk.month+'</div>'+rows;
+  });
+  var grid=document.getElementById('paperGrid'); if(!grid)return;
+  grid.innerHTML=shown?rowsHtml:'<div class="empty-note" style="margin:16px">No papers match those filters \u2014 try a different month, difficulty or subject. Every paper is still there, just hidden by the current filters.</div>';
+  var pc=document.getElementById('paperCount'); if(pc) pc.textContent='Showing '+shown+' of 80 papers';
+  var nu=document.getElementById('nextUpCard');
+  if(nu){
+    if(firstUntried){
+      var s2=PAPERS[firstUntried.key];
+      nu.innerHTML='<div class="nextup-card"><span style="font-size:26px" aria-hidden="true">\u27a1\ufe0f</span><span style="flex:1;min-width:180px"><b style="font-family:Lexend,sans-serif">Next up: '+s2.title+' \u2014 Paper '+(firstUntried.pi+1)+'</b><span style="display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px">First untried paper for '+yearFilter+' \u2022 '+firstUntried.diff+' \u2022 10 questions \u2022 about '+s2.mins+' minutes</span></span><button class="btn btn-gold" onclick="openInstructions(\''+firstUntried.key+'\','+firstUntried.pi+')">Start next paper \u2192</button></div>';
+    } else if(shown){
+      nu.innerHTML='<div class="nextup-card"><span style="font-size:26px" aria-hidden="true">🎉</span><span style="flex:1;min-width:180px"><b style="font-family:Lexend,sans-serif">All caught up!</b><span style="display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px">You have tried every paper matching these filters. Try another paper for extra stars.</span></span></div>';
+    } else { nu.innerHTML=''; }
+  }
 }
 function updateProfileUI(){
   var name=profile.name||'';
@@ -2583,7 +2661,7 @@ function updateProfileUI(){
   document.getElementById('welcomeAvatar').textContent=profile.avatar;
   document.getElementById('progressAvatar').textContent=profile.avatar;
   document.getElementById('welcomeTitle').textContent=name?('Hello, '+name+'! Ready to learn?'):'Hello! Ready to learn?';
-  document.getElementById('welcomeText').textContent=name?('Nice to see you, '+name+'. Pick a subject below, choose a paper, and see how many stars you can earn today.'):'Pick a subject below, choose a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.';
+  document.getElementById('welcomeText').textContent=name?('Nice to see you, '+name+'. Use the filters below to find your next paper, and see how many stars you can earn today.'):'Use the filters below to find a paper, and see how many stars you can earn. Every question is explained afterwards, so mistakes turn into learning.';
   var gn=document.getElementById('guestNote'); if(gn) gn.classList.toggle('hidden', !!fbUser);
   document.getElementById('progressTitle').textContent=name?(name+"'s Progress"):'My Progress';
 }
@@ -2604,7 +2682,7 @@ function saveProfile(){
   profile.name=n; profile.avatar=draftAvatar;
   profile.year=document.getElementById('profYear').value;
   profile.favourite=document.getElementById('profFav').value;
-  subjectFilter=profile.favourite;
+  subjectFilter=profile.favourite; yearFilterManual=false;
   saveState();
   closeModal(); updateProfileUI(); renderCards();
 }
@@ -2733,7 +2811,7 @@ function submitExam(auto){
   else if(score>=5){verdict='Good effort — building nicely';advice='You have the foundations. Go through every explanation below, note the methods, then retake the paper in a few days and watch the score rise.';}
   else{verdict='A brave attempt — now learn from it 💪';advice='These papers are deliberately hard. The review below is the most valuable part: work through it slowly with a parent, then try again. Every explanation teaches an exam method.';}
   document.getElementById('view-exam').classList.add('hidden'); document.getElementById('view-progress').classList.add('hidden'); document.getElementById('view-auth-required').classList.add('hidden'); document.getElementById('view-results').classList.remove('hidden');
-  document.getElementById('scoreHero').innerHTML=`<div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#5EEAD4">${p.title} Mock Paper ${currentPaper+1} ${auto?'• Time ran out — auto-submitted':''}</div><div class="big">${score}<small> / 10</small></div><div style="font-size:21px;font-weight:800;margin-top:6px">${verdict}</div><p style="color:#CBD5E1;max-width:560px;margin:9px auto 0;font-size:15px;line-height:1.6">${advice}</p><div class="score-ring"><span>⭐ Stars earned: ${score} (${starsFor(score)})</span><span>🎯 Score: ${pct}%</span><span>⏱ Time: ${fmtTime(elapsed)} of ${p.mins} mins</span><span>✓ Correct: ${score}</span><span>To improve: ${10-score}</span></div>`;
+  document.getElementById('scoreHero').innerHTML=`<div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:#5EEAD4">${p.title} Mock Paper ${currentPaper+1} ${auto?'• Time ran out — auto-submitted':''}</div><div class="big">${score}<small> / 10</small></div><div style="font-size:21px;font-weight:800;margin-top:6px">${verdict}</div><p style="color:var(--muted);max-width:560px;margin:9px auto 0;font-size:15px;line-height:1.6">${advice}</p><div class="score-ring"><span>⭐ Stars earned: ${score} (${starsFor(score)})</span><span>🎯 Score: ${pct}%</span><span>⏱ Time: ${fmtTime(elapsed)} of ${p.mins} mins</span><span>✓ Correct: ${score}</span><span>To improve: ${10-score}</span></div>`;
   document.getElementById('retakeBtn').onclick=()=>startExam(currentKey,currentPaper);
   document.getElementById('reviewList').innerHTML=p.questions.map((q,i)=>{
     const yours=answers[i], correct=yours===q.ans;
