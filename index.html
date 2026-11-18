@@ -110,7 +110,30 @@ a{color:var(--primary)}
 .bar-label{font-size:12.5px;font-weight:600;color:var(--muted);margin-top:7px}
 /* Papers - calm list inside panel */
 .paper-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:14px}
-.paper-list{display:grid;gap:0;margin-top:0}
+.paper-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:0}
+@media(max-width:900px){.paper-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.paper-list{grid-template-columns:repeat(2,1fr);gap:10px}}
+.paper-panel{padding:14px}
+.paper-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.paper-card:hover{border-color:var(--line2);box-shadow:var(--shadow-md)}
+.paper-card.done{border-color:var(--primary-mid)}
+.paper-card .pc-top{display:flex;align-items:center;gap:8px}
+.paper-card h4{font-size:15.5px;font-weight:700;font-family:Lexend,sans-serif;letter-spacing:-.01em;margin:0;line-height:1.3}
+.paper-card .pc-meta{font-size:12.5px;color:var(--muted);font-weight:500;margin:0;line-height:1.5}
+.paper-card .pc-foot{font-size:13px;font-weight:700;color:var(--ink2);margin-top:auto}
+.paper-card .pc-foot .stars{font-size:13px}
+.diff-chip{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);border:1px solid var(--primary-mid)}
+.month-head{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-weight:800;font-size:14.5px;font-family:Lexend,sans-serif;color:var(--ink);margin:14px 0 12px}
+.month-head:first-child{margin-top:0}
+.month-head:hover{border-color:var(--primary)}
+.month-head .mh-count{font-size:12.5px;font-weight:700;color:var(--muted);font-family:"Plus Jakarta Sans",sans-serif}
+.month-head .mh-toggle{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--primary-dark);white-space:nowrap}
+.pager{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:16px}
+.pager button{min-width:38px;min-height:38px;padding:8px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--surface);color:var(--ink2);font-weight:700;font-size:13.5px}
+.pager button:hover:not(:disabled){border-color:var(--primary);color:var(--primary-dark)}
+.pager button.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.pager button:disabled{opacity:.45}
+.pager .pager-info{font-size:13px;font-weight:700;color:var(--muted);margin:0 8px}
 .paper-row{background:var(--surface);border:none;border-bottom:1px solid var(--line);border-radius:0;padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .paper-row:last-child{border-bottom:none}
 .paper-row:hover{background:var(--surface3)}
@@ -456,6 +479,7 @@ html.auth-pending #view-loading{display:flex!important}
     </div>
     <div id="nextUpCard" style="margin-top:14px"></div>
     <div class="paper-panel"><div class="paper-list" id="paperGrid"></div></div>
+    <div class="pager" id="paperPager" aria-label="Paper pages"></div>
   </div>
 
   <div class="section">
@@ -2370,13 +2394,16 @@ Object.keys(PAPERS).forEach(function(key){
 
 let currentPaper=0, subjectFilter="all";
 let yearFilter="Year 4", monthFilter="all", diffFilter="all", yearFilterManual=false;
+var PAGE_SIZE=8, pageNum=1, collapsedMonths={}, collapsedForYear='';
+function setPage(n){pageNum=n;renderCards();var s=document.getElementById('papersSection');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}
+function toggleMonth(m){collapsedMonths[m]=!collapsedMonths[m];pageNum=1;renderCards();}
 function diffLabel(pi){return pi<6?'Getting started':(pi<14?'Tricky':'Challenge');}
 function defaultYearFilter(){return fbUser?(profile.year==='Year 4'?'Year 4':'Year 5'):'Year 4';}
 function syncYearFilter(){if(!yearFilterManual){yearFilter=defaultYearFilter();}var s=document.getElementById('yearFilter');if(s)s.value=yearFilter;}
-function setYearFilter(v){yearFilter=(v==='Year 5')?'Year 5':'Year 4';yearFilterManual=true;renderCards();}
-function setMonthFilter(v){monthFilter=v;renderCards();}
-function setDiffFilter(v){diffFilter=v;renderCards();}
-function setSubjectTab(k){subjectFilter=k;renderCards();}
+function setYearFilter(v){yearFilter=(v==='Year 5')?'Year 5':'Year 4';yearFilterManual=true;pageNum=1;renderCards();}
+function setMonthFilter(v){monthFilter=v;pageNum=1;renderCards();}
+function setDiffFilter(v){diffFilter=v;pageNum=1;renderCards();}
+function setSubjectTab(k){subjectFilter=k;pageNum=1;renderCards();}
 let currentKey=null, currentIdx=0, answers=[], timerId=null, timeLeft=0, totalTime=0, startStamp=0;
 let best={}; // best score per paper, saved on this device
 let history=[]; // every finished attempt, most recent last, saved on this device
@@ -2595,7 +2622,7 @@ function subjectStats(key){
   var attempts=history.filter(function(h){return h.key===key;}).length;
   return {papersDone:Object.keys(done).length, attempts:attempts, avg:attempts?Math.round(sum/attempts*10):null};
 }
-function setFilter(k){subjectFilter=k;renderCards();var s=document.getElementById('papersSection');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}
+function setFilter(k){subjectFilter=k;pageNum=1;renderCards();var s=document.getElementById('papersSection');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}
 function renderOverview(){
   var el=document.getElementById('overviewStrip'); if(!el)return;
   var attempted=Object.keys(best).length;
@@ -2619,41 +2646,81 @@ function renderCards(){
   document.querySelectorAll('.subj-tab').forEach(function(b){var on=b.getAttribute('data-subj')===subjectFilter;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));});
   var keys=subjectFilter==='all'?Object.keys(PAPERS):[subjectFilter];
   var titleEl=document.getElementById('papersTitle');
-  if(titleEl) titleEl.textContent=subjectFilter==='all'?'Choose a paper \u2014 all subjects':'Choose a paper \u2014 '+PAPERS[subjectFilter].title;
+  if(titleEl) titleEl.textContent=subjectFilter==='all'?'Choose a paper — all subjects':'Choose a paper — '+PAPERS[subjectFilter].title;
   var subEl=document.getElementById('papersSub');
-  if(subEl) subEl.textContent=subjectFilter==='all'?'All four subjects, 20 papers each. 10 questions per paper, timed.':(PAPERS[subjectFilter].desc+' 10 questions \u2022 about '+PAPERS[subjectFilter].mins+' minutes each.');
+  if(subEl) subEl.textContent=subjectFilter==='all'?'All four subjects, 20 papers each. 10 questions per paper, timed.':(PAPERS[subjectFilter].desc+' 10 questions • about '+PAPERS[subjectFilter].mins+' minutes each.');
   var packs=[{month:'November 2026',start:0},{month:'December 2026',start:10}];
   if(yearFilter==='Year 5') packs.reverse();
-  var shown=0, rowsHtml='', firstUntried=null;
+  // Month groups: by default the current year's month is expanded and the other collapsed.
+  if(collapsedForYear!==yearFilter){
+    collapsedForYear=yearFilter;
+    collapsedMonths={};
+    packs.forEach(function(pk,i){collapsedMonths[pk.month]=(i!==0);});
+  }
+  if(monthFilter!=='all') collapsedMonths[monthFilter]=false;
+  // Flat filtered list in display order (paper number outer, subject inner).
+  var items=[], firstUntried=null;
   packs.forEach(function(pk){
     if(monthFilter!=='all'&&monthFilter!==pk.month) return;
-    var rows='';
     for(var pi=pk.start; pi<pk.start+10; pi++){
       if(diffFilter!=='all'&&diffFilter!==diffLabel(pi)) continue;
       keys.forEach(function(key){
-        var subj=PAPERS[key];
         var b=best[key+'-'+pi];
-        var diff=diffLabel(pi);
-        shown++;
-        if(!firstUntried&&!b) firstUntried={key:key,pi:pi,diff:diff};
-        rows+='<div class="paper-row '+(b?'done':'')+'"><span class="paper-num">'+(b?'\u2713':(pi+1))+'</span><span class="paper-info"><b>'+(subjectFilter==='all'?subj.title+' \u2014 ':'')+'Paper '+(pi+1)+(pi>=10?' <span class="new-badge">New</span>':'')+'</b><span>'+subj.icon+' '+subj.title+' \u2022 10 questions \u2022 \u23f1 '+subj.mins+' mins \u2022 '+diff+'</span></span>'+(b?'<span class="stars" title="Best score '+b.score+'/10">'+starsFor(b.score)+'</span><span style="font-weight:800;font-size:14px">Best: '+b.score+'/10</span>':'<span style="font-size:13px;color:var(--muted);font-weight:700">Not tried yet</span>')+'<button class="btn '+(b?'btn-outline':'btn-primary')+' btn-small" onclick="openInstructions(\''+key+'\','+pi+')">'+(b?'Try again':'Start')+' \u2192</button></div>';
+        var it={key:key,pi:pi,month:pk.month,diff:diffLabel(pi),best:b};
+        items.push(it);
+        if(!firstUntried&&!b) firstUntried=it;
       });
     }
-    if(rows) rowsHtml+='<div style="margin:4px 0 10px;font-weight:800;font-size:15px">'+pk.month+'</div>'+rows;
   });
+  // Only papers in expanded months are paginated/rendered.
+  var visible=items.filter(function(it){return !collapsedMonths[it.month];});
+  var totalPages=Math.max(1,Math.ceil(visible.length/PAGE_SIZE));
+  if(pageNum>totalPages) pageNum=totalPages;
+  if(pageNum<1) pageNum=1;
+  var start=(pageNum-1)*PAGE_SIZE, pageItems=visible.slice(start,start+PAGE_SIZE);
   var grid=document.getElementById('paperGrid'); if(!grid)return;
-  grid.innerHTML=shown?rowsHtml:'<div class="empty-note" style="margin:16px">No papers match those filters \u2014 try a different month, difficulty or subject. Every paper is still there, just hidden by the current filters.</div>';
-  var pc=document.getElementById('paperCount'); if(pc) pc.textContent='Showing '+shown+' of 80 papers';
+  var html='';
+  // Month headings (all filtered months, so a collapsed month can be expanded from any page).
+  packs.forEach(function(pk){
+    if(monthFilter!=='all'&&monthFilter!==pk.month) return;
+    var count=items.filter(function(it){return it.month===pk.month;}).length;
+    if(!count) return;
+    var collapsed=!!collapsedMonths[pk.month];
+    html+='<button type="button" class="month-head" style="grid-column:1/-1" onclick="toggleMonth(\''+pk.month+'\')" aria-expanded="'+(!collapsed)+'"><span>'+(collapsed?'▸':'▾')+' '+pk.month+'</span><span class="mh-count">'+count+' papers</span><span class="mh-toggle">'+(collapsed?'Show papers ↓':'Hide ↑')+'</span></button>';
+  });
+  if(!items.length){
+    html+='<div class="empty-note" style="grid-column:1/-1;margin:0">No papers match those filters — try a different month, difficulty or subject. Every paper is still there, just hidden by the current filters.</div>';
+  } else if(!visible.length){
+    html+='<div class="empty-note" style="grid-column:1/-1;margin:0">Those papers are in a month that is collapsed above — tap a month heading to show its papers.</div>';
+  } else {
+    html+=pageItems.map(function(it){
+      var subj=PAPERS[it.key];
+      return '<article class="paper-card '+(it.best?'done':'')+'"><div class="pc-top"><span class="paper-num">'+(it.best?'✓':(it.pi+1))+'</span><span class="diff-chip">'+it.diff+'</span>'+(it.pi>=10?' <span class="new-badge">New</span>':'')+'</div><h4>'+subj.title+' — Paper '+(it.pi+1)+'</h4><p class="pc-meta">'+subj.icon+' '+it.month+' • 10 questions • ⏱ '+subj.mins+' mins</p><div class="pc-foot">'+(it.best?'<span class="stars" title="Best score '+it.best.score+'/10">'+starsFor(it.best.score)+'</span> Best: '+it.best.score+'/10':'Not tried yet')+'</div><button class="btn '+(it.best?'btn-outline':'btn-primary')+' btn-small" style="width:100%" onclick="openInstructions(\''+it.key+'\','+it.pi+')">'+(it.best?'Try again':'Start')+' →</button></article>';
+    }).join('');
+  }
+  grid.innerHTML=html;
+  var pc=document.getElementById('paperCount');
+  if(pc) pc.textContent=visible.length?('Showing '+(start+1)+'–'+Math.min(start+PAGE_SIZE,visible.length)+' of '+visible.length+' papers'):'Showing 0 of '+items.length+' papers';
+  var pg=document.getElementById('paperPager');
+  if(pg){
+    if(visible.length<=PAGE_SIZE){ pg.innerHTML=''; }
+    else{
+      var btns='';
+      for(var p=1;p<=totalPages;p++) btns+='<button type="button" class="'+(p===pageNum?'active':'')+'" aria-current="'+(p===pageNum?'page':'false')+'" onclick="setPage('+p+')">'+p+'</button>';
+      pg.innerHTML='<button type="button" '+(pageNum<=1?'disabled':'')+' onclick="setPage('+(pageNum-1)+')">← Prev</button>'+btns+'<button type="button" '+(pageNum>=totalPages?'disabled':'')+' onclick="setPage('+(pageNum+1)+')">Next →</button><span class="pager-info">Page '+pageNum+' of '+totalPages+'</span>';
+    }
+  }
   var nu=document.getElementById('nextUpCard');
   if(nu){
     if(firstUntried){
       var s2=PAPERS[firstUntried.key];
-      nu.innerHTML='<div class="nextup-card"><span style="font-size:26px" aria-hidden="true">\u27a1\ufe0f</span><span style="flex:1;min-width:180px"><b style="font-family:Lexend,sans-serif">Next up: '+s2.title+' \u2014 Paper '+(firstUntried.pi+1)+'</b><span style="display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px">First untried paper for '+yearFilter+' \u2022 '+firstUntried.diff+' \u2022 10 questions \u2022 about '+s2.mins+' minutes</span></span><button class="btn btn-gold" onclick="openInstructions(\''+firstUntried.key+'\','+firstUntried.pi+')">Start next paper \u2192</button></div>';
-    } else if(shown){
+      nu.innerHTML='<div class="nextup-card"><span style="font-size:26px" aria-hidden="true">➡️</span><span style="flex:1;min-width:180px"><b style="font-family:Lexend,sans-serif">Next up: '+s2.title+' — Paper '+(firstUntried.pi+1)+'</b><span style="display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px">First untried paper for '+yearFilter+' • '+firstUntried.diff+' • 10 questions • about '+s2.mins+' minutes</span></span><button class="btn btn-gold" onclick="openInstructions(\''+firstUntried.key+'\','+firstUntried.pi+')">Start next paper →</button></div>';
+    } else if(items.length){
       nu.innerHTML='<div class="nextup-card"><span style="font-size:26px" aria-hidden="true">🎉</span><span style="flex:1;min-width:180px"><b style="font-family:Lexend,sans-serif">All caught up!</b><span style="display:block;font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px">You have tried every paper matching these filters. Try another paper for extra stars.</span></span></div>';
     } else { nu.innerHTML=''; }
   }
 }
+
 function updateProfileUI(){
   var name=profile.name||'';
   document.getElementById('chipAvatar').textContent=profile.avatar;
