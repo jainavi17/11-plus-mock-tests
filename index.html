@@ -2546,13 +2546,12 @@ function renderCards(){
   document.getElementById('papersTitle').textContent='Choose a paper — '+p.title;
   document.getElementById('papersSub').textContent=p.desc+' 10 questions • about '+p.mins+' minutes each.';
   var packs=[{month:'November 2026',start:0},{month:'December 2026',start:10}];
-  if(profile.year==='Year 5') packs.reverse();
+  if(fbUser && profile.year==='Year 5') packs.reverse();
   grid.innerHTML=packs.map(function(pk){
     var rows='';
     for(var pi=pk.start; pi<pk.start+10; pi++){
       var b=best[subjectFilter+'-'+pi];
-      var within=pi-pk.start;
-      var diff=within<3?'Getting started':(within<7?'Tricky':'Challenge');
+      var diff=pi<6?'Getting started':(pi<14?'Tricky':'Challenge');
       rows+='<div class="paper-row '+(b?'done':'')+'"><span class="paper-num">'+(b?'✓':(pi+1))+'</span><span class="paper-info"><b>Paper '+(pi+1)+(pi>=10?' <span style="display:inline-block;background:#FEF3C7;color:#92400E;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:800;margin-left:4px">New</span>':'')+'</b><span>10 questions • ⏱ '+p.mins+' mins • '+diff+'</span></span>'+(b?'<span class="stars" title="Best score '+b.score+'/10">'+starsFor(b.score)+'</span><span style="font-weight:800;font-size:14px">Best: '+b.score+'/10</span>':'<span style="font-size:13px;color:var(--muted);font-weight:700">Not tried yet</span>')+'<button class="btn '+(b?'btn-outline':'btn-primary')+' btn-small" onclick="openInstructions(\''+subjectFilter+'\','+pi+')">'+(b?'Try again':'Start')+' →</button></div>';
     }
     return '<div style="margin:4px 0 10px;font-weight:800;font-size:15px">'+pk.month+'</div>'+rows;
